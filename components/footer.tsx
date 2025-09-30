@@ -6,7 +6,7 @@ export function Footer() {
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center justify-center">
           <p className="mt-4 text-muted-foreground">
-            <Link href="https://app.millibar.io/" className="hover:text-foreground transition-colors">
+            <Link href="https://millibar.io/" className="hover:text-foreground transition-colors">
               Home
             </Link>
             {" | "}
