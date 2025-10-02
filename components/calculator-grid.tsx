@@ -1,6 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Gauge, Wind, Atom, ArrowUp } from "lucide-react"
+import { Gauge, Wind, ArrowUp, Droplets, Atom } from "lucide-react"
 
 const calculators = [
   {
@@ -18,12 +18,20 @@ const calculators = [
     features: ["SAC Rate", "RMV Calculation", "Tank Planning"],
   },
   {
+    id: "henrys-law",
+    title: "Decompression",
+    description: "Understand gas dissolution, tissue saturation, and decompression theory (Henry's Law)",
+    icon: Droplets,
+    features: ["Gas Dissolution", "Tissue Saturation", "Dive Planning"],
+  },
+  {
     id: "gas-laws",
     title: "Gas Laws",
-    description: "Explore Charles's Law, Dalton's Law, and Gay-Lussac's Law with interactive examples",
+    description: "Explore Boyle's, Charles's, and Gay-Lussac's laws and their applications in diving",
     icon: Atom,
-    features: ["Charles's Law", "Dalton's Law", "Gay-Lussac's Law"],
+    features: ["Boyle's Law", "Charles's Law", "Combined Gas Law"],
   },
+
   {
     id: "lift-displacement",
     title: "Lift & Displacement",
@@ -44,7 +52,7 @@ export function CalculatorGrid() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {calculators.map((calc) => {
             const Icon = calc.icon
             return (

@@ -8,9 +8,13 @@ import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Separator } from "@/components/ui/separator"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Thermometer, Gauge, Beaker } from "lucide-react"
+import { Thermometer, Gauge, Beaker, Maximize } from "lucide-react"
 
 interface GasLawResults {
+  boylesLaw: {
+    finalVolume?: number
+    finalPressure?: number
+  }
   charlesLaw: {
     finalVolume?: number
     finalTemperature?: number
@@ -27,7 +31,14 @@ interface GasLawResults {
 
 export function GasLawsCalculator() {
   const [mainTab, setMainTab] = useState<string>("calculator")
-  const [activeTab, setActiveTab] = useState("charles")
+  const [activeTab, setActiveTab] = useState("boyles")
+
+  // Boyle's Law state
+  const [boylesP1, setBoylesP1] = useState<string>("1")
+  const [boylesV1, setBoylesV1] = useState<string>("10")
+  const [boylesP2, setBoylesP2] = useState<string>("4")
+  const [boylesV2, setBoylesV2] = useState<string>("")
+  const [boylesSolveFor, setBoylesSolveFor] = useState<string>("volume")
 
   // Charles's Law state
   const [charlesV1, setCharlesV1] = useState<string>("10")
@@ -55,6 +66,24 @@ export function GasLawsCalculator() {
       setMainTab("theory")
     }
   }, [])
+
+  const calculateBoylesLaw = () => {
+    const p1 = Number.parseFloat(boylesP1)
+    const v1 = Number.parseFloat(boylesV1)
+    const p2 = Number.parseFloat(boylesP2)
+    const v2 = boylesV2 ? Number.parseFloat(boylesV2) : null
+
+    if (boylesSolveFor === "volume" && !isNaN(p1) && !isNaN(v1) && !isNaN(p2)) {
+      // V2 = P1 * V1 / P2
+      const finalVolume = (p1 * v1) / p2
+      return { finalVolume }
+    } else if (boylesSolveFor === "pressure" && !isNaN(p1) && !isNaN(v1) && v2 && !isNaN(v2)) {
+      // P2 = P1 * V1 / V2
+      const finalPressure = (p1 * v1) / v2
+      return { finalPressure }
+    }
+    return {}
+  }
 
   const calculateCharlesLaw = () => {
     const v1 = Number.parseFloat(charlesV1)
@@ -108,11 +137,13 @@ export function GasLawsCalculator() {
   }
 
   const calculateGasLaws = () => {
+    const boylesResult = calculateBoylesLaw()
     const charlesResult = calculateCharlesLaw()
     const daltonResult = calculateDaltonLaw()
     const gayLussacResult = calculateGayLussacLaw()
 
     setResults({
+      boylesLaw: boylesResult,
       charlesLaw: charlesResult,
       daltonLaw: daltonResult,
       gayLussacLaw: gayLussacResult,
@@ -124,7 +155,7 @@ export function GasLawsCalculator() {
       <div className="text-center mb-8">
         <h1 className="text-3xl font-bold text-foreground mb-2">Gas Laws Calculator</h1>
         <p className="text-muted-foreground">
-          Explore Charles's Law, Dalton's Law, and Gay-Lussac's Law with interactive calculations
+          Explore Boyle's Law, Charles's Law, Dalton's Law, and Gay-Lussac's Law with interactive calculations
         </p>
       </div>
 
@@ -136,11 +167,153 @@ export function GasLawsCalculator() {
 
         <TabsContent value="calculator" className="space-y-6">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid w-full grid-cols-3">
+            <TabsList className="grid w-full grid-cols-4">
+              <TabsTrigger value="boyles">Boyle's Law</TabsTrigger>
               <TabsTrigger value="charles">Charles's Law</TabsTrigger>
               <TabsTrigger value="dalton">Dalton's Law</TabsTrigger>
               <TabsTrigger value="gay-lussac">Gay-Lussac's Law</TabsTrigger>
             </TabsList>
+
+            {/* Boyle's Law */}
+            <TabsContent value="boyles" className="space-y-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Maximize className="h-5 w-5" />
+                      Boyle's Law (P₁V₁ = P₂V₂)
+                    </CardTitle>
+                    <CardDescription>
+                      Pressure is inversely proportional to volume at constant temperature
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="space-y-2">
+                      <Label>Solve for:</Label>
+                      <Select value={boylesSolveFor} onValueChange={setBoylesSolveFor}>
+                        <SelectTrigger>
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="volume">Final Volume (V₂)</SelectItem>
+                          <SelectItem value="pressure">Final Pressure (P₂)</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="boyles-p1">Initial Pressure (bar)</Label>
+                        <Input
+                          id="boyles-p1"
+                          type="number"
+                          value={boylesP1}
+                          onChange={(e) => setBoylesP1(e.target.value)}
+                          placeholder="1"
+                          step="0.1"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="boyles-v1">Initial Volume (L)</Label>
+                        <Input
+                          id="boyles-v1"
+                          type="number"
+                          value={boylesV1}
+                          onChange={(e) => setBoylesV1(e.target.value)}
+                          placeholder="10"
+                          step="0.1"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="boyles-p2">
+                          Final Pressure (bar) {boylesSolveFor === "pressure" && "(calculated)"}
+                        </Label>
+                        <Input
+                          id="boyles-p2"
+                          type="number"
+                          value={boylesP2}
+                          onChange={(e) => setBoylesP2(e.target.value)}
+                          placeholder={boylesSolveFor === "pressure" ? "calculated" : "4"}
+                          disabled={boylesSolveFor === "pressure"}
+                          step="0.1"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="boyles-v2">
+                          Final Volume (L) {boylesSolveFor === "volume" && "(calculated)"}
+                        </Label>
+                        <Input
+                          id="boyles-v2"
+                          type="number"
+                          value={boylesV2}
+                          onChange={(e) => setBoylesV2(e.target.value)}
+                          placeholder={boylesSolveFor === "volume" ? "calculated" : "enter value"}
+                          disabled={boylesSolveFor === "volume"}
+                          step="0.1"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="p-3 bg-muted/50 rounded-lg">
+                      <p className="text-sm text-muted-foreground">
+                        <strong>Example:</strong> At surface (1 bar), a 10L volume becomes 2.5L at 30m depth (4 bar).
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Boyle's Law Results</CardTitle>
+                    <CardDescription>Pressure and volume relationship</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    {results?.boylesLaw ? (
+                      <div className="space-y-4">
+                        {results.boylesLaw.finalVolume && (
+                          <div className="flex justify-between items-center">
+                            <span className="font-medium">Final Volume:</span>
+                            <span className="text-lg font-bold text-primary">
+                              {results.boylesLaw.finalVolume.toFixed(2)} L
+                            </span>
+                          </div>
+                        )}
+                        {results.boylesLaw.finalPressure && (
+                          <div className="flex justify-between items-center">
+                            <span className="font-medium">Final Pressure:</span>
+                            <span className="text-lg font-bold text-primary">
+                              {results.boylesLaw.finalPressure.toFixed(2)} bar
+                            </span>
+                          </div>
+                        )}
+                        <Separator />
+                        <div className="p-3 bg-muted/50 rounded-lg">
+                          <p className="text-sm text-muted-foreground">
+                            <strong>Diving Application:</strong> Boyle's Law is THE most important gas law in diving. It
+                            explains why you must never hold your breath while ascending, why air consumption increases
+                            with depth, and why you must add/release air from your BCD during depth changes.
+                          </p>
+                        </div>
+                        <div className="p-3 bg-amber-500/10 border border-amber-500/20 rounded-lg">
+                          <p className="text-sm text-amber-900 dark:text-amber-200">
+                            <strong>Safety Note:</strong> A breath held at 10m depth will expand to 2x volume at
+                            surface, potentially causing lung overexpansion injury.
+                          </p>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="text-center py-8 text-muted-foreground">
+                        <Maximize className="h-12 w-12 mx-auto mb-4 opacity-50" />
+                        <p>Enter values and calculate to see results</p>
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              </div>
+            </TabsContent>
 
             {/* Charles's Law */}
             <TabsContent value="charles" className="space-y-6">
@@ -513,79 +686,391 @@ export function GasLawsCalculator() {
         </TabsContent>
 
         <TabsContent value="theory" className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Thermometer className="h-5 w-5" />
-                  Charles's Law
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="text-center p-4 bg-muted/50 rounded-lg">
-                  <p className="font-mono text-lg">V₁/T₁ = V₂/T₂</p>
-                </div>
-                <p className="text-sm text-muted-foreground">
-                  At constant pressure, volume is directly proportional to absolute temperature.
-                </p>
-                <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">Diving Applications:</h4>
-                  <ul className="text-sm text-muted-foreground space-y-1">
-                    <li>• BCD volume changes with temperature</li>
-                    <li>• Wetsuit buoyancy variations</li>
-                    <li>• Gas expansion during ascent</li>
-                  </ul>
-                </div>
-              </CardContent>
-            </Card>
+          <div className="space-y-8">
+            {/* Gas Laws Section */}
+            <div>
+              <h2 className="text-2xl font-bold mb-6">Gas Laws</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Maximize className="h-5 w-5" />
+                      Boyle's Law
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="text-center p-4 bg-muted/50 rounded-lg">
+                      <p className="font-mono text-lg mb-2">P₁V₁ = P₂V₂</p>
+                      <p className="text-sm text-muted-foreground">At constant temperature</p>
+                    </div>
+                    <p className="text-sm text-muted-foreground">
+                      At constant temperature, pressure and volume are inversely proportional. Double the pressure,
+                      halve the volume.
+                    </p>
+                    <div className="space-y-2">
+                      <h4 className="font-semibold text-sm">Diving Applications:</h4>
+                      <ul className="text-sm text-muted-foreground space-y-1">
+                        <li>• Never hold your breath while ascending</li>
+                        <li>• Air consumption increases with depth</li>
+                        <li>• BCD volume changes during ascent/descent</li>
+                        <li>• Lung overexpansion injuries</li>
+                      </ul>
+                    </div>
+                  </CardContent>
+                </Card>
 
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Beaker className="h-5 w-5" />
-                  Dalton's Law
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="text-center p-4 bg-muted/50 rounded-lg">
-                  <p className="font-mono text-lg">P_total = P₁ + P₂ + P₃...</p>
-                </div>
-                <p className="text-sm text-muted-foreground">
-                  Total pressure of gas mixture equals sum of partial pressures.
-                </p>
-                <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">Diving Applications:</h4>
-                  <ul className="text-sm text-muted-foreground space-y-1">
-                    <li>• Oxygen toxicity calculations</li>
-                    <li>• Nitrogen narcosis assessment</li>
-                    <li>• Nitrox gas planning</li>
-                  </ul>
-                </div>
-              </CardContent>
-            </Card>
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Thermometer className="h-5 w-5" />
+                      Charles's Law
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="text-center p-4 bg-muted/50 rounded-lg">
+                      <p className="font-mono text-lg mb-2">V₁/T₁ = V₂/T₂</p>
+                      <p className="text-sm text-muted-foreground">At constant pressure</p>
+                    </div>
+                    <p className="text-sm text-muted-foreground">
+                      At constant pressure, volume is directly proportional to absolute temperature (Kelvin).
+                    </p>
+                    <div className="space-y-2">
+                      <h4 className="font-semibold text-sm">Diving Applications:</h4>
+                      <ul className="text-sm text-muted-foreground space-y-1">
+                        <li>• Tank pressure changes with temperature</li>
+                        <li>• BCD volume changes with temperature</li>
+                        <li>• Wetsuit buoyancy variations</li>
+                      </ul>
+                    </div>
+                  </CardContent>
+                </Card>
 
-            <Card>
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Beaker className="h-5 w-5" />
+                      Dalton's Law
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="text-center p-4 bg-muted/50 rounded-lg">
+                      <p className="font-mono text-lg mb-2">P_total = P₁ + P₂ + P₃...</p>
+                      <p className="font-mono text-sm mb-1">P_gas = P_total × % volume</p>
+                    </div>
+                    <p className="text-sm text-muted-foreground">
+                      Total pressure of gas mixture equals sum of partial pressures. Each gas acts independently.
+                    </p>
+                    <div className="space-y-2">
+                      <h4 className="font-semibold text-sm">Diving Applications:</h4>
+                      <ul className="text-sm text-muted-foreground space-y-1">
+                        <li>• Oxygen toxicity (PPO₂ {">"} 1.4 bar)</li>
+                        <li>• Nitrogen narcosis assessment</li>
+                        <li>• Nitrox maximum depth calculations</li>
+                      </ul>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Gauge className="h-5 w-5" />
+                      Gay-Lussac's Law
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="text-center p-4 bg-muted/50 rounded-lg">
+                      <p className="font-mono text-lg mb-2">P₁/T₁ = P₂/T₂</p>
+                      <p className="text-sm text-muted-foreground">At constant volume</p>
+                    </div>
+                    <p className="text-sm text-muted-foreground">
+                      At constant volume, pressure is directly proportional to absolute temperature.
+                    </p>
+                    <div className="space-y-2">
+                      <h4 className="font-semibold text-sm">Diving Applications:</h4>
+                      <ul className="text-sm text-muted-foreground space-y-1">
+                        <li>• Tank pressure temperature effects</li>
+                        <li>• ~0.6 bar per 1°C or ~5 psi per 1°F</li>
+                        <li>• Regulator performance variations</li>
+                      </ul>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="md:col-span-2">
+                  <CardHeader>
+                    <CardTitle>General Gas Law (Combined)</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="text-center p-4 bg-muted/50 rounded-lg">
+                      <p className="font-mono text-lg mb-2">P₁V₁/T₁ = P₂V₂/T₂</p>
+                      <p className="text-sm text-muted-foreground">
+                        Combines Boyle's, Charles's, and Gay-Lussac's Laws
+                      </p>
+                    </div>
+                    <p className="text-sm text-muted-foreground">
+                      This formula accounts for all three variables: pressure, volume, and temperature. Temperature must
+                      be in absolute units (Kelvin or Rankine).
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+
+            {/* Pressure Conversions Section */}
+            <div>
+              <h2 className="text-2xl font-bold mb-6">Pressure Calculations</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Depth to Pressure (Metric)</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <div className="p-4 bg-muted/50 rounded-lg space-y-2">
+                      <p className="font-mono text-sm">P_absolute = (depth in msw / 10) + 1</p>
+                      <p className="text-xs text-muted-foreground">Each 10 metres of seawater = 1 bar pressure</p>
+                    </div>
+                    <div className="text-sm space-y-1">
+                      <p>
+                        <strong>Example:</strong> At 30 metres
+                      </p>
+                      <p className="font-mono text-xs">P = 30/10 + 1 = 4 bar absolute</p>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Depth to Pressure (Imperial)</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <div className="p-4 bg-muted/50 rounded-lg space-y-2">
+                      <p className="font-mono text-sm">P_absolute = (depth in fsw / 33) + 1</p>
+                      <p className="text-xs text-muted-foreground">Each 33 feet of seawater = 1 atm pressure</p>
+                    </div>
+                    <div className="text-sm space-y-1">
+                      <p>
+                        <strong>Example:</strong> At 99 feet
+                      </p>
+                      <p className="font-mono text-xs">P = 99/33 + 1 = 4 ata</p>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="md:col-span-2">
+                  <CardHeader>
+                    <CardTitle>Pressure Equivalents</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                      <div className="space-y-2">
+                        <p className="font-semibold">1 bar equals:</p>
+                        <ul className="space-y-1 text-muted-foreground">
+                          <li>• 0.987 atmospheres (~1 atm)</li>
+                          <li>• 14.5 psi</li>
+                          <li>• 10 metres seawater</li>
+                          <li>• 1.02 kg/cm²</li>
+                        </ul>
+                      </div>
+                      <div className="space-y-2">
+                        <p className="font-semibold">1 atmosphere equals:</p>
+                        <ul className="space-y-1 text-muted-foreground">
+                          <li>• 1.01 bar (~1 bar)</li>
+                          <li>• 14.7 psi</li>
+                          <li>• 33 feet seawater</li>
+                          <li>• 34 feet fresh water</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+
+            {/* Partial Pressure Section */}
+            <div>
+              <h2 className="text-2xl font-bold mb-6">Partial Pressure Calculations</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>T Formula (Partial Pressure)</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="text-center p-4 bg-muted/50 rounded-lg">
+                      <p className="font-mono text-lg mb-2">P_gas = F_g × P_total</p>
+                      <p className="text-xs text-muted-foreground">
+                        P_g = partial pressure, F_g = gas fraction, P_total = total pressure
+                      </p>
+                    </div>
+                    <div className="text-sm space-y-2">
+                      <p>
+                        <strong>Example:</strong> Air (21% O₂) at 30m (4 bar)
+                      </p>
+                      <p className="font-mono text-xs">PPO₂ = 0.21 × 4 = 0.84 bar</p>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Maximum Depth for Gas Mix</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="text-center p-4 bg-muted/50 rounded-lg">
+                      <p className="font-mono text-sm mb-2">P_total = P_g / F_g</p>
+                      <p className="text-xs text-muted-foreground">Rearranged T Formula</p>
+                    </div>
+                    <div className="text-sm space-y-2">
+                      <p>
+                        <strong>Example:</strong> EAN36 with PPO₂ limit 1.4
+                      </p>
+                      <p className="font-mono text-xs">P = 1.4 / 0.36 = 3.9 bar</p>
+                      <p className="font-mono text-xs">Depth = (3.9 - 1) × 10 = 29m</p>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+
+            {/* EANx Calculations */}
+            <div>
+              <h2 className="text-2xl font-bold mb-6">Enriched Air (Nitrox) Formulas</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Equivalent Air Depth (Metric)</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="p-4 bg-muted/50 rounded-lg">
+                      <p className="font-mono text-xs mb-2">EAD = [(1 - O₂%) × (depth + 10) / 0.79] - 10</p>
+                    </div>
+                    <p className="text-sm text-muted-foreground">
+                      Finds the depth where air would have the same nitrogen partial pressure as your nitrox mix at
+                      actual depth.
+                    </p>
+                    <div className="text-sm space-y-1">
+                      <p>
+                        <strong>Example:</strong> EAN32 at 30m
+                      </p>
+                      <p className="font-mono text-xs">EAD = (1-0.32) × (30+10) / 0.79 - 10</p>
+                      <p className="font-mono text-xs">EAD = 24.6 metres</p>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Equivalent Air Depth (Imperial)</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="p-4 bg-muted/50 rounded-lg">
+                      <p className="font-mono text-xs mb-2">EAD = [(1 - O₂%) × (depth + 33) / 0.79] - 33</p>
+                    </div>
+                    <p className="text-sm text-muted-foreground">
+                      Same calculation using feet and atmospheres instead of metres and bar.
+                    </p>
+                    <div className="text-sm space-y-1">
+                      <p>
+                        <strong>Example:</strong> EAN32 at 99 feet
+                      </p>
+                      <p className="font-mono text-xs">EAD = (1-0.32) × (99+33) / 0.79 - 33</p>
+                      <p className="font-mono text-xs">EAD = 80.7 feet</p>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+
+            {/* Temperature Conversions */}
+            <div>
+              <h2 className="text-2xl font-bold mb-6">Temperature Conversions</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Celsius ↔ Fahrenheit</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <div className="p-4 bg-muted/50 rounded-lg space-y-2">
+                      <p className="font-mono text-sm">°F = (°C × 1.8) + 32</p>
+                      <p className="font-mono text-sm">°C = (°F - 32) × 0.555</p>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Absolute Temperature Scales</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <div className="p-4 bg-muted/50 rounded-lg space-y-2">
+                      <p className="font-mono text-sm">K = °C + 273</p>
+                      <p className="font-mono text-sm">°R = °F + 460</p>
+                      <p className="text-xs text-muted-foreground mt-2">
+                        Kelvin (K) and Rankine (°R) are absolute temperature scales required for gas law calculations
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+
+            {/* Important Constants */}
+            <div>
+              <h2 className="text-2xl font-bold mb-6">Important Constants & Values</h2>
+              <Card>
+                <CardContent className="pt-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+                    <div className="space-y-3">
+                      <div>
+                        <p className="font-semibold mb-1">Water Density:</p>
+                        <ul className="space-y-1 text-muted-foreground">
+                          <li>• Fresh water: 1.0 kg/L or 62.4 lbs/ft³</li>
+                          <li>• Sea water: 1.03 kg/L or 64 lbs/ft³</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <p className="font-semibold mb-1">Standard Air Composition:</p>
+                        <ul className="space-y-1 text-muted-foreground">
+                          <li>• Nitrogen (N₂): 78.084%</li>
+                          <li>• Oxygen (O₂): 20.946%</li>
+                          <li>• Argon: 0.934%</li>
+                          <li>• CO₂ and trace gases: 0.036%</li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div className="space-y-3">
+                      <div>
+                        <p className="font-semibold mb-1">Oxygen Limits:</p>
+                        <ul className="space-y-1 text-muted-foreground">
+                          <li>• Working PPO₂ limit: 1.4 bar</li>
+                          <li>• Deco PPO₂ limit: 1.6 bar</li>
+                          <li>• Minimum PPO₂: 0.16 bar</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <p className="font-semibold mb-1">Simplified Air (for calculations):</p>
+                        <ul className="space-y-1 text-muted-foreground">
+                          <li>• Nitrogen: 79%</li>
+                          <li>• Oxygen: 21%</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Safety Notes */}
+            <Card className="border-amber-500/20 bg-amber-500/5">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Gauge className="h-5 w-5" />
-                  Gay-Lussac's Law
-                </CardTitle>
+                <CardTitle className="text-amber-900 dark:text-amber-200">Safety Reminders</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="text-center p-4 bg-muted/50 rounded-lg">
-                  <p className="font-mono text-lg">P₁/T₁ = P₂/T₂</p>
-                </div>
-                <p className="text-sm text-muted-foreground">
-                  At constant volume, pressure is directly proportional to absolute temperature.
-                </p>
-                <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">Diving Applications:</h4>
-                  <ul className="text-sm text-muted-foreground space-y-1">
-                    <li>• Tank pressure temperature effects</li>
-                    <li>• Regulator performance variations</li>
-                    <li>• Gas density calculations</li>
-                  </ul>
-                </div>
+              <CardContent className="space-y-2 text-sm text-amber-900 dark:text-amber-200">
+                <p>• Always use absolute pressure (not gauge pressure) in gas law calculations</p>
+                <p>• Temperature must be in absolute units (Kelvin or Rankine) for gas law formulas</p>
+                <p>• Never exceed PPO₂ of 1.4 bar during working portions of a dive</p>
+                <p>• These calculators are for educational purposes - always follow your training and dive tables</p>
+                <p>• When in doubt, dive conservatively and consult with a dive professional</p>
               </CardContent>
             </Card>
           </div>

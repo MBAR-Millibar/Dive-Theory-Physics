@@ -17,11 +17,11 @@ export function Navigation() {
           </div>
 
           <div className="hidden md:flex items-center gap-6">
-            <a href="/#calculators" className="text-muted-foreground hover:text-foreground transition-colors">
-              Calculators
-            </a>
             <a href="/about" className="text-muted-foreground hover:text-foreground transition-colors">
               About
+            </a>
+            <a href="/#calculators" className="text-muted-foreground hover:text-foreground transition-colors">
+              Topics
             </a>
             <Button variant="default" size="sm">
               Get Started

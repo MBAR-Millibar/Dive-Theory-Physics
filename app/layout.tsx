@@ -8,7 +8,7 @@ import "./globals.css"
 import { Footer } from "@/components/footer"
 
 export const metadata: Metadata = {
-  title: "Dive Theory - Scuba Diving Physics Calculator",
+  title: "Dive Theory - Scuba Diving Physics",
   description:
     "Learn scuba diving physics with interactive calculators for pressure, air consumption, gas laws, and lift calculations",
   generator: "v0.app",
