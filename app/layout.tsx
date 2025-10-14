@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title: "Dive Theory - Scuba Diving Physics",
   description:
     "Learn scuba diving physics with interactive calculators for pressure, air consumption, gas laws, and lift calculations",
-  generator: "v0.app",
+  generator: "Mbar",
 }
 
 export default function RootLayout({
