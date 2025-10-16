@@ -1,6 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Gauge, Wind, ArrowUp, Droplets, Atom } from "lucide-react"
+import { Gauge, Wind, ArrowUp, Droplets, Atom, Scale } from "lucide-react"
 
 const calculators = [
   {
@@ -31,13 +31,19 @@ const calculators = [
     icon: Atom,
     features: ["Boyle's Law", "Charles's Law", "Combined Gas Law"],
   },
-
   {
     id: "lift-displacement",
     title: "Lift & Displacement",
     description: "Calculate buoyancy, lift requirements, and water displacement for diving operations",
     icon: ArrowUp,
     features: ["Buoyancy Force", "Lift Bags", "Water Displacement"],
+  },
+  {
+    id: "weight",
+    title: "Weight Requirements",
+    description: "Calculate proper weighting for neutral buoyancy based on your equipment and body type",
+    icon: Scale,
+    features: ["Weight Calculation", "Suit Adjustments", "Buoyancy Check"],
   },
 ]
 
