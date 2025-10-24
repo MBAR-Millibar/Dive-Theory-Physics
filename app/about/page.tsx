@@ -56,8 +56,8 @@ export default function AboutPage() {
                   operations.
                 </li>
                 <li>
-                  <strong className="text-foreground">Lift and Displacement:</strong> Calculate buoyancy forces, lifting
-                  capacity, and water displacement for underwater operations and object recovery.
+                  <strong className="text-foreground">Buoyancy & Displacement:</strong> Calculate buoyancy forces,
+                  lifting capacity, and water displacement for underwater operations and object recovery.
                 </li>
               </ul>
               <p>

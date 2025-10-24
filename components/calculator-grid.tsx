@@ -33,17 +33,17 @@ const calculators = [
   },
   {
     id: "lift-displacement",
-    title: "Lift & Displacement",
+    title: "Buoyancy & Displacement",
     description: "Calculate buoyancy, lift requirements, and water displacement for diving operations",
     icon: ArrowUp,
     features: ["Buoyancy Force", "Lift Bags", "Water Displacement"],
   },
   {
     id: "weight",
-    title: "Weight Requirements",
-    description: "Calculate proper weighting for neutral buoyancy based on your equipment and body type",
+    title: "Lifting Operations",
+    description: "Calculate buoyancy requirements to lift submerged objects using lift bags or flotation devices",
     icon: Scale,
-    features: ["Weight Calculation", "Suit Adjustments", "Buoyancy Check"],
+    features: ["Negative Buoyancy", "Lift Requirements", "Safety Margins"],
   },
 ]
 

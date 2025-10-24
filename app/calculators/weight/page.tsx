@@ -8,63 +8,58 @@ import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Button } from "@/components/ui/button"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { Scale, Info, ArrowLeft } from "lucide-react"
+import { ArrowUp, Info, ArrowLeft } from "lucide-react"
 
-export default function WeightCalculatorPage() {
-  const [bodyWeight, setBodyWeight] = useState<string>("70")
-  const [weightUnit, setWeightUnit] = useState<string>("kg")
-  const [suitType, setSuitType] = useState<string>("none")
-  const [tankType, setTankType] = useState<string>("aluminum")
+export default function LiftingCalculatorPage() {
+  const [objectWeight, setObjectWeight] = useState<string>("200")
+  const [objectVolume, setObjectVolume] = useState<string>("127")
+  const [depth, setDepth] = useState<string>("17")
   const [waterType, setWaterType] = useState<string>("saltwater")
-  const [bodyType, setBodyType] = useState<string>("average")
+  const [weightUnit, setWeightUnit] = useState<string>("kg")
+  const [volumeUnit, setVolumeUnit] = useState<string>("liters")
 
-  const calculateWeight = () => {
-    const weight = Number.parseFloat(bodyWeight)
-    if (isNaN(weight) || weight <= 0) return null
+  const calculateLiftRequirements = () => {
+    const weight = Number.parseFloat(objectWeight)
+    const volume = Number.parseFloat(objectVolume)
+    const depthValue = Number.parseFloat(depth)
 
+    if (isNaN(weight) || weight <= 0 || isNaN(volume) || volume <= 0 || isNaN(depthValue) || depthValue < 0) {
+      return null
+    }
+
+    // Convert to kg and liters if needed
     const weightInKg = weightUnit === "lbs" ? weight * 0.453592 : weight
+    const volumeInLiters = volumeUnit === "gallons" ? volume * 3.78541 : volume
 
-    let baseWeight = 0
+    // Water density constants (kg/L)
+    const waterDensity = waterType === "saltwater" ? 1.03 : 1.0
 
-    // Suit type adjustments
-    const suitWeights: Record<string, number> = {
-      none: 0,
-      "3mm": 2,
-      "5mm": 4,
-      "7mm": 7,
-      drysuit: 10,
-    }
-    baseWeight += suitWeights[suitType] || 0
+    // Step 1: Calculate how much water weight the object displaces
+    const waterWeightDisplaced = volumeInLiters * waterDensity
 
-    // Tank type adjustments
-    const tankWeights: Record<string, number> = {
-      aluminum: 2,
-      steel: -2,
-    }
-    baseWeight += tankWeights[tankType] || 0
+    // Step 2: Calculate negative buoyancy (object weight - water weight displaced)
+    const negativeBuoyancy = weightInKg - waterWeightDisplaced
 
-    // Water type adjustments
-    const waterWeights: Record<string, number> = {
-      saltwater: 2.5,
-      freshwater: 0,
-    }
-    baseWeight += waterWeights[waterType] || 0
+    // Step 3: Calculate volume of water that must be displaced to achieve neutral buoyancy
+    const requiredDisplacement = negativeBuoyancy / waterDensity
 
-    // Body type adjustments (percentage of body weight)
-    const bodyTypeFactors: Record<string, number> = {
-      lean: 0.08,
-      average: 0.1,
-      heavy: 0.12,
-    }
-    baseWeight += weightInKg * (bodyTypeFactors[bodyType] || 0.1)
+    // Step 4: Add safety margin (typically 10-20% for lifting operations)
+    const safetyMargin = requiredDisplacement * 0.15
+    const recommendedDisplacement = requiredDisplacement + safetyMargin
 
     return {
-      kg: Math.round(baseWeight * 10) / 10,
-      lbs: Math.round(baseWeight * 2.20462 * 10) / 10,
+      waterWeightDisplaced: Math.round(waterWeightDisplaced * 10) / 10,
+      negativeBuoyancy: Math.round(negativeBuoyancy * 10) / 10,
+      minimumDisplacement: Math.round(requiredDisplacement * 10) / 10,
+      recommendedDisplacement: Math.round(recommendedDisplacement * 10) / 10,
+      safetyMargin: Math.round(safetyMargin * 10) / 10,
+      // Convert to gallons for reference
+      minimumDisplacementGal: Math.round((requiredDisplacement / 3.78541) * 10) / 10,
+      recommendedDisplacementGal: Math.round((recommendedDisplacement / 3.78541) * 10) / 10,
     }
   }
 
-  const result = calculateWeight()
+  const result = calculateLiftRequirements()
 
   return (
     <div className="min-h-screen bg-background">
@@ -81,30 +76,34 @@ export default function WeightCalculatorPage() {
 
           <div className="flex items-center gap-3 mb-6">
             <div className="p-3 rounded-lg bg-primary/10">
-              <Scale className="h-8 w-8 text-primary" />
+              <ArrowUp className="h-8 w-8 text-primary" />
             </div>
             <div>
-              <h1 className="text-4xl font-bold text-foreground">Weight Requirements Calculator</h1>
-              <p className="text-lg text-muted-foreground mt-1">Calculate proper weighting for neutral buoyancy</p>
+              <h1 className="text-4xl font-bold text-foreground">Lifting Calculator</h1>
+              <p className="text-lg text-muted-foreground mt-1">
+                Calculate buoyancy required to lift objects underwater
+              </p>
             </div>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-8 mb-12">
             <Card>
               <CardHeader>
-                <CardTitle>Weight Calculator</CardTitle>
-                <CardDescription>Enter your diving configuration to calculate required weight</CardDescription>
+                <CardTitle>Lifting Requirements Calculator</CardTitle>
+                <CardDescription>
+                  Calculate the water displacement needed to lift an object from the bottom
+                </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="space-y-2">
-                  <Label htmlFor="bodyWeight">Body Weight</Label>
+                  <Label htmlFor="objectWeight">Object Weight</Label>
                   <div className="flex gap-2">
                     <Input
-                      id="bodyWeight"
+                      id="objectWeight"
                       type="number"
-                      value={bodyWeight}
-                      onChange={(e) => setBodyWeight(e.target.value)}
-                      placeholder="70"
+                      value={objectWeight}
+                      onChange={(e) => setObjectWeight(e.target.value)}
+                      placeholder="200"
                       min="0"
                       step="0.1"
                     />
@@ -121,32 +120,43 @@ export default function WeightCalculatorPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="suitType">Exposure Suit Type</Label>
-                  <Select value={suitType} onValueChange={setSuitType}>
-                    <SelectTrigger id="suitType">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="none">No Suit / Swimsuit</SelectItem>
-                      <SelectItem value="3mm">3mm Wetsuit</SelectItem>
-                      <SelectItem value="5mm">5mm Wetsuit</SelectItem>
-                      <SelectItem value="7mm">7mm Wetsuit</SelectItem>
-                      <SelectItem value="drysuit">Drysuit</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <Label htmlFor="objectVolume">Object Volume (Water Displaced)</Label>
+                  <div className="flex gap-2">
+                    <Input
+                      id="objectVolume"
+                      type="number"
+                      value={objectVolume}
+                      onChange={(e) => setObjectVolume(e.target.value)}
+                      placeholder="127"
+                      min="0"
+                      step="0.1"
+                    />
+                    <Select value={volumeUnit} onValueChange={setVolumeUnit}>
+                      <SelectTrigger className="w-24">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="liters">L</SelectItem>
+                        <SelectItem value="gallons">gal</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="tankType">Tank Type</Label>
-                  <Select value={tankType} onValueChange={setTankType}>
-                    <SelectTrigger id="tankType">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="aluminum">Aluminum</SelectItem>
-                      <SelectItem value="steel">Steel</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <Label htmlFor="depth">Depth</Label>
+                  <div className="flex gap-2">
+                    <Input
+                      id="depth"
+                      type="number"
+                      value={depth}
+                      onChange={(e) => setDepth(e.target.value)}
+                      placeholder="17"
+                      min="0"
+                      step="0.1"
+                    />
+                    <div className="w-24 flex items-center justify-center text-sm text-muted-foreground">meters</div>
+                  </div>
                 </div>
 
                 <div className="space-y-2">
@@ -156,84 +166,118 @@ export default function WeightCalculatorPage() {
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="saltwater">Saltwater</SelectItem>
-                      <SelectItem value="freshwater">Freshwater</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="bodyType">Body Composition</Label>
-                  <Select value={bodyType} onValueChange={setBodyType}>
-                    <SelectTrigger id="bodyType">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="lean">Lean (Low body fat)</SelectItem>
-                      <SelectItem value="average">Average</SelectItem>
-                      <SelectItem value="heavy">Heavy (Higher body fat)</SelectItem>
+                      <SelectItem value="saltwater">Saltwater (1.03 kg/L)</SelectItem>
+                      <SelectItem value="freshwater">Freshwater (1.0 kg/L)</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
 
                 {result && (
-                  <Alert className="bg-primary/10 border-primary/20">
-                    <Info className="h-4 w-4" />
-                    <AlertDescription>
-                      <div className="font-semibold mb-2">Recommended Weight:</div>
-                      <div className="text-2xl font-bold text-primary">
-                        {result.kg} kg ({result.lbs} lbs)
-                      </div>
-                      <div className="text-sm mt-2 text-muted-foreground">
-                        This is a starting point. Always perform a buoyancy check and adjust as needed.
-                      </div>
-                    </AlertDescription>
-                  </Alert>
+                  <div className="space-y-4">
+                    <Alert className="bg-muted border-muted-foreground/20">
+                      <Info className="h-4 w-4" />
+                      <AlertDescription>
+                        <div className="space-y-3">
+                          <div>
+                            <div className="text-sm font-medium mb-1">Water Weight Displaced by Object:</div>
+                            <div className="text-lg font-semibold">{result.waterWeightDisplaced} kg</div>
+                          </div>
+                          <div>
+                            <div className="text-sm font-medium mb-1">Negative Buoyancy:</div>
+                            <div className="text-lg font-semibold">{result.negativeBuoyancy} kg</div>
+                          </div>
+                        </div>
+                      </AlertDescription>
+                    </Alert>
+
+                    <Alert className="bg-primary/10 border-primary/20">
+                      <ArrowUp className="h-4 w-4" />
+                      <AlertDescription>
+                        <div className="space-y-3">
+                          <div>
+                            <div className="text-sm font-medium mb-1">Minimum Displacement Required:</div>
+                            <div className="text-2xl font-bold text-primary">
+                              {result.minimumDisplacement} L ({result.minimumDisplacementGal} gal)
+                            </div>
+                          </div>
+                          <div className="pt-2 border-t border-primary/20">
+                            <div className="text-sm font-medium mb-1">Recommended (with 15% safety margin):</div>
+                            <div className="text-xl font-bold text-primary">
+                              {result.recommendedDisplacement} L ({result.recommendedDisplacementGal} gal)
+                            </div>
+                          </div>
+                          <div className="text-xs text-muted-foreground mt-2">
+                            Safety margin: +{result.safetyMargin} L for controlled ascent
+                          </div>
+                        </div>
+                      </AlertDescription>
+                    </Alert>
+                  </div>
                 )}
               </CardContent>
             </Card>
 
             <Card>
               <CardHeader>
-                <CardTitle>Quick Reference</CardTitle>
-                <CardDescription>Typical weight adjustments by equipment</CardDescription>
+                <CardTitle>Calculation Steps</CardTitle>
+                <CardDescription>How the lifting requirements are calculated</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
                   <div>
-                    <h3 className="font-semibold mb-2">Exposure Suit</h3>
-                    <ul className="space-y-1 text-sm text-muted-foreground">
-                      <li>• No suit: 0 kg</li>
-                      <li>• 3mm wetsuit: +2 kg</li>
-                      <li>• 5mm wetsuit: +4 kg</li>
-                      <li>• 7mm wetsuit: +7 kg</li>
-                      <li>• Drysuit: +10 kg</li>
-                    </ul>
+                    <h3 className="font-semibold mb-2">Step 1: Water Weight Displaced</h3>
+                    <p className="text-sm text-muted-foreground mb-2">
+                      Multiply the object's volume by the water density constant:
+                    </p>
+                    <div className="bg-muted p-3 rounded font-mono text-sm">
+                      Volume × Water Density = Water Weight
+                      {result && (
+                        <div className="mt-1 text-primary">
+                          {objectVolume} L × {waterType === "saltwater" ? "1.03" : "1.0"} kg/L ={" "}
+                          {result.waterWeightDisplaced} kg
+                        </div>
+                      )}
+                    </div>
                   </div>
 
                   <div>
-                    <h3 className="font-semibold mb-2">Tank Type</h3>
-                    <ul className="space-y-1 text-sm text-muted-foreground">
-                      <li>• Aluminum: +2 kg (becomes positive when empty)</li>
-                      <li>• Steel: -2 kg (stays negative when empty)</li>
-                    </ul>
+                    <h3 className="font-semibold mb-2">Step 2: Negative Buoyancy</h3>
+                    <p className="text-sm text-muted-foreground mb-2">Subtract water weight from object weight:</p>
+                    <div className="bg-muted p-3 rounded font-mono text-sm">
+                      Object Weight - Water Weight = Negative Buoyancy
+                      {result && (
+                        <div className="mt-1 text-primary">
+                          {objectWeight} kg - {result.waterWeightDisplaced} kg = {result.negativeBuoyancy} kg
+                        </div>
+                      )}
+                    </div>
                   </div>
 
                   <div>
-                    <h3 className="font-semibold mb-2">Water Type</h3>
-                    <ul className="space-y-1 text-sm text-muted-foreground">
-                      <li>• Saltwater: +2.5 kg (more buoyant)</li>
-                      <li>• Freshwater: 0 kg (baseline)</li>
-                    </ul>
+                    <h3 className="font-semibold mb-2">Step 3: Required Displacement</h3>
+                    <p className="text-sm text-muted-foreground mb-2">Divide negative buoyancy by water density:</p>
+                    <div className="bg-muted p-3 rounded font-mono text-sm">
+                      Negative Buoyancy ÷ Water Density = Volume Needed
+                      {result && (
+                        <div className="mt-1 text-primary">
+                          {result.negativeBuoyancy} kg ÷ {waterType === "saltwater" ? "1.03" : "1.0"} kg/L ={" "}
+                          {result.minimumDisplacement} L
+                        </div>
+                      )}
+                    </div>
                   </div>
 
                   <div>
-                    <h3 className="font-semibold mb-2">Body Composition</h3>
-                    <ul className="space-y-1 text-sm text-muted-foreground">
-                      <li>• Lean: ~8% of body weight</li>
-                      <li>• Average: ~10% of body weight</li>
-                      <li>• Heavy: ~12% of body weight</li>
-                    </ul>
+                    <h3 className="font-semibold mb-2">Step 4: Safety Margin</h3>
+                    <p className="text-sm text-muted-foreground mb-2">Add 15% for controlled ascent:</p>
+                    <div className="bg-muted p-3 rounded font-mono text-sm">
+                      Minimum × 1.15 = Recommended
+                      {result && (
+                        <div className="mt-1 text-primary">
+                          {result.minimumDisplacement} L × 1.15 = {result.recommendedDisplacement} L
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
               </CardContent>
@@ -242,147 +286,201 @@ export default function WeightCalculatorPage() {
 
           <Card id="theory" className="scroll-mt-24">
             <CardHeader>
-              <CardTitle className="text-2xl">Theory: Buoyancy and Weight Requirements</CardTitle>
-              <CardDescription>Understanding why divers need weight and how to calculate it</CardDescription>
+              <CardTitle className="text-2xl">Theory: Underwater Lifting Operations</CardTitle>
+              <CardDescription>Understanding buoyancy principles for lifting submerged objects</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6 text-foreground">
               <section>
-                <h3 className="text-xl font-semibold mb-3">Why Do Divers Need Weight?</h3>
+                <h3 className="text-xl font-semibold mb-3">The Physics of Underwater Lifting</h3>
                 <p className="text-muted-foreground leading-relaxed mb-4">
-                  The human body is naturally buoyant, especially in saltwater. When you add exposure protection
-                  (wetsuits or drysuits) and equipment, you become even more buoyant. Divers add weight to achieve
-                  neutral buoyancy, allowing them to hover effortlessly at any depth without floating up or sinking
-                  down.
+                  When an object is submerged, it experiences an upward buoyant force equal to the weight of the water
+                  it displaces (Archimedes' Principle). If the object weighs more than the water it displaces, it has
+                  negative buoyancy and will sink. To lift it, we must add enough buoyancy to overcome this negative
+                  buoyancy.
                 </p>
                 <div className="bg-muted/50 p-4 rounded-lg">
-                  <p className="font-semibold mb-2">The Goal: Neutral Buoyancy</p>
-                  <p className="text-sm text-muted-foreground">
-                    Proper weighting allows you to maintain depth with minimal effort, conserve air, protect marine
-                    life, and improve your overall diving experience.
+                  <p className="font-semibold mb-2">Archimedes' Principle</p>
+                  <p className="text-sm text-muted-foreground mb-2">
+                    "Any object, wholly or partially immersed in a fluid, is buoyed up by a force equal to the weight of
+                    the fluid displaced by the object."
                   </p>
+                  <div className="font-mono text-sm bg-background p-2 rounded mt-2">
+                    Buoyant Force = Volume × Water Density × Gravity
+                  </div>
                 </div>
               </section>
 
               <section>
-                <h3 className="text-xl font-semibold mb-3">Factors Affecting Weight Requirements</h3>
+                <h3 className="text-xl font-semibold mb-3">Understanding the Calculation</h3>
                 <div className="space-y-4">
                   <div>
-                    <h4 className="font-semibold mb-2">1. Body Composition</h4>
+                    <h4 className="font-semibold mb-2">1. Water Weight Displaced</h4>
                     <p className="text-muted-foreground leading-relaxed">
-                      Fat tissue is more buoyant than muscle and bone. Divers with higher body fat percentages typically
-                      need more weight. As a general rule, you need approximately 10% of your body weight in lead, but
-                      this varies based on individual body composition.
+                      First, we calculate how much water weight the object displaces based on its volume. In saltwater,
+                      each liter weighs 1.03 kg. In freshwater, each liter weighs 1.0 kg. This tells us the upward
+                      buoyant force acting on the object.
                     </p>
                   </div>
 
                   <div>
-                    <h4 className="font-semibold mb-2">2. Exposure Protection</h4>
+                    <h4 className="font-semibold mb-2">2. Negative Buoyancy</h4>
                     <p className="text-muted-foreground leading-relaxed">
-                      Neoprene wetsuits contain tiny gas bubbles that provide insulation but also add significant
-                      buoyancy. Thicker suits require more weight. Drysuits add even more buoyancy because they contain
-                      a layer of air for insulation.
+                      By subtracting the water weight from the object's actual weight, we find the negative buoyancy -
+                      the net downward force keeping the object on the bottom. This is the force we must overcome to
+                      lift the object.
                     </p>
                   </div>
 
                   <div>
-                    <h4 className="font-semibold mb-2">3. Tank Material</h4>
+                    <h4 className="font-semibold mb-2">3. Required Displacement</h4>
                     <p className="text-muted-foreground leading-relaxed">
-                      Aluminum tanks become positively buoyant when empty (about +2 kg), requiring more weight at the
-                      start of the dive. Steel tanks remain negatively buoyant throughout the dive, reducing the amount
-                      of lead weight needed.
+                      To achieve neutral buoyancy (where the object neither sinks nor floats), we need to displace
+                      additional water equal to the negative buoyancy. We divide the negative buoyancy by the water
+                      density to find the volume of water that must be displaced.
                     </p>
                   </div>
 
                   <div>
-                    <h4 className="font-semibold mb-2">4. Water Salinity</h4>
+                    <h4 className="font-semibold mb-2">4. Safety Margin</h4>
                     <p className="text-muted-foreground leading-relaxed">
-                      Saltwater is denser than freshwater (1.025 g/cm³ vs 1.0 g/cm³), providing more buoyant force. You
-                      typically need 2-3 kg more weight in saltwater compared to freshwater.
+                      For safe lifting operations, we add a safety margin (typically 10-20%) to ensure controlled
+                      ascent. This extra buoyancy allows you to manage the lift rate and compensate for any calculation
+                      errors or unexpected factors.
                     </p>
                   </div>
                 </div>
               </section>
 
               <section>
-                <h3 className="text-xl font-semibold mb-3">The Buoyancy Check</h3>
-                <p className="text-muted-foreground leading-relaxed mb-4">
-                  Calculators provide a starting point, but the only way to determine your exact weight requirements is
-                  to perform a buoyancy check:
-                </p>
-                <ol className="list-decimal list-inside space-y-2 text-muted-foreground">
-                  <li>Enter the water with all your gear and a nearly empty tank (50 bar / 500 psi)</li>
-                  <li>Fully deflate your BCD</li>
-                  <li>Hold a normal breath and relax</li>
-                  <li>You should float at eye level</li>
-                  <li>When you exhale, you should slowly sink</li>
-                </ol>
-                <p className="text-muted-foreground leading-relaxed mt-4">
-                  If you float too high, add weight. If you sink too quickly, remove weight. Make adjustments in 1 kg (2
-                  lbs) increments.
-                </p>
-              </section>
-
-              <section>
-                <h3 className="text-xl font-semibold mb-3">Weight Distribution</h3>
-                <p className="text-muted-foreground leading-relaxed mb-4">
-                  Proper weight distribution is as important as the total amount of weight:
-                </p>
-                <ul className="space-y-2 text-muted-foreground">
-                  <li>
-                    <span className="font-semibold">Weight Belt:</span> Traditional method, worn around the waist.
-                    Should be easily ditchable in an emergency.
-                  </li>
-                  <li>
-                    <span className="font-semibold">Integrated Weights:</span> Built into the BCD, often more
-                    comfortable and better distributed.
-                  </li>
-                  <li>
-                    <span className="font-semibold">Trim Weights:</span> Small weights placed on tank bands or BCD to
-                    adjust body position in the water.
-                  </li>
-                  <li>
-                    <span className="font-semibold">Ankle Weights:</span> Used to counteract buoyant feet, especially
-                    with thick boots or drysuits.
-                  </li>
-                </ul>
-              </section>
-
-              <section>
-                <h3 className="text-xl font-semibold mb-3">Common Mistakes</h3>
-                <div className="bg-destructive/10 border border-destructive/20 p-4 rounded-lg space-y-3">
+                <h3 className="text-xl font-semibold mb-3">Lifting Methods</h3>
+                <div className="space-y-4">
                   <div>
-                    <p className="font-semibold text-destructive">Being Overweighted</p>
-                    <p className="text-sm text-muted-foreground">
-                      Many divers carry too much weight, leading to increased air consumption, difficulty maintaining
-                      depth, and potential damage to the reef from poor buoyancy control.
+                    <h4 className="font-semibold mb-2">Lift Bags</h4>
+                    <p className="text-muted-foreground leading-relaxed mb-2">
+                      The most common method for underwater lifting. Lift bags are inflated with air from a diver's
+                      regulator or surface supply. As the bag inflates, it displaces water and provides upward buoyant
+                      force.
+                    </p>
+                    <ul className="space-y-1 text-sm text-muted-foreground ml-4">
+                      <li>• Open-bottom bags: Simple but require careful inflation control</li>
+                      <li>• Closed bags: More controlled but need proper venting during ascent</li>
+                      <li>• Parachute bags: Large capacity for heavy objects</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h4 className="font-semibold mb-2">Buoyancy Compensators</h4>
+                    <p className="text-muted-foreground leading-relaxed">
+                      For smaller objects, a diver's BCD can provide lifting force. However, this method is limited by
+                      the BCD's volume and can affect the diver's own buoyancy control.
                     </p>
                   </div>
+
                   <div>
-                    <p className="font-semibold text-destructive">Not Accounting for Tank Weight Change</p>
-                    <p className="text-sm text-muted-foreground">
-                      A full tank is heavier than an empty one. You should be properly weighted for the end of your dive
-                      when your tank is nearly empty.
-                    </p>
-                  </div>
-                  <div>
-                    <p className="font-semibold text-destructive">Forgetting to Adjust for Conditions</p>
-                    <p className="text-sm text-muted-foreground">
-                      Weight requirements change with different suits, tanks, and water types. Always reassess when
-                      conditions change.
+                    <h4 className="font-semibold mb-2">Flotation Devices</h4>
+                    <p className="text-muted-foreground leading-relaxed">
+                      Foam blocks, air-filled drums, or specialized flotation devices can be attached to objects for
+                      lifting. These provide consistent buoyancy without the need for inflation.
                     </p>
                   </div>
                 </div>
               </section>
 
               <section>
-                <h3 className="text-xl font-semibold mb-3">Safety Considerations</h3>
+                <h3 className="text-xl font-semibold mb-3">Important Considerations</h3>
+                <div className="space-y-4">
+                  <div>
+                    <h4 className="font-semibold mb-2">Depth and Pressure Changes</h4>
+                    <p className="text-muted-foreground leading-relaxed">
+                      As a lift bag ascends, the air inside expands due to decreasing pressure (Boyle's Law). At 10
+                      meters depth, the pressure is 2 ATA, so air volume doubles when brought to the surface. This means
+                      a lift bag becomes more buoyant as it rises, potentially causing uncontrolled ascent.
+                    </p>
+                    <div className="bg-destructive/10 border border-destructive/20 p-3 rounded-lg mt-2">
+                      <p className="text-sm font-semibold text-destructive">Critical Safety Point</p>
+                      <p className="text-sm text-muted-foreground">
+                        Always vent expanding air from lift bags during ascent to maintain controlled lift rate. An
+                        uncontrolled ascent can be dangerous for divers and damage the object being lifted.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h4 className="font-semibold mb-2">Center of Gravity</h4>
+                    <p className="text-muted-foreground leading-relaxed">
+                      Attach lift bags above the object's center of gravity to prevent tipping or rolling during ascent.
+                      Unbalanced loads can shift unexpectedly and create hazardous situations.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h4 className="font-semibold mb-2">Rigging and Attachment</h4>
+                    <p className="text-muted-foreground leading-relaxed">
+                      Use proper rigging techniques with appropriate lines, shackles, and attachment points. The rigging
+                      must be strong enough to handle the forces involved and should be inspected before use.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h4 className="font-semibold mb-2">Environmental Factors</h4>
+                    <p className="text-muted-foreground leading-relaxed">
+                      Consider currents, visibility, bottom conditions, and overhead obstructions. Plan the lift path to
+                      avoid entanglement hazards and ensure clear ascent to the surface or recovery point.
+                    </p>
+                  </div>
+                </div>
+              </section>
+
+              <section>
+                <h3 className="text-xl font-semibold mb-3">Practical Example</h3>
+                <div className="bg-muted/50 p-4 rounded-lg">
+                  <p className="font-semibold mb-3">Problem:</p>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    A 200 kg anchor that displaces 127 liters of water lies on the bottom in 17 meters of sea water.
+                    What is the minimum amount of water that must be displaced from a lifting device to bring the anchor
+                    to the surface?
+                  </p>
+
+                  <p className="font-semibold mb-2">Solution:</p>
+                  <div className="space-y-2 text-sm text-muted-foreground">
+                    <p>
+                      <span className="font-semibold">Step 1:</span> Water weight displaced = 127 L × 1.03 kg/L = 130.8
+                      kg
+                    </p>
+                    <p>
+                      <span className="font-semibold">Step 2:</span> Negative buoyancy = 200 kg - 130.8 kg = 69.2 kg
+                    </p>
+                    <p>
+                      <span className="font-semibold">Step 3:</span> Required displacement = 69.2 kg ÷ 1.03 kg/L = 67.2
+                      L
+                    </p>
+                    <p>
+                      <span className="font-semibold">Step 4:</span> With 15% safety margin = 67.2 L × 1.15 = 77.3 L
+                    </p>
+                  </div>
+
+                  <div className="mt-4 p-3 bg-primary/10 rounded">
+                    <p className="text-sm font-semibold">Answer:</p>
+                    <p className="text-sm text-muted-foreground">
+                      Minimum: 67.2 liters | Recommended: 77.3 liters (with safety margin)
+                    </p>
+                  </div>
+                </div>
+              </section>
+
+              <section>
+                <h3 className="text-xl font-semibold mb-3">Safety Guidelines</h3>
                 <div className="bg-primary/10 border border-primary/20 p-4 rounded-lg">
                   <ul className="space-y-2 text-sm text-muted-foreground">
-                    <li>• Always ensure your weights are easily ditchable in an emergency</li>
-                    <li>• Practice weight removal and replacement at the surface before diving</li>
-                    <li>• Never dive significantly overweighted - it increases risk and reduces enjoyment</li>
-                    <li>• Reassess your weighting periodically as your skills and equipment change</li>
-                    <li>• Consider using a weight check at the safety stop to verify proper weighting</li>
+                    <li>• Always use proper training before attempting underwater lifting operations</li>
+                    <li>• Calculate buoyancy requirements carefully and add appropriate safety margins</li>
+                    <li>• Use lift bags rated for the load and depth conditions</li>
+                    <li>• Maintain control of the lift at all times - never let objects ascend uncontrolled</li>
+                    <li>• Vent expanding air from lift bags during ascent to prevent runaway ascents</li>
+                    <li>• Stay clear of the load during lifting - objects can shift or fall</li>
+                    <li>• Plan the lift operation thoroughly, including emergency procedures</li>
+                    <li>• Consider surface conditions and have recovery equipment ready</li>
+                    <li>• Work with a team and maintain clear communication throughout the operation</li>
                   </ul>
                 </div>
               </section>
