@@ -687,9 +687,40 @@ export function GasLawsCalculator() {
 
         <TabsContent value="theory" className="space-y-6">
           <div className="space-y-8">
+            <Card className="border-primary/20 bg-primary/5">
+              <CardHeader>
+                <CardTitle>Understanding Gas Laws in Diving</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <p className="text-muted-foreground">
+                  Gas laws describe how gases behave under different conditions of pressure, volume, and temperature.
+                  These laws are fundamental to understanding diving physics and are critical for dive safety.
+                </p>
+                <div className="p-4 bg-muted/50 rounded-lg">
+                  <p className="font-semibold mb-2">Why Gas Laws Matter in Diving:</p>
+                  <ul className="space-y-2 text-sm text-muted-foreground">
+                    <li>
+                      • <strong>Boyle's Law:</strong> Explains why you must never hold your breath and why air
+                      consumption increases with depth
+                    </li>
+                    <li>
+                      • <strong>Dalton's Law:</strong> Critical for calculating oxygen toxicity and nitrogen narcosis
+                      risks
+                    </li>
+                    <li>
+                      • <strong>Charles's Law:</strong> Explains tank pressure changes with temperature
+                    </li>
+                    <li>
+                      • <strong>Gay-Lussac's Law:</strong> Helps understand regulator performance in cold water
+                    </li>
+                  </ul>
+                </div>
+              </CardContent>
+            </Card>
+
             {/* Gas Laws Section */}
             <div>
-              <h2 className="text-2xl font-bold mb-6">Gas Laws</h2>
+              <h2 className="text-2xl font-bold mb-6">The Four Essential Gas Laws</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Card>
                   <CardHeader>
@@ -704,43 +735,35 @@ export function GasLawsCalculator() {
                       <p className="text-sm text-muted-foreground">At constant temperature</p>
                     </div>
                     <p className="text-sm text-muted-foreground">
-                      At constant temperature, pressure and volume are inversely proportional. Double the pressure,
-                      halve the volume.
+                      At constant temperature, pressure and volume are inversely proportional. If you double the
+                      pressure, you halve the volume. If you halve the pressure, you double the volume.
                     </p>
                     <div className="space-y-2">
-                      <h4 className="font-semibold text-sm">Diving Applications:</h4>
+                      <h4 className="font-semibold text-sm">Critical Diving Applications:</h4>
                       <ul className="text-sm text-muted-foreground space-y-1">
-                        <li>• Never hold your breath while ascending</li>
-                        <li>• Air consumption increases with depth</li>
-                        <li>• BCD volume changes during ascent/descent</li>
-                        <li>• Lung overexpansion injuries</li>
+                        <li>
+                          • <strong>Never hold your breath:</strong> Air in lungs expands during ascent - can cause
+                          fatal lung overexpansion injury
+                        </li>
+                        <li>
+                          • <strong>Air consumption:</strong> At 30m (4 bar), you use air 4x faster than at surface
+                        </li>
+                        <li>
+                          • <strong>BCD control:</strong> Must add air descending, release air ascending
+                        </li>
+                        <li>
+                          • <strong>Mask squeeze:</strong> Must equalize mask pressure during descent
+                        </li>
+                        <li>
+                          • <strong>Ear equalization:</strong> Air spaces compress with depth, causing discomfort
+                        </li>
                       </ul>
                     </div>
-                  </CardContent>
-                </Card>
-
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <Thermometer className="h-5 w-5" />
-                      Charles's Law
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="text-center p-4 bg-muted/50 rounded-lg">
-                      <p className="font-mono text-lg mb-2">V₁/T₁ = V₂/T₂</p>
-                      <p className="text-sm text-muted-foreground">At constant pressure</p>
-                    </div>
-                    <p className="text-sm text-muted-foreground">
-                      At constant pressure, volume is directly proportional to absolute temperature (Kelvin).
-                    </p>
-                    <div className="space-y-2">
-                      <h4 className="font-semibold text-sm">Diving Applications:</h4>
-                      <ul className="text-sm text-muted-foreground space-y-1">
-                        <li>• Tank pressure changes with temperature</li>
-                        <li>• BCD volume changes with temperature</li>
-                        <li>• Wetsuit buoyancy variations</li>
-                      </ul>
+                    <div className="p-3 bg-destructive/10 border border-destructive/20 rounded-lg">
+                      <p className="text-sm text-destructive font-medium">
+                        ⚠️ Most Important Law: Boyle's Law is THE most critical gas law for diver safety. Lung
+                        overexpansion injuries can be fatal.
+                      </p>
                     </div>
                   </CardContent>
                 </Card>
@@ -758,15 +781,75 @@ export function GasLawsCalculator() {
                       <p className="font-mono text-sm mb-1">P_gas = P_total × % volume</p>
                     </div>
                     <p className="text-sm text-muted-foreground">
-                      Total pressure of gas mixture equals sum of partial pressures. Each gas acts independently.
+                      Total pressure of a gas mixture equals the sum of the partial pressures of each gas. Each gas in a
+                      mixture acts independently and exerts its own pressure.
+                    </p>
+                    <div className="space-y-2">
+                      <h4 className="font-semibold text-sm">Critical Diving Applications:</h4>
+                      <ul className="text-sm text-muted-foreground space-y-1">
+                        <li>
+                          • <strong>Oxygen toxicity:</strong> PPO₂ {">"} 1.4 bar causes CNS oxygen toxicity (seizures,
+                          convulsions)
+                        </li>
+                        <li>
+                          • <strong>Nitrogen narcosis:</strong> PPN₂ {">"} 3.2 bar causes impairment (like alcohol
+                          intoxication)
+                        </li>
+                        <li>
+                          • <strong>Nitrox diving:</strong> Calculate maximum operating depth (MOD) for enriched air
+                        </li>
+                        <li>
+                          • <strong>Gas planning:</strong> Determine safe depth limits for different gas mixes
+                        </li>
+                      </ul>
+                    </div>
+                    <div className="p-3 bg-amber-500/10 border border-amber-500/20 rounded-lg">
+                      <p className="text-sm text-amber-900 dark:text-amber-200">
+                        <strong>Safety Note:</strong> Always analyze your gas mix before diving and calculate your
+                        maximum operating depth based on PPO₂ limits.
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Thermometer className="h-5 w-5" />
+                      Charles's Law
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="text-center p-4 bg-muted/50 rounded-lg">
+                      <p className="font-mono text-lg mb-2">V₁/T₁ = V₂/T₂</p>
+                      <p className="text-sm text-muted-foreground">At constant pressure</p>
+                    </div>
+                    <p className="text-sm text-muted-foreground">
+                      At constant pressure, volume is directly proportional to absolute temperature (Kelvin). As
+                      temperature increases, volume increases proportionally.
                     </p>
                     <div className="space-y-2">
                       <h4 className="font-semibold text-sm">Diving Applications:</h4>
                       <ul className="text-sm text-muted-foreground space-y-1">
-                        <li>• Oxygen toxicity (PPO₂ {">"} 1.4 bar)</li>
-                        <li>• Nitrogen narcosis assessment</li>
-                        <li>• Nitrox maximum depth calculations</li>
+                        <li>
+                          • <strong>Tank filling:</strong> Tanks get hot when filled quickly, pressure drops when cooled
+                        </li>
+                        <li>
+                          • <strong>Cold water diving:</strong> Tank pressure decreases in cold water
+                        </li>
+                        <li>
+                          • <strong>BCD volume:</strong> Changes slightly with water temperature changes
+                        </li>
+                        <li>
+                          • <strong>Wetsuit buoyancy:</strong> Neoprene gas bubbles affected by temperature
+                        </li>
                       </ul>
+                    </div>
+                    <div className="p-3 bg-muted/50 rounded-lg">
+                      <p className="text-sm text-muted-foreground">
+                        <strong>Practical Tip:</strong> If your tank is filled in warm conditions, expect lower pressure
+                        when diving in cold water. Plan accordingly.
+                      </p>
                     </div>
                   </CardContent>
                 </Card>
@@ -784,22 +867,39 @@ export function GasLawsCalculator() {
                       <p className="text-sm text-muted-foreground">At constant volume</p>
                     </div>
                     <p className="text-sm text-muted-foreground">
-                      At constant volume, pressure is directly proportional to absolute temperature.
+                      At constant volume, pressure is directly proportional to absolute temperature. As temperature
+                      increases, pressure increases proportionally.
                     </p>
                     <div className="space-y-2">
                       <h4 className="font-semibold text-sm">Diving Applications:</h4>
                       <ul className="text-sm text-muted-foreground space-y-1">
-                        <li>• Tank pressure temperature effects</li>
-                        <li>• ~0.6 bar per 1°C or ~5 psi per 1°F</li>
-                        <li>• Regulator performance variations</li>
+                        <li>
+                          • <strong>Tank pressure changes:</strong> ~0.6 bar per 1°C or ~5 psi per 1°F temperature
+                          change
+                        </li>
+                        <li>
+                          • <strong>Regulator performance:</strong> Cold water can affect first stage performance
+                        </li>
+                        <li>
+                          • <strong>Tank storage:</strong> Store tanks in cool, stable temperature environments
+                        </li>
+                        <li>
+                          • <strong>Fill calculations:</strong> Account for temperature when calculating tank fills
+                        </li>
                       </ul>
+                    </div>
+                    <div className="p-3 bg-muted/50 rounded-lg">
+                      <p className="text-sm text-muted-foreground">
+                        <strong>Example:</strong> A tank filled to 200 bar at 30°C will drop to ~194 bar when cooled to
+                        20°C.
+                      </p>
                     </div>
                   </CardContent>
                 </Card>
 
                 <Card className="md:col-span-2">
                   <CardHeader>
-                    <CardTitle>General Gas Law (Combined)</CardTitle>
+                    <CardTitle>General Gas Law (Combined Gas Law)</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="text-center p-4 bg-muted/50 rounded-lg">
@@ -809,9 +909,17 @@ export function GasLawsCalculator() {
                       </p>
                     </div>
                     <p className="text-sm text-muted-foreground">
-                      This formula accounts for all three variables: pressure, volume, and temperature. Temperature must
-                      be in absolute units (Kelvin or Rankine).
+                      This formula accounts for all three variables: pressure, volume, and temperature changing
+                      simultaneously. Temperature must be in absolute units (Kelvin = Celsius + 273).
                     </p>
+                    <div className="p-4 bg-muted/50 rounded-lg">
+                      <p className="font-semibold mb-2">When to Use:</p>
+                      <p className="text-sm text-muted-foreground">
+                        Use the combined gas law when pressure, volume, AND temperature all change. For example,
+                        calculating how much a balloon expands when brought from depth to surface in water of different
+                        temperature.
+                      </p>
+                    </div>
                   </CardContent>
                 </Card>
               </div>
@@ -1060,17 +1168,62 @@ export function GasLawsCalculator() {
               </Card>
             </div>
 
-            {/* Safety Notes */}
-            <Card className="border-amber-500/20 bg-amber-500/5">
+            <Card className="border-destructive/20 bg-destructive/5">
               <CardHeader>
-                <CardTitle className="text-amber-900 dark:text-amber-200">Safety Reminders</CardTitle>
+                <CardTitle className="text-destructive">Critical Safety Reminders</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-2 text-sm text-amber-900 dark:text-amber-200">
-                <p>• Always use absolute pressure (not gauge pressure) in gas law calculations</p>
-                <p>• Temperature must be in absolute units (Kelvin or Rankine) for gas law formulas</p>
-                <p>• Never exceed PPO₂ of 1.4 bar during working portions of a dive</p>
-                <p>• These calculators are for educational purposes - always follow your training and dive tables</p>
-                <p>• When in doubt, dive conservatively and consult with a dive professional</p>
+              <CardContent className="space-y-3 text-sm">
+                <div className="space-y-2">
+                  <p className="font-semibold text-destructive">Absolute vs. Gauge Pressure:</p>
+                  <p className="text-muted-foreground">
+                    • Always use <strong>absolute pressure</strong> (not gauge pressure) in gas law calculations
+                    <br />• Absolute pressure = gauge pressure + 1 bar (or + 1 atm)
+                    <br />• Example: At 30m, gauge shows 3 bar, but absolute pressure is 4 bar
+                  </p>
+                </div>
+                <Separator />
+                <div className="space-y-2">
+                  <p className="font-semibold text-destructive">Temperature Units:</p>
+                  <p className="text-muted-foreground">
+                    • Temperature must be in <strong>absolute units</strong> (Kelvin or Rankine) for gas law formulas
+                    <br />• Kelvin = Celsius + 273
+                    <br />• Rankine = Fahrenheit + 460
+                    <br />• Never use Celsius or Fahrenheit directly in calculations
+                  </p>
+                </div>
+                <Separator />
+                <div className="space-y-2">
+                  <p className="font-semibold text-destructive">Oxygen Toxicity Limits:</p>
+                  <p className="text-muted-foreground">
+                    • <strong>Never exceed PPO₂ of 1.4 bar</strong> during working portions of a dive
+                    <br />• PPO₂ of 1.6 bar maximum for decompression stops only
+                    <br />• Symptoms: Visual disturbances, ear ringing, nausea, twitching, convulsions
+                    <br />• Convulsions underwater are usually fatal
+                  </p>
+                </div>
+                <Separator />
+                <div className="space-y-2">
+                  <p className="font-semibold text-destructive">Nitrogen Narcosis:</p>
+                  <p className="text-muted-foreground">
+                    • Begins around 30m (4 bar) for most divers
+                    <br />• Significant impairment at 40m+ (5+ bar)
+                    <br />• Effects similar to alcohol intoxication
+                    <br />• Impairs judgment - dangerous for decision-making
+                    <br />• Ascend to shallower depth if experiencing symptoms
+                  </p>
+                </div>
+                <Separator />
+                <div className="space-y-2">
+                  <p className="font-semibold text-destructive">General Dive Safety:</p>
+                  <p className="text-muted-foreground">
+                    • These calculators are for <strong>educational purposes only</strong>
+                    <br />• Always follow your training and certification limits
+                    <br />• Use dive tables or dive computers for actual dive planning
+                    <br />• When in doubt, dive conservatively
+                    <br />• Never dive beyond your training level
+                    <br />• Consult with a dive professional for questions about dive planning
+                  </p>
+                </div>
               </CardContent>
             </Card>
           </div>

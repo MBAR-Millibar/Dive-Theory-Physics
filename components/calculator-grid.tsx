@@ -5,10 +5,10 @@ import { Gauge, Wind, ArrowUp, Droplets, Atom, Scale } from "lucide-react"
 const calculators = [
   {
     id: "pressure",
-    title: "Pressure",
-    description: "Calculate absolute pressure, gauge pressure, and partial pressures at different depths",
+    title: "Water & Pressure",
+    description: "Understand water properties (heat, light, sound) and calculate pressures at different depths",
     icon: Gauge,
-    features: ["Absolute Pressure", "Partial Pressure", "Depth Conversion"],
+    features: ["Water Properties", "Absolute Pressure", "Partial Pressure"],
   },
   {
     id: "air-consumption",
