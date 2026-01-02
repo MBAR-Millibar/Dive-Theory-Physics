@@ -85,11 +85,11 @@ export function CalculatorGrid() {
                     ))}
                   </div>
                   <div className="flex flex-col gap-3">
+                    <Button className="w-full bg-black hover:bg-black/90 text-white" asChild>
+                      <a href={`/calculators/${calc.id}#theory`}>Learn Theory</a>
+                    </Button>
                     <Button className="w-full" variant="default" asChild>
                       <a href={`/calculators/${calc.id}`}>Open Calculator</a>
-                    </Button>
-                    <Button className="w-full bg-black hover:bg-black/90 text-white" asChild>
-                      <a href={`/calculators/${calc.id}#theory`}>Open Theory</a>
                     </Button>
                   </div>
                 </CardContent>

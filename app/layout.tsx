@@ -1,11 +1,22 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { GeistSans } from "geist/font/sans"
-import { GeistMono } from "geist/font/mono"
+import { Inter, Roboto_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
 import "./globals.css"
 import { Footer } from "@/components/footer"
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+})
+
+const robotoMono = Roboto_Mono({
+  subsets: ["latin"],
+  variable: "--font-roboto-mono",
+  display: "swap",
+})
 
 export const metadata: Metadata = {
   title: "Dive Theory - Scuba Diving Physics",
@@ -20,8 +31,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
+    <html lang="en" className={`${inter.variable} ${robotoMono.variable}`}>
+      <body className="font-sans antialiased">
         <Suspense fallback={null}>{children}</Suspense>
         <Analytics />
         <Footer />
