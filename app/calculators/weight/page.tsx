@@ -74,9 +74,9 @@ export default function LiftingCalculatorPage() {
               <ArrowUp className="h-8 w-8 text-primary" />
             </div>
             <div>
-              <h1 className="text-4xl font-bold text-foreground">Lifting Calculator</h1>
+              <h1 className="text-4xl font-bold text-foreground">{t.calculators.weight.title}</h1>
               <p className="text-lg text-muted-foreground mt-1">
-                Calculate buoyancy required to lift objects underwater
+                {t.calculators.weight.description}
               </p>
             </div>
           </div>

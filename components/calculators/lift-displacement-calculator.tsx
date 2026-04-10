@@ -10,6 +10,7 @@ import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { ArrowUp, Waves, Package, Scale } from "lucide-react"
+import { useI18n } from "@/lib/i18n/context"
 
 interface LiftResults {
   buoyantForce: number
@@ -21,6 +22,7 @@ interface LiftResults {
 }
 
 export function LiftDisplacementCalculator() {
+  const { t } = useI18n()
   const [mainTab, setMainTab] = useState<string>("calculator")
   const [activeTab, setActiveTab] = useState("buoyancy")
 
@@ -91,16 +93,14 @@ export function LiftDisplacementCalculator() {
   return (
     <div className="max-w-6xl mx-auto p-6 space-y-6">
       <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-foreground mb-2">Buoyancy & Displacement Calculator</h1>
-        <p className="text-muted-foreground">
-          Calculate buoyancy forces, lift bag requirements, and water displacement for diving operations
-        </p>
+        <h1 className="text-3xl font-bold text-foreground mb-2">{t.calculators.liftDisplacement.title}</h1>
+        <p className="text-muted-foreground">{t.calculators.liftDisplacement.description}</p>
       </div>
 
       <Tabs value={mainTab} onValueChange={setMainTab} className="w-full">
         <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="calculator">Calculator</TabsTrigger>
-          <TabsTrigger value="theory">Theory</TabsTrigger>
+          <TabsTrigger value="calculator">{t.calculatorUI.tabs.calculator}</TabsTrigger>
+          <TabsTrigger value="theory">{t.calculatorUI.tabs.theory}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="calculator" className="space-y-6">
@@ -559,7 +559,7 @@ export function LiftDisplacementCalculator() {
 
           <div className="flex justify-center">
             <Button onClick={calculateLiftAndDisplacement} size="lg" className="px-8">
-              Calculate Buoyancy & Displacement
+              {t.calculatorUI.buttons.calculate}
             </Button>
           </div>
         </TabsContent>

@@ -9,6 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { Calculator, Info } from "lucide-react"
+import { useI18n } from "@/lib/i18n/context"
 
 interface PressureResults {
   absolutePressure: number
@@ -19,6 +20,7 @@ interface PressureResults {
 }
 
 export function PressureCalculator() {
+  const { t } = useI18n()
   const [activeTab, setActiveTab] = useState<string>("calculator")
   const [depth, setDepth] = useState<string>("30")
   const [oxygenPercentage, setOxygenPercentage] = useState<string>("21")
@@ -55,14 +57,14 @@ export function PressureCalculator() {
   return (
     <div className="max-w-4xl mx-auto p-6 space-y-6">
       <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-foreground mb-2">Water & Pressure Calculator</h1>
-        <p className="text-muted-foreground">Understand water properties and calculate pressures at different depths</p>
+        <h1 className="text-3xl font-bold text-foreground mb-2">{t.calculators.pressure.title}</h1>
+        <p className="text-muted-foreground">{t.calculators.pressure.description}</p>
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
         <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="calculator">Calculator</TabsTrigger>
-          <TabsTrigger value="theory">Theory</TabsTrigger>
+          <TabsTrigger value="calculator">{t.calculatorUI.tabs.calculator}</TabsTrigger>
+          <TabsTrigger value="theory">{t.calculatorUI.tabs.theory}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="calculator" className="space-y-6">
@@ -72,32 +74,29 @@ export function PressureCalculator() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Calculator className="h-5 w-5" />
-                  Input Parameters
+                  {t.calculatorUI.labels.inputParameters}
                 </CardTitle>
-                <CardDescription>Enter your diving parameters to calculate pressures</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="depth">Depth (meters)</Label>
+                  <Label htmlFor="depth">{t.calculatorUI.labels.depth}</Label>
                   <Input
                     id="depth"
                     type="number"
                     value={depth}
                     onChange={(e) => setDepth(e.target.value)}
-                    placeholder="Enter depth in meters"
                     min="0"
                     step="0.1"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="oxygen">Oxygen Percentage (%)</Label>
+                  <Label htmlFor="oxygen">{t.calculatorUI.labels.oxygenPercentage}</Label>
                   <Input
                     id="oxygen"
                     type="number"
                     value={oxygenPercentage}
                     onChange={(e) => setOxygenPercentage(e.target.value)}
-                    placeholder="Enter oxygen percentage"
                     min="1"
                     max="100"
                     step="0.1"
@@ -105,7 +104,7 @@ export function PressureCalculator() {
                 </div>
 
                 <Button onClick={calculatePressure} className="w-full" size="lg">
-                  Calculate Pressures
+                  {t.calculatorUI.buttons.calculatePressures}
                 </Button>
               </CardContent>
             </Card>
@@ -113,21 +112,20 @@ export function PressureCalculator() {
             {/* Results Section */}
             <Card>
               <CardHeader>
-                <CardTitle>Pressure Results</CardTitle>
-                <CardDescription>Calculated pressure values for your dive parameters</CardDescription>
+                <CardTitle>{t.calculatorUI.labels.pressureResults}</CardTitle>
               </CardHeader>
               <CardContent>
                 {results ? (
                   <div className="space-y-4">
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <Label className="text-sm font-medium">Depth</Label>
+                        <Label className="text-sm font-medium">{t.calculatorUI.labels.depth}</Label>
                         <Badge variant="secondary" className="text-base px-3 py-1">
                           {depth}m
                         </Badge>
                       </div>
                       <div className="space-y-2">
-                        <Label className="text-sm font-medium">Atmospheres</Label>
+                        <Label className="text-sm font-medium">{t.calculatorUI.labels.atmospheres}</Label>
                         <Badge variant="secondary" className="text-base px-3 py-1">
                           {results.atmospheres.toFixed(1)} ATM
                         </Badge>
@@ -138,13 +136,13 @@ export function PressureCalculator() {
 
                     <div className="space-y-3">
                       <div className="flex justify-between items-center">
-                        <span className="font-medium">Absolute Pressure:</span>
+                        <span className="font-medium">{t.calculatorUI.labels.absolutePressure}:</span>
                         <span className="text-lg font-bold text-primary">
                           {results.absolutePressure.toFixed(2)} bar
                         </span>
                       </div>
                       <div className="flex justify-between items-center">
-                        <span className="font-medium">Gauge Pressure:</span>
+                        <span className="font-medium">{t.calculatorUI.labels.gaugePressure}:</span>
                         <span className="text-lg font-bold text-primary">{results.gaugePressure.toFixed(2)} bar</span>
                       </div>
                     </div>
@@ -153,16 +151,16 @@ export function PressureCalculator() {
 
                     <div className="space-y-3">
                       <h4 className="font-semibold text-sm uppercase tracking-wide text-muted-foreground">
-                        Partial Pressures
+                        {t.calculatorUI.labels.partialPressures}
                       </h4>
                       <div className="flex justify-between items-center">
-                        <span className="font-medium">Oxygen (O₂):</span>
+                        <span className="font-medium">{t.calculatorUI.labels.oxygen}:</span>
                         <span className="text-lg font-bold text-chart-1">
                           {results.partialPressureO2.toFixed(2)} bar
                         </span>
                       </div>
                       <div className="flex justify-between items-center">
-                        <span className="font-medium">Nitrogen (N₂):</span>
+                        <span className="font-medium">{t.calculatorUI.labels.nitrogen}:</span>
                         <span className="text-lg font-bold text-chart-2">
                           {results.partialPressureN2.toFixed(2)} bar
                         </span>
@@ -173,7 +171,7 @@ export function PressureCalculator() {
                     {results.partialPressureO2 > 1.4 && (
                       <div className="p-3 bg-destructive/10 border border-destructive/20 rounded-lg">
                         <p className="text-sm text-destructive font-medium">
-                          ⚠️ Warning: O₂ partial pressure exceeds 1.4 bar - risk of oxygen toxicity
+                          {t.calculatorUI.warnings.oxygenToxicity}
                         </p>
                       </div>
                     )}
@@ -181,7 +179,7 @@ export function PressureCalculator() {
                 ) : (
                   <div className="text-center py-8 text-muted-foreground">
                     <Calculator className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                    <p>Enter parameters and click calculate to see results</p>
+                    <p>{t.calculatorUI.labels.enterParametersPrompt}</p>
                   </div>
                 )}
               </CardContent>

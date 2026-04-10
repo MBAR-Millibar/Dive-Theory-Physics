@@ -98,6 +98,35 @@ export const translations = {
     common: {
       backToHome: "Back to Home",
     },
+    // Calculator UI
+    calculatorUI: {
+      tabs: {
+        calculator: "Calculator",
+        theory: "Theory",
+      },
+      buttons: {
+        calculate: "Calculate",
+        calculatePressures: "Calculate Pressures",
+        calculateAirConsumption: "Calculate Air Consumption",
+      },
+      labels: {
+        inputParameters: "Input Parameters",
+        results: "Results",
+        depth: "Depth (meters)",
+        oxygenPercentage: "Oxygen Percentage (%)",
+        pressureResults: "Pressure Results",
+        atmospheres: "Atmospheres",
+        absolutePressure: "Absolute Pressure",
+        gaugePressure: "Gauge Pressure",
+        partialPressures: "Partial Pressures",
+        oxygen: "Oxygen (O₂)",
+        nitrogen: "Nitrogen (N₂)",
+        enterParametersPrompt: "Enter parameters and click calculate to see results",
+      },
+      warnings: {
+        oxygenToxicity: "Warning: O₂ partial pressure exceeds 1.4 bar - risk of oxygen toxicity",
+      },
+    },
   },
   it: {
     // Navigation
@@ -193,6 +222,35 @@ export const translations = {
     // Common
     common: {
       backToHome: "Torna alla Home",
+    },
+    // Calculator UI
+    calculatorUI: {
+      tabs: {
+        calculator: "Calcolatore",
+        theory: "Teoria",
+      },
+      buttons: {
+        calculate: "Calcola",
+        calculatePressures: "Calcola Pressioni",
+        calculateAirConsumption: "Calcola Consumo d'Aria",
+      },
+      labels: {
+        inputParameters: "Parametri di Input",
+        results: "Risultati",
+        depth: "Profondità (metri)",
+        oxygenPercentage: "Percentuale di Ossigeno (%)",
+        pressureResults: "Risultati Pressione",
+        atmospheres: "Atmosfere",
+        absolutePressure: "Pressione Assoluta",
+        gaugePressure: "Pressione Relativa",
+        partialPressures: "Pressioni Parziali",
+        oxygen: "Ossigeno (O₂)",
+        nitrogen: "Azoto (N₂)",
+        enterParametersPrompt: "Inserisci i parametri e clicca calcola per vedere i risultati",
+      },
+      warnings: {
+        oxygenToxicity: "Attenzione: la pressione parziale di O₂ supera 1.4 bar - rischio di tossicità da ossigeno",
+      },
     },
   },
   de: {
@@ -290,6 +348,35 @@ export const translations = {
     common: {
       backToHome: "Zurück zur Startseite",
     },
+    // Calculator UI
+    calculatorUI: {
+      tabs: {
+        calculator: "Rechner",
+        theory: "Theorie",
+      },
+      buttons: {
+        calculate: "Berechnen",
+        calculatePressures: "Drücke Berechnen",
+        calculateAirConsumption: "Luftverbrauch Berechnen",
+      },
+      labels: {
+        inputParameters: "Eingabeparameter",
+        results: "Ergebnisse",
+        depth: "Tiefe (Meter)",
+        oxygenPercentage: "Sauerstoffanteil (%)",
+        pressureResults: "Druckergebnisse",
+        atmospheres: "Atmosphären",
+        absolutePressure: "Absoluter Druck",
+        gaugePressure: "Überdruck",
+        partialPressures: "Partialdrücke",
+        oxygen: "Sauerstoff (O₂)",
+        nitrogen: "Stickstoff (N₂)",
+        enterParametersPrompt: "Parameter eingeben und berechnen klicken für Ergebnisse",
+      },
+      warnings: {
+        oxygenToxicity: "Warnung: O₂-Partialdruck übersteigt 1.4 bar - Risiko einer Sauerstofftoxizität",
+      },
+    },
   },
   fr: {
     // Navigation
@@ -386,6 +473,35 @@ export const translations = {
     common: {
       backToHome: "Retour à l'Accueil",
     },
+    // Calculator UI
+    calculatorUI: {
+      tabs: {
+        calculator: "Calculateur",
+        theory: "Théorie",
+      },
+      buttons: {
+        calculate: "Calculer",
+        calculatePressures: "Calculer les Pressions",
+        calculateAirConsumption: "Calculer la Consommation d'Air",
+      },
+      labels: {
+        inputParameters: "Paramètres d'Entrée",
+        results: "Résultats",
+        depth: "Profondeur (mètres)",
+        oxygenPercentage: "Pourcentage d'Oxygène (%)",
+        pressureResults: "Résultats de Pression",
+        atmospheres: "Atmosphères",
+        absolutePressure: "Pression Absolue",
+        gaugePressure: "Pression Relative",
+        partialPressures: "Pressions Partielles",
+        oxygen: "Oxygène (O₂)",
+        nitrogen: "Azote (N₂)",
+        enterParametersPrompt: "Entrez les paramètres et cliquez calculer pour voir les résultats",
+      },
+      warnings: {
+        oxygenToxicity: "Attention : la pression partielle d'O₂ dépasse 1.4 bar - risque de toxicité à l'oxygène",
+      },
+    },
   },
   es: {
     // Navigation
@@ -481,6 +597,35 @@ export const translations = {
     // Common
     common: {
       backToHome: "Volver al Inicio",
+    },
+    // Calculator UI
+    calculatorUI: {
+      tabs: {
+        calculator: "Calculadora",
+        theory: "Teoría",
+      },
+      buttons: {
+        calculate: "Calcular",
+        calculatePressures: "Calcular Presiones",
+        calculateAirConsumption: "Calcular Consumo de Aire",
+      },
+      labels: {
+        inputParameters: "Parámetros de Entrada",
+        results: "Resultados",
+        depth: "Profundidad (metros)",
+        oxygenPercentage: "Porcentaje de Oxígeno (%)",
+        pressureResults: "Resultados de Presión",
+        atmospheres: "Atmósferas",
+        absolutePressure: "Presión Absoluta",
+        gaugePressure: "Presión Manométrica",
+        partialPressures: "Presiones Parciales",
+        oxygen: "Oxígeno (O₂)",
+        nitrogen: "Nitrógeno (N₂)",
+        enterParametersPrompt: "Ingrese los parámetros y haga clic en calcular para ver los resultados",
+      },
+      warnings: {
+        oxygenToxicity: "Advertencia: la presión parcial de O₂ supera 1.4 bar - riesgo de toxicidad por oxígeno",
+      },
     },
   },
 } as const

@@ -9,6 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Separator } from "@/components/ui/separator"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Thermometer, Gauge, Beaker, Maximize } from "lucide-react"
+import { useI18n } from "@/lib/i18n/context"
 
 interface GasLawResults {
   boylesLaw: {
@@ -30,6 +31,7 @@ interface GasLawResults {
 }
 
 export function GasLawsCalculator() {
+  const { t } = useI18n()
   const [mainTab, setMainTab] = useState<string>("calculator")
   const [activeTab, setActiveTab] = useState("boyles")
 
@@ -153,16 +155,14 @@ export function GasLawsCalculator() {
   return (
     <div className="max-w-6xl mx-auto p-6 space-y-6">
       <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-foreground mb-2">Gas Laws Calculator</h1>
-        <p className="text-muted-foreground">
-          Explore Boyle's Law, Charles's Law, Dalton's Law, and Gay-Lussac's Law with interactive calculations
-        </p>
+        <h1 className="text-3xl font-bold text-foreground mb-2">{t.calculators.gasLaws.title}</h1>
+        <p className="text-muted-foreground">{t.calculators.gasLaws.description}</p>
       </div>
 
       <Tabs value={mainTab} onValueChange={setMainTab} className="w-full">
         <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="calculator">Calculator</TabsTrigger>
-          <TabsTrigger value="theory">Theory</TabsTrigger>
+          <TabsTrigger value="calculator">{t.calculatorUI.tabs.calculator}</TabsTrigger>
+          <TabsTrigger value="theory">{t.calculatorUI.tabs.theory}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="calculator" className="space-y-6">

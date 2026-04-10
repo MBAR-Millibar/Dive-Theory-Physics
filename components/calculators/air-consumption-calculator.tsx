@@ -10,6 +10,7 @@ import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Wind, Calculator, Info, Clock, Gauge } from "lucide-react"
+import { useI18n } from "@/lib/i18n/context"
 
 interface AirConsumptionResults {
   sacRate: number
@@ -20,6 +21,7 @@ interface AirConsumptionResults {
 }
 
 export function AirConsumptionCalculator() {
+  const { t } = useI18n()
   const [activeTab, setActiveTab] = useState<string>("calculator")
   const [surfaceConsumption, setSurfaceConsumption] = useState<string>("15")
   const [depth, setDepth] = useState<string>("30")
@@ -85,14 +87,14 @@ export function AirConsumptionCalculator() {
   return (
     <div className="max-w-4xl mx-auto p-6 space-y-6">
       <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-foreground mb-2">Air Consumption Calculator</h1>
-        <p className="text-muted-foreground">Calculate air consumption rates, dive times, and plan your air supply</p>
+        <h1 className="text-3xl font-bold text-foreground mb-2">{t.calculators.airConsumption.title}</h1>
+        <p className="text-muted-foreground">{t.calculators.airConsumption.description}</p>
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
         <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="calculator">Calculator</TabsTrigger>
-          <TabsTrigger value="theory">Theory</TabsTrigger>
+          <TabsTrigger value="calculator">{t.calculatorUI.tabs.calculator}</TabsTrigger>
+          <TabsTrigger value="theory">{t.calculatorUI.tabs.theory}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="calculator" className="space-y-6">
@@ -208,7 +210,7 @@ export function AirConsumptionCalculator() {
                 </div>
 
                 <Button onClick={calculateAirConsumption} className="w-full" size="lg">
-                  Calculate Air Consumption
+                  {t.calculatorUI.buttons.calculateAirConsumption}
                 </Button>
               </CardContent>
             </Card>

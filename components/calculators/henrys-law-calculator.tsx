@@ -11,6 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Droplets, AlertTriangle, Info, Calculator, Home } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
+import { useI18n } from "@/lib/i18n/context"
 
 interface HenrysLawResults {
   dissolvedGas?: number
@@ -20,6 +21,7 @@ interface HenrysLawResults {
 }
 
 export function HenrysLawCalculator() {
+  const { t } = useI18n()
   const [activeTab, setActiveTab] = useState<string>("calculator")
   const [calculationType, setCalculationType] = useState<string>("dissolution")
 
@@ -122,17 +124,15 @@ export function HenrysLawCalculator() {
     <div className="max-w-4xl mx-auto p-6 space-y-6">
       <div className="flex items-start justify-between mb-4">
         <div className="text-center flex-1">
-          <h1 className="text-3xl font-bold text-foreground mb-2">Decompression Theory</h1>
-          <p className="text-muted-foreground">
-            Understand gas dissolution, tissue saturation, and decompression principles (Henry's Law)
-          </p>
+          <h1 className="text-3xl font-bold text-foreground mb-2">{t.calculators.henrysLaw.title}</h1>
+          <p className="text-muted-foreground">{t.calculators.henrysLaw.description}</p>
         </div>
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
         <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="calculator">Calculator</TabsTrigger>
-          <TabsTrigger value="theory">Theory</TabsTrigger>
+          <TabsTrigger value="calculator">{t.calculatorUI.tabs.calculator}</TabsTrigger>
+          <TabsTrigger value="theory">{t.calculatorUI.tabs.theory}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="calculator" className="space-y-6">
@@ -314,7 +314,7 @@ export function HenrysLawCalculator() {
                 )}
 
                 <Button onClick={calculateHenrysLaw} className="w-full" size="lg">
-                  Calculate
+                  {t.calculatorUI.buttons.calculate}
                 </Button>
               </CardContent>
             </Card>
