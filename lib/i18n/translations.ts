@@ -98,6 +98,109 @@ export const translations = {
     common: {
       backToHome: "Back to Home",
     },
+    // Theory sections
+    theory: {
+      pressure: {
+        waterPropertiesTitle: "Water Properties & Physics",
+        waterDensityTitle: "Water Density & Mass",
+        waterDensityIntro: "Water is approximately <strong>770 times more dense than air</strong>. This fundamental property affects every aspect of diving physics.",
+        freshWater: "Fresh Water",
+        freshWaterDetails: ["Density: 1.0 kg/L", "1 cubic meter = 1000 kg", "10.3 meters = 1 bar pressure"],
+        seaWater: "Sea Water",
+        seaWaterDetails: ["Density: 1.03 kg/L", "1 cubic meter = 1030 kg", "10 meters = 1 bar pressure"],
+        heatTitle: "Heat Transmission",
+        heatIntro: "Water conducts heat approximately <strong>20 times faster than air</strong>, making thermal protection critical for divers.",
+        heatMethods: "Three Methods of Heat Transfer:",
+        conduction: "Conduction:",
+        conductionDesc: "Direct heat transfer through contact. Water's high thermal conductivity means you lose body heat rapidly when immersed.",
+        convection: "Convection:",
+        convectionDesc: "Heat transfer through fluid movement. Water currents carry warm water away from your body, accelerating heat loss.",
+        radiation: "Radiation:",
+        radiationDesc: "Heat transfer through electromagnetic waves. Less significant underwater but still contributes to heat loss.",
+        heatSafetyNote: "Safety Note:",
+        heatSafetyText: "Hypothermia is a serious risk. Always use appropriate thermal protection for water temperature and dive duration. Even in tropical waters (24°C/75°F), you can become hypothermic on long dives.",
+        lightTitle: "Light & Vision Underwater",
+        lightIntro: "Water absorbs and refracts light, dramatically affecting visibility and color perception underwater.",
+        lightAbsorption: "Light Absorption by Depth:",
+        lightAbsorptionDetails: [
+          "Surface: Only 20% of sunlight reaches 10 meters depth",
+          "5 meters: Red colors disappear (absorbed first)",
+          "16 meters: Orange colors disappear",
+          "30 meters: Yellow colors disappear",
+          "50+ meters: Only blue-green light remains"
+        ],
+        refraction: "Refraction Effects:",
+        refractionDetails: [
+          "Objects appear 25% closer than they actually are",
+          "Objects appear 33% larger than actual size",
+          "Refraction ratio: 4:3 (water to air)",
+          "This affects depth perception and distance judgment"
+        ],
+        turbidity: "Turbidity & Visual Effects:",
+        turbidityDetails: [
+          "Suspended particles scatter light, reducing visibility",
+          "Visual reversal: In murky water, objects may appear darker when closer",
+          "Fluorescent colors remain visible longer at depth",
+          "Dive lights restore true colors by providing full-spectrum light"
+        ],
+        soundTitle: "Sound Underwater",
+        soundIntro: "Sound travels approximately <strong>4 times faster in water</strong> than in air, but this creates challenges for divers.",
+        soundSpeed: "Speed of Sound:",
+        soundSpeedDetails: ["In air: ~340 m/s", "In water: ~1,500 m/s", "Ratio: approximately 4:1"],
+        soundDirectionTitle: "Direction Finding:",
+        soundDirectionText: "Due to sound's increased speed in water, humans cannot accurately determine the direction of sounds. The time difference between sounds reaching each ear is too small for our brains to process. Sounds often seem to come from all directions.",
+        soundPractical: "Practical Implications:",
+        soundPracticalDetails: [
+          "Tank banging is an effective signaling method",
+          "Boat engines can be heard from great distances",
+          "Cannot locate sound sources by hearing alone",
+          "Visual contact remains essential for communication"
+        ],
+        pressureTitle: "Pressure & Depth",
+        pressureIntro: "Understanding pressure relationships is fundamental to safe diving.",
+        pressureKey: "Key Pressure Concepts:",
+        atmosphericPressure: "Atmospheric Pressure:",
+        atmosphericPressureDesc: "At sea level = 1 bar (14.7 psi). This is the baseline pressure we experience on land.",
+        hydrostaticPressure: "Hydrostatic Pressure:",
+        hydrostaticPressureDesc: "Pressure from water weight. Increases by 1 bar per 10m in seawater (10.3m in freshwater).",
+        absolutePressure: "Absolute Pressure:",
+        absolutePressureDesc: "Total pressure = Atmospheric + Hydrostatic. At 10m: 1 + 1 = 2 bar absolute.",
+        gaugePressure: "Gauge Pressure:",
+        gaugePressureDesc: "Pressure above atmospheric. At 10m depth, gauge pressure = 1 bar.",
+        pressureTable: "Pressure Relationships:",
+        pressureTableHeaders: ["Depth", "Absolute Pressure", "Pressure Ratio"],
+        pressureTableRows: [
+          ["Surface", "1 bar", "1:1"],
+          ["10m", "2 bar", "2:1"],
+          ["20m", "3 bar", "3:1"],
+          ["30m", "4 bar", "4:1"],
+          ["40m", "5 bar", "5:1"]
+        ],
+        partialPressureTitle: "Partial Pressures",
+        partialPressureIntro: "Dalton's Law: The total pressure of a gas mixture equals the sum of partial pressures of each gas.",
+        partialPressureAir: "Air at Depth:",
+        partialPressureAirText: "Air is approximately 21% oxygen and 79% nitrogen. As depth increases, partial pressures increase proportionally.",
+        partialPressureExample: "Example at 30m (4 bar absolute):",
+        partialPressureExampleDetails: [
+          "O₂ partial pressure: 0.21 × 4 = 0.84 bar",
+          "N₂ partial pressure: 0.79 × 4 = 3.16 bar"
+        ],
+        oxygenLimits: "Oxygen Exposure Limits:",
+        oxygenLimitsDetails: [
+          "Recreational limit: 1.4 bar (conservative)",
+          "Technical limit: 1.6 bar (with proper training)",
+          "At 1.4 bar ppO₂, maximum depth on air = ~56m",
+          "Exceeding limits risks oxygen toxicity (CNS)"
+        ],
+        nitrogenNarcosis: "Nitrogen Narcosis:",
+        nitrogenNarcosisDetails: [
+          "Begins affecting most divers around 30m",
+          "Impairs judgment, motor function, memory",
+          "Sometimes called 'Martini Effect'",
+          "Relieved by ascending to shallower depth"
+        ],
+      },
+    },
     // Calculator UI
     calculatorUI: {
       tabs: {
@@ -222,6 +325,109 @@ export const translations = {
     // Common
     common: {
       backToHome: "Torna alla Home",
+    },
+    // Theory sections
+    theory: {
+      pressure: {
+        waterPropertiesTitle: "Proprietà dell'Acqua e Fisica",
+        waterDensityTitle: "Densità e Massa dell'Acqua",
+        waterDensityIntro: "L'acqua è circa <strong>770 volte più densa dell'aria</strong>. Questa proprietà fondamentale influenza ogni aspetto della fisica subacquea.",
+        freshWater: "Acqua Dolce",
+        freshWaterDetails: ["Densità: 1.0 kg/L", "1 metro cubo = 1000 kg", "10.3 metri = 1 bar di pressione"],
+        seaWater: "Acqua di Mare",
+        seaWaterDetails: ["Densità: 1.03 kg/L", "1 metro cubo = 1030 kg", "10 metri = 1 bar di pressione"],
+        heatTitle: "Trasmissione del Calore",
+        heatIntro: "L'acqua conduce il calore circa <strong>20 volte più velocemente dell'aria</strong>, rendendo la protezione termica fondamentale per i subacquei.",
+        heatMethods: "Tre Metodi di Trasferimento del Calore:",
+        conduction: "Conduzione:",
+        conductionDesc: "Trasferimento diretto di calore attraverso il contatto. L'alta conduttività termica dell'acqua significa che perdi calore corporeo rapidamente quando sei immerso.",
+        convection: "Convezione:",
+        convectionDesc: "Trasferimento di calore attraverso il movimento del fluido. Le correnti d'acqua portano via l'acqua calda dal tuo corpo, accelerando la perdita di calore.",
+        radiation: "Irraggiamento:",
+        radiationDesc: "Trasferimento di calore attraverso onde elettromagnetiche. Meno significativo sott'acqua ma contribuisce comunque alla perdita di calore.",
+        heatSafetyNote: "Nota di Sicurezza:",
+        heatSafetyText: "L'ipotermia è un rischio serio. Usa sempre una protezione termica adeguata per la temperatura dell'acqua e la durata dell'immersione. Anche in acque tropicali (24°C/75°F), puoi diventare ipotermico in immersioni lunghe.",
+        lightTitle: "Luce e Visione Sott'Acqua",
+        lightIntro: "L'acqua assorbe e rifrange la luce, influenzando drasticamente la visibilità e la percezione dei colori sott'acqua.",
+        lightAbsorption: "Assorbimento della Luce per Profondità:",
+        lightAbsorptionDetails: [
+          "Superficie: Solo il 20% della luce solare raggiunge i 10 metri di profondità",
+          "5 metri: I colori rossi scompaiono (assorbiti per primi)",
+          "16 metri: I colori arancioni scompaiono",
+          "30 metri: I colori gialli scompaiono",
+          "50+ metri: Rimane solo la luce blu-verde"
+        ],
+        refraction: "Effetti della Rifrazione:",
+        refractionDetails: [
+          "Gli oggetti appaiono il 25% più vicini di quanto siano realmente",
+          "Gli oggetti appaiono il 33% più grandi della dimensione reale",
+          "Rapporto di rifrazione: 4:3 (acqua/aria)",
+          "Questo influenza la percezione della profondità e la valutazione delle distanze"
+        ],
+        turbidity: "Torbidità ed Effetti Visivi:",
+        turbidityDetails: [
+          "Le particelle sospese diffondono la luce, riducendo la visibilità",
+          "Inversione visiva: In acqua torbida, gli oggetti possono apparire più scuri quando sono più vicini",
+          "I colori fluorescenti rimangono visibili più a lungo in profondità",
+          "Le torce subacquee ripristinano i colori reali fornendo luce a spettro completo"
+        ],
+        soundTitle: "Suono Sott'Acqua",
+        soundIntro: "Il suono viaggia circa <strong>4 volte più velocemente nell'acqua</strong> che nell'aria, ma questo crea sfide per i subacquei.",
+        soundSpeed: "Velocità del Suono:",
+        soundSpeedDetails: ["Nell'aria: ~340 m/s", "Nell'acqua: ~1.500 m/s", "Rapporto: circa 4:1"],
+        soundDirectionTitle: "Localizzazione della Direzione:",
+        soundDirectionText: "A causa della maggiore velocità del suono nell'acqua, gli esseri umani non possono determinare con precisione la direzione dei suoni. La differenza di tempo tra i suoni che raggiungono ogni orecchio è troppo piccola per essere elaborata dal nostro cervello. I suoni spesso sembrano provenire da tutte le direzioni.",
+        soundPractical: "Implicazioni Pratiche:",
+        soundPracticalDetails: [
+          "Battere sulla bombola è un metodo di segnalazione efficace",
+          "I motori delle barche possono essere sentiti da grandi distanze",
+          "Non è possibile localizzare le fonti sonore solo con l'udito",
+          "Il contatto visivo rimane essenziale per la comunicazione"
+        ],
+        pressureTitle: "Pressione e Profondità",
+        pressureIntro: "Comprendere le relazioni di pressione è fondamentale per un'immersione sicura.",
+        pressureKey: "Concetti Chiave sulla Pressione:",
+        atmosphericPressure: "Pressione Atmosferica:",
+        atmosphericPressureDesc: "A livello del mare = 1 bar (14.7 psi). Questa è la pressione di base che sperimentiamo sulla terra.",
+        hydrostaticPressure: "Pressione Idrostatica:",
+        hydrostaticPressureDesc: "Pressione dal peso dell'acqua. Aumenta di 1 bar ogni 10m in acqua di mare (10.3m in acqua dolce).",
+        absolutePressure: "Pressione Assoluta:",
+        absolutePressureDesc: "Pressione totale = Atmosferica + Idrostatica. A 10m: 1 + 1 = 2 bar assoluti.",
+        gaugePressure: "Pressione Relativa:",
+        gaugePressureDesc: "Pressione sopra quella atmosferica. A 10m di profondità, la pressione relativa = 1 bar.",
+        pressureTable: "Relazioni di Pressione:",
+        pressureTableHeaders: ["Profondità", "Pressione Assoluta", "Rapporto di Pressione"],
+        pressureTableRows: [
+          ["Superficie", "1 bar", "1:1"],
+          ["10m", "2 bar", "2:1"],
+          ["20m", "3 bar", "3:1"],
+          ["30m", "4 bar", "4:1"],
+          ["40m", "5 bar", "5:1"]
+        ],
+        partialPressureTitle: "Pressioni Parziali",
+        partialPressureIntro: "Legge di Dalton: La pressione totale di una miscela di gas è uguale alla somma delle pressioni parziali di ogni gas.",
+        partialPressureAir: "Aria in Profondità:",
+        partialPressureAirText: "L'aria è composta da circa 21% di ossigeno e 79% di azoto. Con l'aumentare della profondità, le pressioni parziali aumentano proporzionalmente.",
+        partialPressureExample: "Esempio a 30m (4 bar assoluti):",
+        partialPressureExampleDetails: [
+          "Pressione parziale O₂: 0.21 × 4 = 0.84 bar",
+          "Pressione parziale N₂: 0.79 × 4 = 3.16 bar"
+        ],
+        oxygenLimits: "Limiti di Esposizione all'Ossigeno:",
+        oxygenLimitsDetails: [
+          "Limite ricreativo: 1.4 bar (conservativo)",
+          "Limite tecnico: 1.6 bar (con formazione adeguata)",
+          "A 1.4 bar ppO₂, profondità massima con aria = ~56m",
+          "Superare i limiti rischia la tossicità dell'ossigeno (SNC)"
+        ],
+        nitrogenNarcosis: "Narcosi da Azoto:",
+        nitrogenNarcosisDetails: [
+          "Inizia a colpire la maggior parte dei subacquei intorno ai 30m",
+          "Compromette giudizio, funzione motoria, memoria",
+          "A volte chiamato 'Effetto Martini'",
+          "Si risolve risalendo a profondità minori"
+        ],
+      },
     },
     // Calculator UI
     calculatorUI: {
@@ -348,6 +554,109 @@ export const translations = {
     common: {
       backToHome: "Zurück zur Startseite",
     },
+    // Theory sections
+    theory: {
+      pressure: {
+        waterPropertiesTitle: "Wassereigenschaften & Physik",
+        waterDensityTitle: "Wasserdichte & Masse",
+        waterDensityIntro: "Wasser ist etwa <strong>770-mal dichter als Luft</strong>. Diese grundlegende Eigenschaft beeinflusst jeden Aspekt der Tauchphysik.",
+        freshWater: "Süßwasser",
+        freshWaterDetails: ["Dichte: 1,0 kg/L", "1 Kubikmeter = 1000 kg", "10,3 Meter = 1 bar Druck"],
+        seaWater: "Meerwasser",
+        seaWaterDetails: ["Dichte: 1,03 kg/L", "1 Kubikmeter = 1030 kg", "10 Meter = 1 bar Druck"],
+        heatTitle: "Wärmeübertragung",
+        heatIntro: "Wasser leitet Wärme etwa <strong>20-mal schneller als Luft</strong>, was den Wärmeschutz für Taucher entscheidend macht.",
+        heatMethods: "Drei Methoden der Wärmeübertragung:",
+        conduction: "Wärmeleitung:",
+        conductionDesc: "Direkter Wärmetransfer durch Kontakt. Die hohe Wärmeleitfähigkeit des Wassers bedeutet, dass Sie beim Eintauchen schnell Körperwärme verlieren.",
+        convection: "Konvektion:",
+        convectionDesc: "Wärmeübertragung durch Flüssigkeitsbewegung. Wasserströmungen transportieren warmes Wasser von Ihrem Körper weg und beschleunigen den Wärmeverlust.",
+        radiation: "Strahlung:",
+        radiationDesc: "Wärmeübertragung durch elektromagnetische Wellen. Unter Wasser weniger bedeutend, trägt aber dennoch zum Wärmeverlust bei.",
+        heatSafetyNote: "Sicherheitshinweis:",
+        heatSafetyText: "Unterkühlung ist ein ernstes Risiko. Verwenden Sie immer angemessenen Wärmeschutz für die Wassertemperatur und Tauchdauer. Selbst in tropischen Gewässern (24°C/75°F) können Sie bei langen Tauchgängen unterkühlen.",
+        lightTitle: "Licht & Sehen unter Wasser",
+        lightIntro: "Wasser absorbiert und bricht Licht, was die Sichtbarkeit und Farbwahrnehmung unter Wasser dramatisch beeinflusst.",
+        lightAbsorption: "Lichtabsorption nach Tiefe:",
+        lightAbsorptionDetails: [
+          "Oberfläche: Nur 20% des Sonnenlichts erreicht 10 Meter Tiefe",
+          "5 Meter: Rote Farben verschwinden (werden zuerst absorbiert)",
+          "16 Meter: Orange Farben verschwinden",
+          "30 Meter: Gelbe Farben verschwinden",
+          "50+ Meter: Nur blau-grünes Licht bleibt"
+        ],
+        refraction: "Brechungseffekte:",
+        refractionDetails: [
+          "Objekte erscheinen 25% näher als sie tatsächlich sind",
+          "Objekte erscheinen 33% größer als ihre tatsächliche Größe",
+          "Brechungsverhältnis: 4:3 (Wasser zu Luft)",
+          "Dies beeinflusst die Tiefenwahrnehmung und Entfernungseinschätzung"
+        ],
+        turbidity: "Trübung & visuelle Effekte:",
+        turbidityDetails: [
+          "Schwebeteilchen streuen Licht und verringern die Sichtweite",
+          "Visuelle Umkehrung: In trübem Wasser können Objekte dunkler erscheinen, wenn sie näher sind",
+          "Fluoreszierende Farben bleiben in der Tiefe länger sichtbar",
+          "Tauchlampen stellen wahre Farben wieder her, indem sie Vollspektrumlicht liefern"
+        ],
+        soundTitle: "Schall unter Wasser",
+        soundIntro: "Schall bewegt sich in Wasser etwa <strong>4-mal schneller</strong> als in Luft, aber dies schafft Herausforderungen für Taucher.",
+        soundSpeed: "Schallgeschwindigkeit:",
+        soundSpeedDetails: ["In Luft: ~340 m/s", "In Wasser: ~1.500 m/s", "Verhältnis: etwa 4:1"],
+        soundDirectionTitle: "Richtungsbestimmung:",
+        soundDirectionText: "Aufgrund der erhöhten Schallgeschwindigkeit im Wasser können Menschen die Richtung von Geräuschen nicht genau bestimmen. Der Zeitunterschied zwischen den Geräuschen, die jedes Ohr erreichen, ist zu gering für unser Gehirn. Geräusche scheinen oft aus allen Richtungen zu kommen.",
+        soundPractical: "Praktische Auswirkungen:",
+        soundPracticalDetails: [
+          "Klopfen auf die Flasche ist eine effektive Signalmethode",
+          "Bootsmotoren können aus großer Entfernung gehört werden",
+          "Schallquellen können nicht allein durch Hören lokalisiert werden",
+          "Sichtkontakt bleibt für die Kommunikation unerlässlich"
+        ],
+        pressureTitle: "Druck & Tiefe",
+        pressureIntro: "Das Verständnis von Druckbeziehungen ist grundlegend für sicheres Tauchen.",
+        pressureKey: "Wichtige Druckkonzepte:",
+        atmosphericPressure: "Atmosphärischer Druck:",
+        atmosphericPressureDesc: "Auf Meereshöhe = 1 bar (14,7 psi). Dies ist der Basisdruck, den wir an Land erleben.",
+        hydrostaticPressure: "Hydrostatischer Druck:",
+        hydrostaticPressureDesc: "Druck durch das Gewicht des Wassers. Erhöht sich um 1 bar pro 10m im Meerwasser (10,3m im Süßwasser).",
+        absolutePressure: "Absoluter Druck:",
+        absolutePressureDesc: "Gesamtdruck = Atmosphärisch + Hydrostatisch. Bei 10m: 1 + 1 = 2 bar absolut.",
+        gaugePressure: "Überdruck:",
+        gaugePressureDesc: "Druck über dem atmosphärischen. In 10m Tiefe beträgt der Überdruck = 1 bar.",
+        pressureTable: "Druckbeziehungen:",
+        pressureTableHeaders: ["Tiefe", "Absoluter Druck", "Druckverhältnis"],
+        pressureTableRows: [
+          ["Oberfläche", "1 bar", "1:1"],
+          ["10m", "2 bar", "2:1"],
+          ["20m", "3 bar", "3:1"],
+          ["30m", "4 bar", "4:1"],
+          ["40m", "5 bar", "5:1"]
+        ],
+        partialPressureTitle: "Partialdrücke",
+        partialPressureIntro: "Daltons Gesetz: Der Gesamtdruck eines Gasgemisches entspricht der Summe der Partialdrücke jedes Gases.",
+        partialPressureAir: "Luft in der Tiefe:",
+        partialPressureAirText: "Luft besteht aus etwa 21% Sauerstoff und 79% Stickstoff. Mit zunehmender Tiefe steigen die Partialdrücke proportional.",
+        partialPressureExample: "Beispiel bei 30m (4 bar absolut):",
+        partialPressureExampleDetails: [
+          "O₂-Partialdruck: 0,21 × 4 = 0,84 bar",
+          "N₂-Partialdruck: 0,79 × 4 = 3,16 bar"
+        ],
+        oxygenLimits: "Sauerstoff-Expositionsgrenzen:",
+        oxygenLimitsDetails: [
+          "Freizeitgrenze: 1,4 bar (konservativ)",
+          "Technische Grenze: 1,6 bar (mit entsprechender Ausbildung)",
+          "Bei 1,4 bar ppO₂, maximale Tiefe mit Luft = ~56m",
+          "Überschreiten der Grenzen riskiert Sauerstofftoxizität (ZNS)"
+        ],
+        nitrogenNarcosis: "Stickstoffnarkose:",
+        nitrogenNarcosisDetails: [
+          "Beginnt die meisten Taucher um 30m zu beeinflussen",
+          "Beeinträchtigt Urteilsvermögen, Motorik, Gedächtnis",
+          "Manchmal als 'Martini-Effekt' bezeichnet",
+          "Wird durch Aufstieg in geringere Tiefe behoben"
+        ],
+      },
+    },
     // Calculator UI
     calculatorUI: {
       tabs: {
@@ -473,6 +782,109 @@ export const translations = {
     common: {
       backToHome: "Retour à l'Accueil",
     },
+    // Theory sections
+    theory: {
+      pressure: {
+        waterPropertiesTitle: "Propriétés de l'Eau & Physique",
+        waterDensityTitle: "Densité et Masse de l'Eau",
+        waterDensityIntro: "L'eau est environ <strong>770 fois plus dense que l'air</strong>. Cette propriété fondamentale affecte tous les aspects de la physique de la plongée.",
+        freshWater: "Eau Douce",
+        freshWaterDetails: ["Densité : 1,0 kg/L", "1 mètre cube = 1000 kg", "10,3 mètres = 1 bar de pression"],
+        seaWater: "Eau de Mer",
+        seaWaterDetails: ["Densité : 1,03 kg/L", "1 mètre cube = 1030 kg", "10 mètres = 1 bar de pression"],
+        heatTitle: "Transmission de la Chaleur",
+        heatIntro: "L'eau conduit la chaleur environ <strong>20 fois plus vite que l'air</strong>, rendant la protection thermique essentielle pour les plongeurs.",
+        heatMethods: "Trois Méthodes de Transfert de Chaleur :",
+        conduction: "Conduction :",
+        conductionDesc: "Transfert direct de chaleur par contact. La haute conductivité thermique de l'eau signifie que vous perdez rapidement de la chaleur corporelle lorsque vous êtes immergé.",
+        convection: "Convection :",
+        convectionDesc: "Transfert de chaleur par mouvement du fluide. Les courants d'eau éloignent l'eau chaude de votre corps, accélérant la perte de chaleur.",
+        radiation: "Rayonnement :",
+        radiationDesc: "Transfert de chaleur par ondes électromagnétiques. Moins significatif sous l'eau mais contribue toujours à la perte de chaleur.",
+        heatSafetyNote: "Note de Sécurité :",
+        heatSafetyText: "L'hypothermie est un risque sérieux. Utilisez toujours une protection thermique appropriée pour la température de l'eau et la durée de la plongée. Même dans les eaux tropicales (24°C/75°F), vous pouvez devenir hypothermique lors de longues plongées.",
+        lightTitle: "Lumière & Vision Sous l'Eau",
+        lightIntro: "L'eau absorbe et réfracte la lumière, affectant dramatiquement la visibilité et la perception des couleurs sous l'eau.",
+        lightAbsorption: "Absorption de la Lumière par Profondeur :",
+        lightAbsorptionDetails: [
+          "Surface : Seulement 20% de la lumière du soleil atteint 10 mètres de profondeur",
+          "5 mètres : Les couleurs rouges disparaissent (absorbées en premier)",
+          "16 mètres : Les couleurs oranges disparaissent",
+          "30 mètres : Les couleurs jaunes disparaissent",
+          "50+ mètres : Seule la lumière bleu-vert reste"
+        ],
+        refraction: "Effets de Réfraction :",
+        refractionDetails: [
+          "Les objets apparaissent 25% plus proches qu'ils ne le sont réellement",
+          "Les objets apparaissent 33% plus grands que leur taille réelle",
+          "Rapport de réfraction : 4:3 (eau/air)",
+          "Cela affecte la perception de la profondeur et l'estimation des distances"
+        ],
+        turbidity: "Turbidité & Effets Visuels :",
+        turbidityDetails: [
+          "Les particules en suspension dispersent la lumière, réduisant la visibilité",
+          "Inversion visuelle : Dans l'eau trouble, les objets peuvent paraître plus sombres quand ils sont plus proches",
+          "Les couleurs fluorescentes restent visibles plus longtemps en profondeur",
+          "Les lampes de plongée restaurent les vraies couleurs en fournissant une lumière à spectre complet"
+        ],
+        soundTitle: "Son Sous l'Eau",
+        soundIntro: "Le son se déplace environ <strong>4 fois plus vite dans l'eau</strong> que dans l'air, mais cela crée des défis pour les plongeurs.",
+        soundSpeed: "Vitesse du Son :",
+        soundSpeedDetails: ["Dans l'air : ~340 m/s", "Dans l'eau : ~1 500 m/s", "Rapport : environ 4:1"],
+        soundDirectionTitle: "Localisation Directionnelle :",
+        soundDirectionText: "En raison de la vitesse accrue du son dans l'eau, les humains ne peuvent pas déterminer avec précision la direction des sons. La différence de temps entre les sons atteignant chaque oreille est trop faible pour que notre cerveau puisse la traiter. Les sons semblent souvent venir de toutes les directions.",
+        soundPractical: "Implications Pratiques :",
+        soundPracticalDetails: [
+          "Frapper sur la bouteille est une méthode de signalisation efficace",
+          "Les moteurs de bateaux peuvent être entendus de très loin",
+          "Impossible de localiser les sources sonores par l'ouïe seule",
+          "Le contact visuel reste essentiel pour la communication"
+        ],
+        pressureTitle: "Pression & Profondeur",
+        pressureIntro: "Comprendre les relations de pression est fondamental pour une plongée sûre.",
+        pressureKey: "Concepts Clés de Pression :",
+        atmosphericPressure: "Pression Atmosphérique :",
+        atmosphericPressureDesc: "Au niveau de la mer = 1 bar (14,7 psi). C'est la pression de base que nous subissons sur terre.",
+        hydrostaticPressure: "Pression Hydrostatique :",
+        hydrostaticPressureDesc: "Pression due au poids de l'eau. Augmente de 1 bar par 10m en eau de mer (10,3m en eau douce).",
+        absolutePressure: "Pression Absolue :",
+        absolutePressureDesc: "Pression totale = Atmosphérique + Hydrostatique. À 10m : 1 + 1 = 2 bar absolus.",
+        gaugePressure: "Pression Relative :",
+        gaugePressureDesc: "Pression au-dessus de l'atmosphérique. À 10m de profondeur, la pression relative = 1 bar.",
+        pressureTable: "Relations de Pression :",
+        pressureTableHeaders: ["Profondeur", "Pression Absolue", "Rapport de Pression"],
+        pressureTableRows: [
+          ["Surface", "1 bar", "1:1"],
+          ["10m", "2 bar", "2:1"],
+          ["20m", "3 bar", "3:1"],
+          ["30m", "4 bar", "4:1"],
+          ["40m", "5 bar", "5:1"]
+        ],
+        partialPressureTitle: "Pressions Partielles",
+        partialPressureIntro: "Loi de Dalton : La pression totale d'un mélange gazeux est égale à la somme des pressions partielles de chaque gaz.",
+        partialPressureAir: "Air en Profondeur :",
+        partialPressureAirText: "L'air est composé d'environ 21% d'oxygène et 79% d'azote. À mesure que la profondeur augmente, les pressions partielles augmentent proportionnellement.",
+        partialPressureExample: "Exemple à 30m (4 bar absolus) :",
+        partialPressureExampleDetails: [
+          "Pression partielle O₂ : 0,21 × 4 = 0,84 bar",
+          "Pression partielle N₂ : 0,79 × 4 = 3,16 bar"
+        ],
+        oxygenLimits: "Limites d'Exposition à l'Oxygène :",
+        oxygenLimitsDetails: [
+          "Limite récréative : 1,4 bar (conservateur)",
+          "Limite technique : 1,6 bar (avec formation appropriée)",
+          "À 1,4 bar ppO₂, profondeur maximale à l'air = ~56m",
+          "Dépasser les limites risque la toxicité de l'oxygène (SNC)"
+        ],
+        nitrogenNarcosis: "Narcose à l'Azote :",
+        nitrogenNarcosisDetails: [
+          "Commence à affecter la plupart des plongeurs autour de 30m",
+          "Altère le jugement, la fonction motrice, la mémoire",
+          "Parfois appelé 'Effet Martini'",
+          "Soulagé en remontant à une profondeur moindre"
+        ],
+      },
+    },
     // Calculator UI
     calculatorUI: {
       tabs: {
@@ -597,6 +1009,109 @@ export const translations = {
     // Common
     common: {
       backToHome: "Volver al Inicio",
+    },
+    // Theory sections
+    theory: {
+      pressure: {
+        waterPropertiesTitle: "Propiedades del Agua y Física",
+        waterDensityTitle: "Densidad y Masa del Agua",
+        waterDensityIntro: "El agua es aproximadamente <strong>770 veces más densa que el aire</strong>. Esta propiedad fundamental afecta todos los aspectos de la física del buceo.",
+        freshWater: "Agua Dulce",
+        freshWaterDetails: ["Densidad: 1,0 kg/L", "1 metro cúbico = 1000 kg", "10,3 metros = 1 bar de presión"],
+        seaWater: "Agua de Mar",
+        seaWaterDetails: ["Densidad: 1,03 kg/L", "1 metro cúbico = 1030 kg", "10 metros = 1 bar de presión"],
+        heatTitle: "Transmisión de Calor",
+        heatIntro: "El agua conduce el calor aproximadamente <strong>20 veces más rápido que el aire</strong>, haciendo que la protección térmica sea crítica para los buceadores.",
+        heatMethods: "Tres Métodos de Transferencia de Calor:",
+        conduction: "Conducción:",
+        conductionDesc: "Transferencia directa de calor a través del contacto. La alta conductividad térmica del agua significa que pierdes calor corporal rápidamente cuando estás sumergido.",
+        convection: "Convección:",
+        convectionDesc: "Transferencia de calor a través del movimiento del fluido. Las corrientes de agua alejan el agua caliente de tu cuerpo, acelerando la pérdida de calor.",
+        radiation: "Radiación:",
+        radiationDesc: "Transferencia de calor a través de ondas electromagnéticas. Menos significativa bajo el agua pero aún contribuye a la pérdida de calor.",
+        heatSafetyNote: "Nota de Seguridad:",
+        heatSafetyText: "La hipotermia es un riesgo serio. Siempre usa protección térmica adecuada para la temperatura del agua y la duración de la inmersión. Incluso en aguas tropicales (24°C/75°F), puedes volverte hipotérmico en inmersiones largas.",
+        lightTitle: "Luz y Visión Bajo el Agua",
+        lightIntro: "El agua absorbe y refracta la luz, afectando dramáticamente la visibilidad y la percepción del color bajo el agua.",
+        lightAbsorption: "Absorción de Luz por Profundidad:",
+        lightAbsorptionDetails: [
+          "Superficie: Solo el 20% de la luz solar alcanza los 10 metros de profundidad",
+          "5 metros: Los colores rojos desaparecen (absorbidos primero)",
+          "16 metros: Los colores naranjas desaparecen",
+          "30 metros: Los colores amarillos desaparecen",
+          "50+ metros: Solo queda la luz azul-verde"
+        ],
+        refraction: "Efectos de Refracción:",
+        refractionDetails: [
+          "Los objetos parecen un 25% más cerca de lo que realmente están",
+          "Los objetos parecen un 33% más grandes que su tamaño real",
+          "Relación de refracción: 4:3 (agua/aire)",
+          "Esto afecta la percepción de profundidad y la estimación de distancias"
+        ],
+        turbidity: "Turbidez y Efectos Visuales:",
+        turbidityDetails: [
+          "Las partículas suspendidas dispersan la luz, reduciendo la visibilidad",
+          "Inversión visual: En agua turbia, los objetos pueden parecer más oscuros cuando están más cerca",
+          "Los colores fluorescentes permanecen visibles más tiempo en profundidad",
+          "Las linternas de buceo restauran los colores reales proporcionando luz de espectro completo"
+        ],
+        soundTitle: "Sonido Bajo el Agua",
+        soundIntro: "El sonido viaja aproximadamente <strong>4 veces más rápido en el agua</strong> que en el aire, pero esto crea desafíos para los buceadores.",
+        soundSpeed: "Velocidad del Sonido:",
+        soundSpeedDetails: ["En el aire: ~340 m/s", "En el agua: ~1.500 m/s", "Relación: aproximadamente 4:1"],
+        soundDirectionTitle: "Localización de Dirección:",
+        soundDirectionText: "Debido a la mayor velocidad del sonido en el agua, los humanos no pueden determinar con precisión la dirección de los sonidos. La diferencia de tiempo entre los sonidos que llegan a cada oído es demasiado pequeña para que nuestro cerebro la procese. Los sonidos a menudo parecen venir de todas las direcciones.",
+        soundPractical: "Implicaciones Prácticas:",
+        soundPracticalDetails: [
+          "Golpear el tanque es un método de señalización efectivo",
+          "Los motores de barcos pueden escucharse desde grandes distancias",
+          "No se pueden localizar fuentes de sonido solo con el oído",
+          "El contacto visual sigue siendo esencial para la comunicación"
+        ],
+        pressureTitle: "Presión y Profundidad",
+        pressureIntro: "Entender las relaciones de presión es fundamental para un buceo seguro.",
+        pressureKey: "Conceptos Clave de Presión:",
+        atmosphericPressure: "Presión Atmosférica:",
+        atmosphericPressureDesc: "A nivel del mar = 1 bar (14,7 psi). Esta es la presión base que experimentamos en tierra.",
+        hydrostaticPressure: "Presión Hidrostática:",
+        hydrostaticPressureDesc: "Presión del peso del agua. Aumenta 1 bar por cada 10m en agua de mar (10,3m en agua dulce).",
+        absolutePressure: "Presión Absoluta:",
+        absolutePressureDesc: "Presión total = Atmosférica + Hidrostática. A 10m: 1 + 1 = 2 bar absolutos.",
+        gaugePressure: "Presión Manométrica:",
+        gaugePressureDesc: "Presión sobre la atmosférica. A 10m de profundidad, la presión manométrica = 1 bar.",
+        pressureTable: "Relaciones de Presión:",
+        pressureTableHeaders: ["Profundidad", "Presión Absoluta", "Relación de Presión"],
+        pressureTableRows: [
+          ["Superficie", "1 bar", "1:1"],
+          ["10m", "2 bar", "2:1"],
+          ["20m", "3 bar", "3:1"],
+          ["30m", "4 bar", "4:1"],
+          ["40m", "5 bar", "5:1"]
+        ],
+        partialPressureTitle: "Presiones Parciales",
+        partialPressureIntro: "Ley de Dalton: La presión total de una mezcla de gases es igual a la suma de las presiones parciales de cada gas.",
+        partialPressureAir: "Aire en Profundidad:",
+        partialPressureAirText: "El aire es aproximadamente 21% oxígeno y 79% nitrógeno. A medida que aumenta la profundidad, las presiones parciales aumentan proporcionalmente.",
+        partialPressureExample: "Ejemplo a 30m (4 bar absolutos):",
+        partialPressureExampleDetails: [
+          "Presión parcial O₂: 0,21 × 4 = 0,84 bar",
+          "Presión parcial N₂: 0,79 × 4 = 3,16 bar"
+        ],
+        oxygenLimits: "Límites de Exposición al Oxígeno:",
+        oxygenLimitsDetails: [
+          "Límite recreativo: 1,4 bar (conservador)",
+          "Límite técnico: 1,6 bar (con entrenamiento apropiado)",
+          "A 1,4 bar ppO₂, profundidad máxima con aire = ~56m",
+          "Exceder los límites arriesga toxicidad por oxígeno (SNC)"
+        ],
+        nitrogenNarcosis: "Narcosis por Nitrógeno:",
+        nitrogenNarcosisDetails: [
+          "Comienza a afectar a la mayoría de los buceadores alrededor de los 30m",
+          "Afecta el juicio, la función motora, la memoria",
+          "A veces llamado 'Efecto Martini'",
+          "Se alivia ascendiendo a menor profundidad"
+        ],
+      },
     },
     // Calculator UI
     calculatorUI: {
