@@ -1,21 +1,12 @@
+"use client"
+
 import { AirConsumptionCalculator } from "@/components/calculators/air-consumption-calculator"
-import { Button } from "@/components/ui/button"
-import { ArrowLeft } from "lucide-react"
-import Link from "next/link"
+import { CalculatorHeader } from "@/components/calculator-header"
 
 export default function AirConsumptionCalculatorPage() {
   return (
     <div className="min-h-screen bg-background">
-      <div className="border-b border-border bg-card">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-end">
-          <Link href="/">
-            <Button variant="default" size="sm" className="gap-2">
-              <ArrowLeft className="h-4 w-4" />
-              Back to Home
-            </Button>
-          </Link>
-        </div>
-      </div>
+      <CalculatorHeader />
       <AirConsumptionCalculator />
     </div>
   )

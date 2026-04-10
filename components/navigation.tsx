@@ -3,9 +3,12 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Menu, X, Waves } from "lucide-react"
+import { LanguageSelector } from "@/components/language-selector"
+import { useI18n } from "@/lib/i18n/context"
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
+  const { t } = useI18n()
 
   return (
     <nav className="bg-card border-b border-border">
@@ -18,17 +21,16 @@ export function Navigation() {
 
           <div className="hidden md:flex items-center gap-6">
             <a href="/about" className="text-muted-foreground hover:text-foreground transition-colors">
-              About
+              {t.nav.about}
             </a>
             <a href="/#calculators" className="text-muted-foreground hover:text-foreground transition-colors">
-              Topics
+              {t.nav.topics}
             </a>
-            <Button variant="default" size="sm">
-              Get Started
-            </Button>
+            <LanguageSelector />
           </div>
 
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center gap-2">
+            <LanguageSelector />
             <Button variant="ghost" size="sm" onClick={() => setIsOpen(!isOpen)}>
               {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
@@ -39,14 +41,11 @@ export function Navigation() {
           <div className="md:hidden py-4 border-t border-border">
             <div className="flex flex-col gap-4">
               <a href="/#calculators" className="text-muted-foreground hover:text-foreground transition-colors">
-                Calculators
+                {t.nav.calculators}
               </a>
               <a href="/about" className="text-muted-foreground hover:text-foreground transition-colors">
-                About
+                {t.nav.about}
               </a>
-              <Button variant="default" size="sm" className="w-fit">
-                Get Started
-              </Button>
             </div>
           </div>
         )}
