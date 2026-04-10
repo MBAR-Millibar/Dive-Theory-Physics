@@ -26,7 +26,7 @@ export function Footer() {
               Imprint
             </Link>
           </p>
-          <p className="mt-4 text-muted-foreground">2025 © Millibar - All Rights Reserved</p>
+          <p className="mt-4 text-muted-foreground">2025 © Millibar Technologies UG - All Rights Reserved</p>
         </div>
       </div>
     </footer>
