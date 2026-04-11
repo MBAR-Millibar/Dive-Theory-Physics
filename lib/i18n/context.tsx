@@ -13,24 +13,25 @@ const I18nContext = createContext<I18nContextType | undefined>(undefined)
 
 const LOCALE_STORAGE_KEY = "dive-theory-locale"
 
-export function I18nProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>(() => {
-    // Initialize from localStorage if available (only runs on client)
-    if (typeof window !== "undefined") {
-      const stored = localStorage.getItem(LOCALE_STORAGE_KEY) as Locale | null
-      if (stored && translations[stored]) {
-        return stored
-      }
-    }
-    return "en"
-  })
-
-  // Sync with localStorage on mount (handles SSR hydration)
-  useEffect(() => {
+function getStoredLocale(): Locale {
+  if (typeof window !== "undefined") {
     const stored = localStorage.getItem(LOCALE_STORAGE_KEY) as Locale | null
-    if (stored && translations[stored] && stored !== locale) {
-      setLocaleState(stored)
+    if (stored && translations[stored]) {
+      return stored
     }
+  }
+  return "en"
+}
+
+export function I18nProvider({ children }: { children: ReactNode }) {
+  const [locale, setLocaleState] = useState<Locale>("en")
+  const [isHydrated, setIsHydrated] = useState(false)
+
+  // Hydrate from localStorage on mount
+  useEffect(() => {
+    const stored = getStoredLocale()
+    setLocaleState(stored)
+    setIsHydrated(true)
   }, [])
 
   const setLocale = (newLocale: Locale) => {
@@ -39,6 +40,15 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   }
 
   const t = translations[locale]
+
+  // Prevent hydration mismatch by using consistent initial state
+  if (!isHydrated) {
+    return (
+      <I18nContext.Provider value={{ locale: "en", setLocale, t: translations["en"] }}>
+        {children}
+      </I18nContext.Provider>
+    )
+  }
 
   return (
     <I18nContext.Provider value={{ locale, setLocale, t }}>

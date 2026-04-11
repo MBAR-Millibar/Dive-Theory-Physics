@@ -452,42 +452,39 @@ export function HenrysLawCalculator() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Info className="h-5 w-5" />
-                Decompression Theory & Henry's Law
+                {t.theory.henrysLaw.title}
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="space-y-4">
-                <h3 className="text-lg font-semibold">Henry's Law Basics</h3>
+                <h3 className="text-lg font-semibold">{t.theory.henrysLaw.basicsTitle}</h3>
                 <div className="text-center p-4 bg-muted/50 rounded-lg">
-                  <p className="font-mono text-lg">C = k × P</p>
+                  <p className="font-mono text-lg">{t.theory.henrysLaw.formula}</p>
                   <p className="text-xs text-muted-foreground mt-2">
-                    Concentration = Solubility Coefficient × Partial Pressure
+                    {t.theory.henrysLaw.formulaExplanation}
                   </p>
                 </div>
                 <p className="text-muted-foreground">
-                  The amount of gas that dissolves into a liquid is directly proportional to the partial pressure of
-                  that gas in contact with the liquid. Higher pressure means more gas dissolves; lower pressure means
-                  gas comes out of solution.
+                  {t.theory.henrysLaw.basicsDesc}
                 </p>
               </div>
 
               <Separator />
 
               <div className="space-y-4">
-                <h3 className="text-lg font-semibold">Saturation & Desaturation</h3>
+                <h3 className="text-lg font-semibold">{t.theory.henrysLaw.saturationTitle}</h3>
                 <p className="text-muted-foreground">
-                  When gas pressure in tissues equals ambient pressure, tissues are saturated. When you ascend, tissues
-                  become supersaturated and must off-gas. Different tissue types have different half-times:
+                  {t.theory.henrysLaw.saturationDesc}
                 </p>
                 <ul className="space-y-2 text-muted-foreground">
                   <li>
-                    • <strong>Fast tissues:</strong> Blood, brain (5-10 min half-time)
+                    • <strong>{t.theory.henrysLaw.fastTissues}</strong> {t.theory.henrysLaw.fastTissuesDesc}
                   </li>
                   <li>
-                    • <strong>Medium tissues:</strong> Muscle (20-40 min half-time)
+                    • <strong>{t.theory.henrysLaw.mediumTissues}</strong> {t.theory.henrysLaw.mediumTissuesDesc}
                   </li>
                   <li>
-                    • <strong>Slow tissues:</strong> Joints, fat (80-120 min half-time)
+                    • <strong>{t.theory.henrysLaw.slowTissues}</strong> {t.theory.henrysLaw.slowTissuesDesc}
                   </li>
                 </ul>
               </div>
@@ -495,23 +492,22 @@ export function HenrysLawCalculator() {
               <Separator />
 
               <div className="space-y-4">
-                <h3 className="text-lg font-semibold">Decompression Sickness (DCS)</h3>
+                <h3 className="text-lg font-semibold">{t.theory.henrysLaw.dcsTitle}</h3>
                 <p className="text-muted-foreground">
-                  If you ascend too quickly, the pressure gradient becomes too large and nitrogen forms bubbles instead
-                  of dissolving out gradually. This causes decompression sickness.
+                  {t.theory.henrysLaw.dcsDesc}
                 </p>
                 <ul className="space-y-2 text-muted-foreground">
                   <li>
-                    • <strong>Prevention:</strong> Follow dive computer/table limits
+                    • <strong>{t.theory.henrysLaw.dcsPrevention}</strong> {t.theory.henrysLaw.dcsPreventionDesc}
                   </li>
                   <li>
-                    • <strong>Ascent rate:</strong> Maximum 9-10m/min
+                    • <strong>{t.theory.henrysLaw.dcsAscentRate}</strong> {t.theory.henrysLaw.dcsAscentRateDesc}
                   </li>
                   <li>
-                    • <strong>Safety stops:</strong> 3-5 minutes at 5m depth
+                    • <strong>{t.theory.henrysLaw.dcsSafetyStop}</strong> {t.theory.henrysLaw.dcsSafetyStopDesc}
                   </li>
                   <li>
-                    • <strong>Hydration:</strong> Stay well hydrated before and after diving
+                    • <strong>{t.theory.henrysLaw.dcsHydration}</strong> {t.theory.henrysLaw.dcsHydrationDesc}
                   </li>
                 </ul>
               </div>
@@ -519,15 +515,15 @@ export function HenrysLawCalculator() {
               <Separator />
 
               <div className="space-y-4">
-                <h3 className="text-lg font-semibold">Diving Applications</h3>
+                <h3 className="text-lg font-semibold">{t.theory.henrysLaw.applicationsTitle}</h3>
                 <p className="text-muted-foreground">
-                  Henry's Law is the foundation of all decompression theory and dive planning. It's used for:
+                  {t.theory.henrysLaw.applicationsDesc}
                 </p>
                 <ul className="space-y-2 text-muted-foreground">
-                  <li>• No-decompression limit calculations</li>
-                  <li>• Repetitive dive planning and surface interval requirements</li>
-                  <li>• Flying after diving guidelines (12-24 hours)</li>
-                  <li>• Technical diving gas switches and decompression stops</li>
+                  <li>• {t.theory.henrysLaw.appNDL}</li>
+                  <li>• {t.theory.henrysLaw.appRepetitive}</li>
+                  <li>• {t.theory.henrysLaw.appFlying}</li>
+                  <li>• {t.theory.henrysLaw.appTechnical}</li>
                 </ul>
               </div>
 
@@ -536,12 +532,10 @@ export function HenrysLawCalculator() {
               <div className="p-4 bg-amber-500/10 border border-amber-500/20 rounded-lg">
                 <h4 className="font-semibold text-amber-900 dark:text-amber-200 mb-2 flex items-center gap-2">
                   <AlertTriangle className="h-4 w-4" />
-                  Important Safety Note
+                  {t.theory.henrysLaw.safetyNote}
                 </h4>
                 <p className="text-sm text-amber-900 dark:text-amber-200">
-                  Understanding Henry's Law helps you appreciate why dive computers and tables work the way they do.
-                  However, this calculator is for educational purposes only. Always use proper dive planning tools and
-                  follow your training for actual dives. Never exceed your certification limits.
+                  {t.theory.henrysLaw.safetyNoteText}
                 </p>
               </div>
             </CardContent>

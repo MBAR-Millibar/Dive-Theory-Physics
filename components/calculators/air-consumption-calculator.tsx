@@ -324,44 +324,41 @@ export function AirConsumptionCalculator() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Info className="h-5 w-5" />
-                Air Consumption Theory
+                {t.theory.airConsumption.title}
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="space-y-4">
-                <h3 className="text-lg font-semibold">SAC Rate (Surface Air Consumption)</h3>
+                <h3 className="text-lg font-semibold">{t.theory.airConsumption.sacRateTitle}</h3>
                 <p className="text-muted-foreground">
-                  Your personal air consumption rate at the surface, measured in liters per minute. Typical values:
-                  <strong> Beginner: 18-25 L/min, Experienced: 12-18 L/min, Expert: 8-15 L/min</strong>
+                  {t.theory.airConsumption.sacRateDesc}{" "}
+                  <strong>{t.theory.airConsumption.sacRateTypical}</strong>
                 </p>
               </div>
 
               <Separator />
 
               <div className="space-y-4">
-                <h3 className="text-lg font-semibold">RMV (Respiratory Minute Volume)</h3>
-                <p className="text-muted-foreground">
-                  Your air consumption at depth, calculated as: <strong>RMV = SAC Rate × Absolute Pressure</strong>.
-                  This accounts for the increased air density at depth requiring more air volume per breath.
-                </p>
+                <h3 className="text-lg font-semibold">{t.theory.airConsumption.rmvTitle}</h3>
+                <p className="text-muted-foreground" dangerouslySetInnerHTML={{ __html: t.theory.airConsumption.rmvDesc }} />
               </div>
 
               <Separator />
 
               <div className="space-y-4">
-                <h3 className="text-lg font-semibold">Dive Planning Rules</h3>
+                <h3 className="text-lg font-semibold">{t.theory.airConsumption.planningRulesTitle}</h3>
                 <ul className="space-y-2 text-muted-foreground">
                   <li>
-                    • <strong>Rule of Thirds:</strong> Use 1/3 air for descent/bottom, 1/3 for ascent, 1/3 reserve
+                    • <strong>{t.theory.airConsumption.ruleOfThirds}</strong> {t.theory.airConsumption.ruleOfThirdsDesc}
                   </li>
                   <li>
-                    • <strong>80% Rule:</strong> Plan dive time as 80% of calculated air time for safety buffer
+                    • <strong>{t.theory.airConsumption.rule80}</strong> {t.theory.airConsumption.rule80Desc}
                   </li>
                   <li>
-                    • <strong>Turn Pressure:</strong> Start ascent when tank reaches calculated turn pressure
+                    • <strong>{t.theory.airConsumption.turnPressure}</strong> {t.theory.airConsumption.turnPressureDesc}
                   </li>
                   <li>
-                    • <strong>Safety Reserve:</strong> Always maintain 50+ bar reserve for emergencies
+                    • <strong>{t.theory.airConsumption.safetyReserve}</strong> {t.theory.airConsumption.safetyReserveDesc}
                   </li>
                 </ul>
               </div>
@@ -369,22 +366,22 @@ export function AirConsumptionCalculator() {
               <Separator />
 
               <div className="space-y-4">
-                <h3 className="text-lg font-semibold">Factors Affecting Air Consumption</h3>
+                <h3 className="text-lg font-semibold">{t.theory.airConsumption.factorsTitle}</h3>
                 <ul className="space-y-2 text-muted-foreground">
                   <li>
-                    • <strong>Experience:</strong> More experienced divers consume less air
+                    • <strong>{t.theory.airConsumption.factorExperience}</strong> {t.theory.airConsumption.factorExperienceDesc}
                   </li>
                   <li>
-                    • <strong>Fitness:</strong> Better fitness = lower consumption
+                    • <strong>{t.theory.airConsumption.factorFitness}</strong> {t.theory.airConsumption.factorFitnessDesc}
                   </li>
                   <li>
-                    • <strong>Water Temperature:</strong> Cold water increases consumption
+                    • <strong>{t.theory.airConsumption.factorTemperature}</strong> {t.theory.airConsumption.factorTemperatureDesc}
                   </li>
                   <li>
-                    • <strong>Current/Conditions:</strong> Strong currents increase air usage
+                    • <strong>{t.theory.airConsumption.factorCurrent}</strong> {t.theory.airConsumption.factorCurrentDesc}
                   </li>
                   <li>
-                    • <strong>Stress/Anxiety:</strong> Significantly increases consumption
+                    • <strong>{t.theory.airConsumption.factorStress}</strong> {t.theory.airConsumption.factorStressDesc}
                   </li>
                 </ul>
               </div>

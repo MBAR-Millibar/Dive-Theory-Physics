@@ -570,23 +570,23 @@ export function LiftDisplacementCalculator() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Waves className="h-5 w-5" />
-                  Archimedes' Principle
+                  {t.theory.liftDisplacement.archimedesTitle}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="text-center p-4 bg-muted/50 rounded-lg">
-                  <p className="font-mono text-lg">F_b = ρ × g × V</p>
+                  <p className="font-mono text-lg">{t.theory.liftDisplacement.archimedesFormula}</p>
                 </div>
                 <p className="text-sm text-muted-foreground">
-                  The buoyant force equals the weight of the fluid displaced by the submerged object.
+                  {t.theory.liftDisplacement.archimedesDesc}
                 </p>
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">Key Concepts:</h4>
+                  <h4 className="font-semibold text-sm">{t.theory.liftDisplacement.keyConcepts}</h4>
                   <ul className="text-sm text-muted-foreground space-y-1">
-                    <li>• F_b = Buoyant force (N)</li>
-                    <li>• ρ = Fluid density (kg/m³)</li>
-                    <li>• g = Gravitational acceleration (9.81 m/s²)</li>
-                    <li>• V = Volume of displaced fluid (m³)</li>
+                    <li>• {t.theory.liftDisplacement.fbForce}</li>
+                    <li>• {t.theory.liftDisplacement.density}</li>
+                    <li>• {t.theory.liftDisplacement.gravity}</li>
+                    <li>• {t.theory.liftDisplacement.volume}</li>
                   </ul>
                 </div>
               </CardContent>
@@ -596,26 +596,26 @@ export function LiftDisplacementCalculator() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <ArrowUp className="h-5 w-5" />
-                  Lift Operations
+                  {t.theory.liftDisplacement.liftOperationsTitle}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">Safety Guidelines:</h4>
+                  <h4 className="font-semibold text-sm">{t.theory.liftDisplacement.safetyGuidelines}</h4>
                   <ul className="text-sm text-muted-foreground space-y-1">
-                    <li>• Always use 20-50% safety factor</li>
-                    <li>• Control ascent rate (max 18m/min)</li>
-                    <li>• Monitor for gas expansion</li>
-                    <li>• Use multiple smaller bags vs one large</li>
-                    <li>• Maintain positive buoyancy control</li>
+                    <li>• {t.theory.liftDisplacement.safetyFactor}</li>
+                    <li>• {t.theory.liftDisplacement.ascentRate}</li>
+                    <li>• {t.theory.liftDisplacement.gasExpansion}</li>
+                    <li>• {t.theory.liftDisplacement.multipleBags}</li>
+                    <li>• {t.theory.liftDisplacement.buoyancyControl}</li>
                   </ul>
                 </div>
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">Water Density:</h4>
+                  <h4 className="font-semibold text-sm">{t.theory.liftDisplacement.waterDensityTitle}</h4>
                   <ul className="text-sm text-muted-foreground space-y-1">
-                    <li>• Freshwater: 1000 kg/m³</li>
-                    <li>• Saltwater: 1025 kg/m³ (2.5% more lift)</li>
-                    <li>• Temperature affects density slightly</li>
+                    <li>• {t.theory.liftDisplacement.freshwaterDensity}</li>
+                    <li>• {t.theory.liftDisplacement.saltwaterDensity}</li>
+                    <li>• {t.theory.liftDisplacement.temperatureEffect}</li>
                   </ul>
                 </div>
               </CardContent>
@@ -625,26 +625,26 @@ export function LiftDisplacementCalculator() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Scale className="h-5 w-5" />
-                  Practical Applications
+                  {t.theory.liftDisplacement.practicalTitle}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">Underwater Recovery:</h4>
+                  <h4 className="font-semibold text-sm">{t.theory.liftDisplacement.underwaterRecovery}</h4>
                   <ul className="text-sm text-muted-foreground space-y-1">
-                    <li>• Salvage operations</li>
-                    <li>• Archaeological recovery</li>
-                    <li>• Equipment retrieval</li>
-                    <li>• Scientific sampling</li>
+                    <li>• {t.theory.liftDisplacement.salvageOps}</li>
+                    <li>• {t.theory.liftDisplacement.archaeological}</li>
+                    <li>• {t.theory.liftDisplacement.equipmentRetrieval}</li>
+                    <li>• {t.theory.liftDisplacement.scientificSampling}</li>
                   </ul>
                 </div>
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">Buoyancy Control:</h4>
+                  <h4 className="font-semibold text-sm">{t.theory.liftDisplacement.buoyancyControlTitle}</h4>
                   <ul className="text-sm text-muted-foreground space-y-1">
-                    <li>• Diver buoyancy management</li>
-                    <li>• Equipment neutralization</li>
-                    <li>• Underwater construction</li>
-                    <li>• Marine biology research</li>
+                    <li>• {t.theory.liftDisplacement.diverBuoyancy}</li>
+                    <li>• {t.theory.liftDisplacement.equipmentNeutralization}</li>
+                    <li>• {t.theory.liftDisplacement.underwaterConstruction}</li>
+                    <li>• {t.theory.liftDisplacement.marineBiology}</li>
                   </ul>
                 </div>
               </CardContent>
@@ -654,25 +654,25 @@ export function LiftDisplacementCalculator() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Package className="h-5 w-5" />
-                  Volume Calculations
+                  {t.theory.liftDisplacement.volumeCalculationsTitle}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">Common Shapes:</h4>
+                  <h4 className="font-semibold text-sm">{t.theory.liftDisplacement.commonShapes}</h4>
                   <ul className="text-sm text-muted-foreground space-y-1">
-                    <li>• Rectangular: L × W × H</li>
-                    <li>• Cylindrical: π × r² × h</li>
-                    <li>• Spherical: (4/3) × π × r³</li>
-                    <li>• Irregular: Water displacement method</li>
+                    <li>• {t.theory.liftDisplacement.rectangular}</li>
+                    <li>• {t.theory.liftDisplacement.cylindrical}</li>
+                    <li>• {t.theory.liftDisplacement.spherical}</li>
+                    <li>• {t.theory.liftDisplacement.irregular}</li>
                   </ul>
                 </div>
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">Unit Conversions:</h4>
+                  <h4 className="font-semibold text-sm">{t.theory.liftDisplacement.unitConversions}</h4>
                   <ul className="text-sm text-muted-foreground space-y-1">
-                    <li>• 1 m³ = 1000 liters</li>
-                    <li>• 1 liter = 1 kg (freshwater)</li>
-                    <li>• 1 liter = 1.025 kg (saltwater)</li>
+                    <li>• {t.theory.liftDisplacement.cubicMeterToLiter}</li>
+                    <li>• {t.theory.liftDisplacement.literToKgFresh}</li>
+                    <li>• {t.theory.liftDisplacement.literToKgSalt}</li>
                   </ul>
                 </div>
               </CardContent>
