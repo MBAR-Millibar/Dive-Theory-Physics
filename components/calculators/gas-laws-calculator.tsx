@@ -168,10 +168,10 @@ export function GasLawsCalculator() {
         <TabsContent value="calculator" className="space-y-6">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
             <TabsList className="grid w-full grid-cols-4">
-              <TabsTrigger value="boyles">Boyle's Law</TabsTrigger>
-              <TabsTrigger value="charles">Charles's Law</TabsTrigger>
-              <TabsTrigger value="dalton">Dalton's Law</TabsTrigger>
-              <TabsTrigger value="gay-lussac">Gay-Lussac's Law</TabsTrigger>
+              <TabsTrigger value="boyles">{t.calculatorUI.gasLaws.boylesLaw}</TabsTrigger>
+              <TabsTrigger value="charles">{t.calculatorUI.gasLaws.charlesLaw}</TabsTrigger>
+              <TabsTrigger value="dalton">{t.calculatorUI.gasLaws.daltonsLaw}</TabsTrigger>
+              <TabsTrigger value="gay-lussac">{t.calculatorUI.gasLaws.gayLussacsLaw}</TabsTrigger>
             </TabsList>
 
             {/* Boyle's Law */}
@@ -680,7 +680,7 @@ export function GasLawsCalculator() {
 
           <div className="flex justify-center">
             <Button onClick={calculateGasLaws} size="lg" className="px-8">
-              Calculate All Gas Laws
+              {t.calculatorUI.buttons.calculateGasLaws}
             </Button>
           </div>
         </TabsContent>

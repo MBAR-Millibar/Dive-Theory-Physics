@@ -104,14 +104,14 @@ export function AirConsumptionCalculator() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Calculator className="h-5 w-5" />
-                  Dive Parameters
+                  {t.calculatorUI.airConsumption.diveParameters}
                 </CardTitle>
-                <CardDescription>Enter your diving and equipment parameters</CardDescription>
+                <CardDescription>{t.calculatorUI.airConsumption.diveParametersDesc}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="surface-consumption">SAC Rate (L/min)</Label>
+                    <Label htmlFor="surface-consumption">{t.calculatorUI.airConsumption.sacRate}</Label>
                     <Input
                       id="surface-consumption"
                       type="number"
@@ -124,7 +124,7 @@ export function AirConsumptionCalculator() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="depth">Depth (meters)</Label>
+                    <Label htmlFor="depth">{t.calculatorUI.airConsumption.depthMeters}</Label>
                     <Input
                       id="depth"
                       type="number"
@@ -138,7 +138,7 @@ export function AirConsumptionCalculator() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="dive-time">Planned Dive Time (minutes)</Label>
+                  <Label htmlFor="dive-time">{t.calculatorUI.airConsumption.plannedDiveTime}</Label>
                   <Input
                     id="dive-time"
                     type="number"
@@ -151,14 +151,14 @@ export function AirConsumptionCalculator() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="water-type">Water Type</Label>
+                  <Label htmlFor="water-type">{t.calculatorUI.airConsumption.waterType}</Label>
                   <Select value={waterType} onValueChange={setWaterType}>
                     <SelectTrigger>
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="saltwater">Saltwater (1 ATM/10m)</SelectItem>
-                      <SelectItem value="freshwater">Freshwater (1 ATM/10.3m)</SelectItem>
+                      <SelectItem value="saltwater">{t.calculatorUI.airConsumption.saltwater}</SelectItem>
+                      <SelectItem value="freshwater">{t.calculatorUI.airConsumption.freshwater}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -166,12 +166,12 @@ export function AirConsumptionCalculator() {
                 <Separator />
 
                 <h4 className="font-semibold text-sm uppercase tracking-wide text-muted-foreground">
-                  Tank Information
+                  {t.calculatorUI.airConsumption.tankInformation}
                 </h4>
 
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="tank-size">Tank Size (liters)</Label>
+                    <Label htmlFor="tank-size">{t.calculatorUI.airConsumption.tankSize}</Label>
                     <Input
                       id="tank-size"
                       type="number"
@@ -183,7 +183,7 @@ export function AirConsumptionCalculator() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="start-pressure">Start Pressure (bar)</Label>
+                    <Label htmlFor="start-pressure">{t.calculatorUI.airConsumption.startPressure}</Label>
                     <Input
                       id="start-pressure"
                       type="number"
@@ -197,7 +197,7 @@ export function AirConsumptionCalculator() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="end-pressure">Reserve Pressure (bar)</Label>
+                  <Label htmlFor="end-pressure">{t.calculatorUI.airConsumption.reservePressure}</Label>
                   <Input
                     id="end-pressure"
                     type="number"
@@ -218,8 +218,8 @@ export function AirConsumptionCalculator() {
             {/* Results Section */}
             <Card>
               <CardHeader>
-                <CardTitle>Air Consumption Results</CardTitle>
-                <CardDescription>Calculated air consumption and dive planning data</CardDescription>
+                <CardTitle>{t.calculatorUI.airConsumption.resultsTitle}</CardTitle>
+                <CardDescription>{t.calculatorUI.airConsumption.resultsDesc}</CardDescription>
               </CardHeader>
               <CardContent>
                 {results ? (
@@ -228,7 +228,7 @@ export function AirConsumptionCalculator() {
                       <div className="space-y-2">
                         <Label className="text-sm font-medium flex items-center gap-1">
                           <Wind className="h-4 w-4" />
-                          SAC Rate
+                          {t.calculatorUI.airConsumption.sacRateResult}
                         </Label>
                         <Badge variant="secondary" className="text-base px-3 py-1">
                           {results.sacRate} L/min
@@ -237,7 +237,7 @@ export function AirConsumptionCalculator() {
                       <div className="space-y-2">
                         <Label className="text-sm font-medium flex items-center gap-1">
                           <Gauge className="h-4 w-4" />
-                          RMV at Depth
+                          {t.calculatorUI.airConsumption.rmvAtDepth}
                         </Label>
                         <Badge variant="secondary" className="text-base px-3 py-1">
                           {results.rmv.toFixed(1)} L/min
@@ -251,16 +251,16 @@ export function AirConsumptionCalculator() {
                       <div className="flex justify-between items-center">
                         <span className="font-medium flex items-center gap-2">
                           <Clock className="h-4 w-4" />
-                          Air Time Available:
+                          {t.calculatorUI.airConsumption.airTimeAvailable}
                         </span>
                         <span className="text-lg font-bold text-primary">{results.airTimeAtDepth.toFixed(0)} min</span>
                       </div>
                       <div className="flex justify-between items-center">
-                        <span className="font-medium">Air Needed for Dive:</span>
+                        <span className="font-medium">{t.calculatorUI.airConsumption.airNeededForDive}</span>
                         <span className="text-lg font-bold text-chart-1">{results.totalAirNeeded.toFixed(0)} L</span>
                       </div>
                       <div className="flex justify-between items-center">
-                        <span className="font-medium">Safety Reserve:</span>
+                        <span className="font-medium">{t.calculatorUI.airConsumption.safetyReserve}</span>
                         <span className="text-lg font-bold text-chart-2">{results.safetyReserve.toFixed(0)} L</span>
                       </div>
                     </div>
@@ -270,13 +270,13 @@ export function AirConsumptionCalculator() {
                     {/* Dive Planning Recommendations */}
                     <div className="space-y-3">
                       <h4 className="font-semibold text-sm uppercase tracking-wide text-muted-foreground">
-                        Dive Planning
+                        {t.calculatorUI.airConsumption.divePlanning}
                       </h4>
 
                       {results.airTimeAtDepth < Number.parseFloat(diveTime) && (
                         <div className="p-3 bg-destructive/10 border border-destructive/20 rounded-lg">
                           <p className="text-sm text-destructive font-medium">
-                            ⚠️ Warning: Insufficient air for planned dive time
+                            {t.calculatorUI.warnings.insufficientAir}
                           </p>
                         </div>
                       )}
@@ -284,19 +284,19 @@ export function AirConsumptionCalculator() {
                       {results.airTimeAtDepth >= Number.parseFloat(diveTime) && (
                         <div className="p-3 bg-chart-4/10 border border-chart-4/20 rounded-lg">
                           <p className="text-sm text-chart-4 font-medium">
-                            ✓ Sufficient air for planned dive with{" "}
-                            {(results.airTimeAtDepth - Number.parseFloat(diveTime)).toFixed(0)} min buffer
+                            {t.calculatorUI.warnings.sufficientAir}{" "}
+                            {(results.airTimeAtDepth - Number.parseFloat(diveTime)).toFixed(0)} {t.calculatorUI.warnings.minBuffer}
                           </p>
                         </div>
                       )}
 
                       <div className="text-sm text-muted-foreground space-y-1">
                         <p>
-                          • Recommended max dive time: <strong>{(results.airTimeAtDepth * 0.8).toFixed(0)} min</strong>{" "}
-                          (80% rule)
+                          {t.calculatorUI.airConsumption.recommendedMaxDiveTime} <strong>{(results.airTimeAtDepth * 0.8).toFixed(0)} min</strong>{" "}
+                          {t.calculatorUI.airConsumption.rule80}
                         </p>
                         <p>
-                          • Turn pressure:{" "}
+                          {t.calculatorUI.airConsumption.turnPressure}{" "}
                           <strong>
                             {(
                               Number.parseFloat(startPressure) -
@@ -311,7 +311,7 @@ export function AirConsumptionCalculator() {
                 ) : (
                   <div className="text-center py-8 text-muted-foreground">
                     <Wind className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                    <p>Enter parameters and click calculate to see results</p>
+                    <p>{t.calculatorUI.labels.enterParametersPrompt}</p>
                   </div>
                 )}
               </CardContent>

@@ -142,21 +142,21 @@ export function HenrysLawCalculator() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Calculator className="h-5 w-5" />
-                  Calculation Parameters
+                  {t.calculatorUI.henrysLaw.calculationParameters}
                 </CardTitle>
-                <CardDescription>Select calculation type and enter parameters</CardDescription>
+                <CardDescription>{t.calculatorUI.henrysLaw.calculationParametersDesc}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="calculation-type">Calculation Type</Label>
+                  <Label htmlFor="calculation-type">{t.calculatorUI.henrysLaw.calculationType}</Label>
                   <Select value={calculationType} onValueChange={setCalculationType}>
                     <SelectTrigger>
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="dissolution">Gas Dissolution (C = k × P)</SelectItem>
-                      <SelectItem value="saturation">Tissue Saturation</SelectItem>
-                      <SelectItem value="planner">Dive Planner</SelectItem>
+                      <SelectItem value="dissolution">{t.calculatorUI.henrysLaw.gasDissolution} (C = k × P)</SelectItem>
+                      <SelectItem value="saturation">{t.calculatorUI.henrysLaw.tissueSaturation}</SelectItem>
+                      <SelectItem value="planner">{t.calculatorUI.henrysLaw.decompressionPlanner}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -167,10 +167,10 @@ export function HenrysLawCalculator() {
                 {calculationType === "dissolution" && (
                   <>
                     <h4 className="font-semibold text-sm uppercase tracking-wide text-muted-foreground">
-                      Gas Dissolution
+                      {t.calculatorUI.henrysLaw.gasDissolution}
                     </h4>
                     <div className="space-y-2">
-                      <Label htmlFor="partial-pressure">Partial Pressure (bar)</Label>
+                      <Label htmlFor="partial-pressure">{t.calculatorUI.henrysLaw.partialPressure}</Label>
                       <Input
                         id="partial-pressure"
                         type="number"
@@ -185,7 +185,7 @@ export function HenrysLawCalculator() {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="solubility">Solubility Coefficient (k)</Label>
+                      <Label htmlFor="solubility">{t.calculatorUI.henrysLaw.solubilityCoefficient}</Label>
                       <Input
                         id="solubility"
                         type="number"
@@ -198,7 +198,7 @@ export function HenrysLawCalculator() {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="liquid-volume">Liquid Volume (L)</Label>
+                      <Label htmlFor="liquid-volume">{t.calculatorUI.henrysLaw.liquidVolume}</Label>
                       <Input
                         id="liquid-volume"
                         type="number"
@@ -215,10 +215,10 @@ export function HenrysLawCalculator() {
                 {calculationType === "saturation" && (
                   <>
                     <h4 className="font-semibold text-sm uppercase tracking-wide text-muted-foreground">
-                      Tissue Saturation
+                      {t.calculatorUI.henrysLaw.tissueSaturation}
                     </h4>
                     <div className="space-y-2">
-                      <Label htmlFor="initial-pressure">Initial N₂ Pressure (bar)</Label>
+                      <Label htmlFor="initial-pressure">{t.calculatorUI.henrysLaw.initialN2Pressure}</Label>
                       <Input
                         id="initial-pressure"
                         type="number"
@@ -231,7 +231,7 @@ export function HenrysLawCalculator() {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="final-pressure">Final N₂ Pressure (bar)</Label>
+                      <Label htmlFor="final-pressure">{t.calculatorUI.henrysLaw.finalN2Pressure}</Label>
                       <Input
                         id="final-pressure"
                         type="number"
@@ -244,15 +244,15 @@ export function HenrysLawCalculator() {
                     </div>
 
                     <div className="space-y-2">
-                      <Label>Tissue Type</Label>
+                      <Label>{t.calculatorUI.henrysLaw.tissueType}</Label>
                       <Select value={tissueType} onValueChange={setTissueType}>
                         <SelectTrigger>
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="fast">Fast (5 min half-time)</SelectItem>
-                          <SelectItem value="medium">Medium (20 min half-time)</SelectItem>
-                          <SelectItem value="slow">Slow (80 min half-time)</SelectItem>
+                          <SelectItem value="fast">{t.calculatorUI.henrysLaw.fastTissue}</SelectItem>
+                          <SelectItem value="medium">{t.calculatorUI.henrysLaw.mediumTissue}</SelectItem>
+                          <SelectItem value="slow">{t.calculatorUI.henrysLaw.slowTissue}</SelectItem>
                         </SelectContent>
                       </Select>
                       <p className="text-xs text-muted-foreground">
@@ -266,10 +266,10 @@ export function HenrysLawCalculator() {
                 {calculationType === "planner" && (
                   <>
                     <h4 className="font-semibold text-sm uppercase tracking-wide text-muted-foreground">
-                      Dive Planning
+                      {t.calculatorUI.henrysLaw.decompressionPlanner}
                     </h4>
                     <div className="space-y-2">
-                      <Label htmlFor="dive-depth">Dive Depth (meters)</Label>
+                      <Label htmlFor="dive-depth">{t.calculatorUI.henrysLaw.diveDepth}</Label>
                       <Input
                         id="dive-depth"
                         type="number"
@@ -281,7 +281,7 @@ export function HenrysLawCalculator() {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="dive-time">Dive Time (minutes)</Label>
+                      <Label htmlFor="dive-time">{t.calculatorUI.henrysLaw.diveTime}</Label>
                       <Input
                         id="dive-time"
                         type="number"
@@ -293,7 +293,7 @@ export function HenrysLawCalculator() {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="surface-interval">Surface Interval (minutes)</Label>
+                      <Label htmlFor="surface-interval">{t.calculatorUI.henrysLaw.surfaceInterval}</Label>
                       <Input
                         id="surface-interval"
                         type="number"
@@ -322,12 +322,8 @@ export function HenrysLawCalculator() {
             {/* Results Section */}
             <Card>
               <CardHeader>
-                <CardTitle>Calculation Results</CardTitle>
-                <CardDescription>
-                  {calculationType === "dissolution" && "Amount of gas dissolved"}
-                  {calculationType === "saturation" && "Tissue loading times"}
-                  {calculationType === "planner" && "Nitrogen loading analysis"}
-                </CardDescription>
+                <CardTitle>{t.calculatorUI.henrysLaw.resultsTitle}</CardTitle>
+                <CardDescription>{t.calculatorUI.henrysLaw.resultsDesc}</CardDescription>
               </CardHeader>
               <CardContent>
                 {results && Object.keys(results).length > 0 ? (
@@ -338,7 +334,7 @@ export function HenrysLawCalculator() {
                         <div className="space-y-2">
                           <Label className="text-sm font-medium flex items-center gap-1">
                             <Droplets className="h-4 w-4" />
-                            Dissolved Gas
+                            {t.calculatorUI.henrysLaw.dissolvedGas}
                           </Label>
                           <Badge variant="secondary" className="text-base px-3 py-1">
                             {results.dissolvedGas.toFixed(3)} L
@@ -361,14 +357,14 @@ export function HenrysLawCalculator() {
                           <div className="space-y-2">
                             <Label className="text-sm font-medium flex items-center gap-1">
                               <Info className="h-4 w-4" />
-                              Pressure Gradient
+                              {t.calculatorUI.henrysLaw.pressureGradient}
                             </Label>
                             <Badge variant="secondary" className="text-base px-3 py-1">
                               {results.pressureGradient?.toFixed(2)} bar
                             </Badge>
                           </div>
                           <div className="space-y-2">
-                            <Label className="text-sm font-medium">95% Saturation</Label>
+                            <Label className="text-sm font-medium">{t.calculatorUI.henrysLaw.saturationTime}</Label>
                             <Badge variant="secondary" className="text-base px-3 py-1">
                               {results.saturationTime.toFixed(0)} min
                             </Badge>
@@ -379,7 +375,7 @@ export function HenrysLawCalculator() {
 
                         <div className="space-y-3">
                           <div className="flex justify-between items-center">
-                            <span className="font-medium">Safe Desaturation Time:</span>
+                            <span className="font-medium">{t.calculatorUI.henrysLaw.desaturationTime}</span>
                             <span className="text-lg font-bold text-primary">
                               {results.desaturationTime?.toFixed(0)} min
                             </span>
@@ -405,20 +401,20 @@ export function HenrysLawCalculator() {
                           <div className="flex justify-between items-center">
                             <span className="font-medium flex items-center gap-2">
                               <AlertTriangle className="h-4 w-4" />
-                              N₂ Pressure Gradient:
+                              {t.calculatorUI.henrysLaw.pressureGradient}
                             </span>
                             <span className="text-lg font-bold text-primary">
                               {results.pressureGradient?.toFixed(2)} bar
                             </span>
                           </div>
                           <div className="flex justify-between items-center">
-                            <span className="font-medium">Estimated N₂ Loading:</span>
+                            <span className="font-medium">{t.calculatorUI.henrysLaw.nitrogenLoading}</span>
                             <span className="text-lg font-bold text-chart-1">
                               {results.dissolvedGas.toFixed(2)} units
                             </span>
                           </div>
                           <div className="flex justify-between items-center">
-                            <span className="font-medium">Off-gassing Progress:</span>
+                            <span className="font-medium">{t.calculatorUI.henrysLaw.offGassingTime}</span>
                             <span className="text-lg font-bold text-chart-2">
                               {results.desaturationTime?.toFixed(2)} units
                             </span>
