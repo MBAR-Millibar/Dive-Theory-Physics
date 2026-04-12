@@ -10,6 +10,7 @@ import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { ArrowUp, Waves, Package, Scale } from "lucide-react"
+import { useI18n } from "@/lib/i18n/context"
 
 interface LiftResults {
   buoyantForce: number
@@ -21,6 +22,7 @@ interface LiftResults {
 }
 
 export function LiftDisplacementCalculator() {
+  const { t } = useI18n()
   const [mainTab, setMainTab] = useState<string>("calculator")
   const [activeTab, setActiveTab] = useState("buoyancy")
 
@@ -91,24 +93,22 @@ export function LiftDisplacementCalculator() {
   return (
     <div className="max-w-6xl mx-auto p-6 space-y-6">
       <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-foreground mb-2">Buoyancy & Displacement Calculator</h1>
-        <p className="text-muted-foreground">
-          Calculate buoyancy forces, lift bag requirements, and water displacement for diving operations
-        </p>
+        <h1 className="text-3xl font-bold text-foreground mb-2">{t.calculators.liftDisplacement.title}</h1>
+        <p className="text-muted-foreground">{t.calculators.liftDisplacement.description}</p>
       </div>
 
       <Tabs value={mainTab} onValueChange={setMainTab} className="w-full">
         <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="calculator">Calculator</TabsTrigger>
-          <TabsTrigger value="theory">Theory</TabsTrigger>
+          <TabsTrigger value="calculator">{t.calculatorUI.tabs.calculator}</TabsTrigger>
+          <TabsTrigger value="theory">{t.calculatorUI.tabs.theory}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="calculator" className="space-y-6">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
             <TabsList className="grid w-full grid-cols-3">
-              <TabsTrigger value="buoyancy">Buoyancy</TabsTrigger>
-              <TabsTrigger value="lift-bags">Lift Bags</TabsTrigger>
-              <TabsTrigger value="displacement">Displacement</TabsTrigger>
+              <TabsTrigger value="buoyancy">{t.calculatorUI.liftDisplacement.buoyancy}</TabsTrigger>
+              <TabsTrigger value="lift-bags">{t.calculatorUI.liftDisplacement.liftBags}</TabsTrigger>
+              <TabsTrigger value="displacement">{t.calculatorUI.liftDisplacement.displacement}</TabsTrigger>
             </TabsList>
 
             {/* Buoyancy Calculator */}
@@ -118,14 +118,14 @@ export function LiftDisplacementCalculator() {
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <Waves className="h-5 w-5" />
-                      Buoyancy Calculator
+                      {t.calculatorUI.liftDisplacement.buoyancyCalculator}
                     </CardTitle>
-                    <CardDescription>Calculate buoyant force using Archimedes' principle</CardDescription>
+                    <CardDescription>{t.calculatorUI.liftDisplacement.buoyancyCalculatorDesc}</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <Label htmlFor="object-weight">Object Weight (kg)</Label>
+                        <Label htmlFor="object-weight">{t.calculatorUI.liftDisplacement.objectWeight}</Label>
                         <Input
                           id="object-weight"
                           type="number"
@@ -137,7 +137,7 @@ export function LiftDisplacementCalculator() {
                         />
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="object-volume">Object Volume (m³)</Label>
+                        <Label htmlFor="object-volume">{t.calculatorUI.liftDisplacement.objectVolume}</Label>
                         <Input
                           id="object-volume"
                           type="number"
@@ -151,20 +151,20 @@ export function LiftDisplacementCalculator() {
                     </div>
 
                     <div className="space-y-2">
-                      <Label>Water Type</Label>
+                      <Label>{t.calculatorUI.liftDisplacement.waterType}</Label>
                       <Select value={waterType} onValueChange={setWaterType}>
                         <SelectTrigger>
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="saltwater">Saltwater (1025 kg/m³)</SelectItem>
-                          <SelectItem value="freshwater">Freshwater (1000 kg/m³)</SelectItem>
+                          <SelectItem value="saltwater">{t.calculatorUI.liftDisplacement.saltwater} (1025 kg/m³)</SelectItem>
+                          <SelectItem value="freshwater">{t.calculatorUI.liftDisplacement.freshwater} (1000 kg/m³)</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="depth">Depth (meters)</Label>
+                      <Label htmlFor="depth">{t.calculatorUI.liftDisplacement.depth}</Label>
                       <Input
                         id="depth"
                         type="number"
@@ -188,25 +188,25 @@ export function LiftDisplacementCalculator() {
 
                 <Card>
                   <CardHeader>
-                    <CardTitle>Buoyancy Results</CardTitle>
-                    <CardDescription>Forces acting on the submerged object</CardDescription>
+                    <CardTitle>{t.calculatorUI.liftDisplacement.buoyancyResults}</CardTitle>
+                    <CardDescription>{t.calculatorUI.labels.results}</CardDescription>
                   </CardHeader>
                   <CardContent>
                     {results ? (
                       <div className="space-y-4">
                         <div className="space-y-3">
                           <div className="flex justify-between items-center">
-                            <span className="font-medium">Buoyant Force:</span>
+                            <span className="font-medium">{t.calculatorUI.liftDisplacement.buoyantForce}</span>
                             <span className="text-lg font-bold text-primary">{results.buoyantForce.toFixed(2)} kN</span>
                           </div>
                           <div className="flex justify-between items-center">
-                            <span className="font-medium">Object Weight:</span>
+                            <span className="font-medium">{t.calculatorUI.liftDisplacement.objectWeight}</span>
                             <span className="text-lg font-bold text-chart-2">
                               {((Number.parseFloat(objectWeight) * 9.81) / 1000).toFixed(2)} kN
                             </span>
                           </div>
                           <div className="flex justify-between items-center">
-                            <span className="font-medium">Net Force:</span>
+                            <span className="font-medium">{t.calculatorUI.liftDisplacement.netForce}</span>
                             <span
                               className={`text-lg font-bold ${results.netForce > 0 ? "text-chart-4" : "text-chart-1"}`}
                             >
@@ -219,23 +219,23 @@ export function LiftDisplacementCalculator() {
 
                         <div className="space-y-2">
                           <h4 className="font-semibold text-sm uppercase tracking-wide text-muted-foreground">
-                            Object Status
+                            {t.calculatorUI.labels.results}
                           </h4>
                           {results.netForce > 0 ? (
                             <div className="p-3 bg-chart-4/10 border border-chart-4/20 rounded-lg">
                               <p className="text-sm text-chart-4 font-medium">
-                                ✓ Object will float - Buoyant force exceeds weight
+                                {t.calculatorUI.liftDisplacement.positive}
                               </p>
                             </div>
                           ) : results.netForce < 0 ? (
                             <div className="p-3 bg-chart-1/10 border border-chart-1/20 rounded-lg">
                               <p className="text-sm text-chart-1 font-medium">
-                                ↓ Object will sink - Weight exceeds buoyant force
+                                {t.calculatorUI.liftDisplacement.negative}
                               </p>
                             </div>
                           ) : (
                             <div className="p-3 bg-muted/50 border border-border rounded-lg">
-                              <p className="text-sm text-muted-foreground font-medium">⚖️ Object is neutrally buoyant</p>
+                              <p className="text-sm text-muted-foreground font-medium">{t.calculatorUI.labels.results}</p>
                             </div>
                           )}
                         </div>
@@ -243,7 +243,7 @@ export function LiftDisplacementCalculator() {
                     ) : (
                       <div className="text-center py-8 text-muted-foreground">
                         <Waves className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                        <p>Enter values and calculate to see results</p>
+                        <p>{t.calculatorUI.labels.enterParametersPrompt}</p>
                       </div>
                     )}
                   </CardContent>
@@ -258,13 +258,13 @@ export function LiftDisplacementCalculator() {
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <ArrowUp className="h-5 w-5" />
-                      Lift Bag Calculator
+                      {t.calculatorUI.liftDisplacement.liftBagCalculator}
                     </CardTitle>
-                    <CardDescription>Calculate lift bag requirements for underwater recovery</CardDescription>
+                    <CardDescription>{t.calculatorUI.liftDisplacement.liftBagCalculatorDesc}</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="space-y-2">
-                      <Label htmlFor="lift-weight">Object Weight to Lift (kg)</Label>
+                      <Label htmlFor="lift-weight">{t.calculatorUI.liftDisplacement.weightToLift}</Label>
                       <Input
                         id="lift-weight"
                         type="number"
@@ -277,7 +277,7 @@ export function LiftDisplacementCalculator() {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="lift-bag-capacity">Lift Bag Capacity (L)</Label>
+                      <Label htmlFor="lift-bag-capacity">{t.calculatorUI.liftDisplacement.bagCapacity}</Label>
                       <Input
                         id="lift-bag-capacity"
                         type="number"
@@ -290,7 +290,7 @@ export function LiftDisplacementCalculator() {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="safety-factor">Safety Factor (%)</Label>
+                      <Label htmlFor="safety-factor">{t.calculatorUI.liftDisplacement.safetyFactor}</Label>
                       <Input
                         id="safety-factor"
                         type="number"
@@ -304,21 +304,21 @@ export function LiftDisplacementCalculator() {
                     </div>
 
                     <div className="space-y-2">
-                      <Label>Water Type</Label>
+                      <Label>{t.calculatorUI.liftDisplacement.waterType}</Label>
                       <Select value={waterType} onValueChange={setWaterType}>
                         <SelectTrigger>
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="saltwater">Saltwater (1025 kg/m³)</SelectItem>
-                          <SelectItem value="freshwater">Freshwater (1000 kg/m³)</SelectItem>
+                          <SelectItem value="saltwater">{t.calculatorUI.liftDisplacement.saltwater} (1025 kg/m³)</SelectItem>
+                          <SelectItem value="freshwater">{t.calculatorUI.liftDisplacement.freshwater} (1000 kg/m³)</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
 
                     <div className="p-3 bg-muted/50 rounded-lg">
                       <p className="text-sm text-muted-foreground">
-                        <strong>Safety Factor:</strong> Recommended 20-50% extra lift capacity to account for
+                        <strong>{t.calculatorUI.liftDisplacement.safetyFactor}:</strong> Recommended 20-50% extra lift capacity to account for
                         uncertainties and provide control during ascent.
                       </p>
                     </div>
@@ -327,21 +327,21 @@ export function LiftDisplacementCalculator() {
 
                 <Card>
                   <CardHeader>
-                    <CardTitle>Lift Bag Results</CardTitle>
-                    <CardDescription>Required lift bag configuration</CardDescription>
+                    <CardTitle>{t.calculatorUI.liftDisplacement.liftBagResults}</CardTitle>
+                    <CardDescription>{t.calculatorUI.labels.results}</CardDescription>
                   </CardHeader>
                   <CardContent>
                     {results ? (
                       <div className="space-y-4">
                         <div className="grid grid-cols-2 gap-4">
                           <div className="space-y-2">
-                            <Label className="text-sm font-medium">Required Lift Bags</Label>
+                            <Label className="text-sm font-medium">{t.calculatorUI.liftDisplacement.requiredBags}</Label>
                             <Badge variant="secondary" className="text-base px-3 py-1">
-                              {results.requiredLiftBags} bags
+                              {results.requiredLiftBags}
                             </Badge>
                           </div>
                           <div className="space-y-2">
-                            <Label className="text-sm font-medium">Safety Factor</Label>
+                            <Label className="text-sm font-medium">{t.calculatorUI.liftDisplacement.safetyFactor}</Label>
                             <Badge variant="secondary" className="text-base px-3 py-1">
                               {results.safetyFactor}%
                             </Badge>
@@ -352,7 +352,7 @@ export function LiftDisplacementCalculator() {
 
                         <div className="space-y-3">
                           <div className="flex justify-between items-center">
-                            <span className="font-medium">Total Lift Volume:</span>
+                            <span className="font-medium">{t.calculatorUI.liftDisplacement.requiredLiftVolume}</span>
                             <span className="text-lg font-bold text-primary">{results.liftBagVolume.toFixed(0)} L</span>
                           </div>
                           <div className="flex justify-between items-center">
@@ -416,13 +416,13 @@ export function LiftDisplacementCalculator() {
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <Package className="h-5 w-5" />
-                      Water Displacement
+                      {t.calculatorUI.liftDisplacement.displacementCalculator}
                     </CardTitle>
-                    <CardDescription>Calculate volume of water displaced by submerged objects</CardDescription>
+                    <CardDescription>{t.calculatorUI.liftDisplacement.displacementCalculatorDesc}</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="space-y-2">
-                      <Label htmlFor="displacement-length">Length (meters)</Label>
+                      <Label htmlFor="displacement-length">{t.calculatorUI.liftDisplacement.length}</Label>
                       <Input
                         id="displacement-length"
                         type="number"
@@ -435,7 +435,7 @@ export function LiftDisplacementCalculator() {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="displacement-width">Width (meters)</Label>
+                      <Label htmlFor="displacement-width">{t.calculatorUI.liftDisplacement.width}</Label>
                       <Input
                         id="displacement-width"
                         type="number"
@@ -448,7 +448,7 @@ export function LiftDisplacementCalculator() {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="displacement-height">Height (meters)</Label>
+                      <Label htmlFor="displacement-height">{t.calculatorUI.liftDisplacement.height}</Label>
                       <Input
                         id="displacement-height"
                         type="number"
@@ -461,14 +461,14 @@ export function LiftDisplacementCalculator() {
                     </div>
 
                     <div className="space-y-2">
-                      <Label>Water Type</Label>
+                      <Label>{t.calculatorUI.liftDisplacement.waterType}</Label>
                       <Select value={waterType} onValueChange={setWaterType}>
                         <SelectTrigger>
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="saltwater">Saltwater (1025 kg/m³)</SelectItem>
-                          <SelectItem value="freshwater">Freshwater (1000 kg/m³)</SelectItem>
+                          <SelectItem value="saltwater">{t.calculatorUI.liftDisplacement.saltwater} (1025 kg/m³)</SelectItem>
+                          <SelectItem value="freshwater">{t.calculatorUI.liftDisplacement.freshwater} (1000 kg/m³)</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -485,15 +485,15 @@ export function LiftDisplacementCalculator() {
 
                 <Card>
                   <CardHeader>
-                    <CardTitle>Displacement Results</CardTitle>
-                    <CardDescription>Water volume and mass displaced</CardDescription>
+                    <CardTitle>{t.calculatorUI.liftDisplacement.displacementResults}</CardTitle>
+                    <CardDescription>{t.calculatorUI.labels.results}</CardDescription>
                   </CardHeader>
                   <CardContent>
                     {results ? (
                       <div className="space-y-4">
                         <div className="space-y-3">
                           <div className="flex justify-between items-center">
-                            <span className="font-medium">Volume Displaced:</span>
+                            <span className="font-medium">{t.calculatorUI.liftDisplacement.waterDisplaced}</span>
                             <span className="text-lg font-bold text-primary">
                               {results.waterDisplaced.toFixed(0)} L
                             </span>
@@ -559,7 +559,7 @@ export function LiftDisplacementCalculator() {
 
           <div className="flex justify-center">
             <Button onClick={calculateLiftAndDisplacement} size="lg" className="px-8">
-              Calculate Buoyancy & Displacement
+              {t.calculatorUI.buttons.calculate}
             </Button>
           </div>
         </TabsContent>
@@ -570,23 +570,23 @@ export function LiftDisplacementCalculator() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Waves className="h-5 w-5" />
-                  Archimedes' Principle
+                  {t.theory.liftDisplacement.archimedesTitle}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="text-center p-4 bg-muted/50 rounded-lg">
-                  <p className="font-mono text-lg">F_b = ρ × g × V</p>
+                  <p className="font-mono text-lg">{t.theory.liftDisplacement.archimedesFormula}</p>
                 </div>
                 <p className="text-sm text-muted-foreground">
-                  The buoyant force equals the weight of the fluid displaced by the submerged object.
+                  {t.theory.liftDisplacement.archimedesDesc}
                 </p>
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">Key Concepts:</h4>
+                  <h4 className="font-semibold text-sm">{t.theory.liftDisplacement.keyConcepts}</h4>
                   <ul className="text-sm text-muted-foreground space-y-1">
-                    <li>• F_b = Buoyant force (N)</li>
-                    <li>• ρ = Fluid density (kg/m³)</li>
-                    <li>• g = Gravitational acceleration (9.81 m/s²)</li>
-                    <li>• V = Volume of displaced fluid (m³)</li>
+                    <li>• {t.theory.liftDisplacement.fbForce}</li>
+                    <li>• {t.theory.liftDisplacement.density}</li>
+                    <li>• {t.theory.liftDisplacement.gravity}</li>
+                    <li>• {t.theory.liftDisplacement.volume}</li>
                   </ul>
                 </div>
               </CardContent>
@@ -596,26 +596,26 @@ export function LiftDisplacementCalculator() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <ArrowUp className="h-5 w-5" />
-                  Lift Operations
+                  {t.theory.liftDisplacement.liftOperationsTitle}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">Safety Guidelines:</h4>
+                  <h4 className="font-semibold text-sm">{t.theory.liftDisplacement.safetyGuidelines}</h4>
                   <ul className="text-sm text-muted-foreground space-y-1">
-                    <li>• Always use 20-50% safety factor</li>
-                    <li>• Control ascent rate (max 18m/min)</li>
-                    <li>• Monitor for gas expansion</li>
-                    <li>• Use multiple smaller bags vs one large</li>
-                    <li>• Maintain positive buoyancy control</li>
+                    <li>• {t.theory.liftDisplacement.safetyFactor}</li>
+                    <li>• {t.theory.liftDisplacement.ascentRate}</li>
+                    <li>• {t.theory.liftDisplacement.gasExpansion}</li>
+                    <li>• {t.theory.liftDisplacement.multipleBags}</li>
+                    <li>• {t.theory.liftDisplacement.buoyancyControl}</li>
                   </ul>
                 </div>
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">Water Density:</h4>
+                  <h4 className="font-semibold text-sm">{t.theory.liftDisplacement.waterDensityTitle}</h4>
                   <ul className="text-sm text-muted-foreground space-y-1">
-                    <li>• Freshwater: 1000 kg/m³</li>
-                    <li>• Saltwater: 1025 kg/m³ (2.5% more lift)</li>
-                    <li>• Temperature affects density slightly</li>
+                    <li>• {t.theory.liftDisplacement.freshwaterDensity}</li>
+                    <li>• {t.theory.liftDisplacement.saltwaterDensity}</li>
+                    <li>• {t.theory.liftDisplacement.temperatureEffect}</li>
                   </ul>
                 </div>
               </CardContent>
@@ -625,26 +625,26 @@ export function LiftDisplacementCalculator() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Scale className="h-5 w-5" />
-                  Practical Applications
+                  {t.theory.liftDisplacement.practicalTitle}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">Underwater Recovery:</h4>
+                  <h4 className="font-semibold text-sm">{t.theory.liftDisplacement.underwaterRecovery}</h4>
                   <ul className="text-sm text-muted-foreground space-y-1">
-                    <li>• Salvage operations</li>
-                    <li>• Archaeological recovery</li>
-                    <li>• Equipment retrieval</li>
-                    <li>• Scientific sampling</li>
+                    <li>• {t.theory.liftDisplacement.salvageOps}</li>
+                    <li>• {t.theory.liftDisplacement.archaeological}</li>
+                    <li>• {t.theory.liftDisplacement.equipmentRetrieval}</li>
+                    <li>• {t.theory.liftDisplacement.scientificSampling}</li>
                   </ul>
                 </div>
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">Buoyancy Control:</h4>
+                  <h4 className="font-semibold text-sm">{t.theory.liftDisplacement.buoyancyControlTitle}</h4>
                   <ul className="text-sm text-muted-foreground space-y-1">
-                    <li>• Diver buoyancy management</li>
-                    <li>• Equipment neutralization</li>
-                    <li>• Underwater construction</li>
-                    <li>• Marine biology research</li>
+                    <li>• {t.theory.liftDisplacement.diverBuoyancy}</li>
+                    <li>• {t.theory.liftDisplacement.equipmentNeutralization}</li>
+                    <li>• {t.theory.liftDisplacement.underwaterConstruction}</li>
+                    <li>• {t.theory.liftDisplacement.marineBiology}</li>
                   </ul>
                 </div>
               </CardContent>
@@ -654,25 +654,25 @@ export function LiftDisplacementCalculator() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Package className="h-5 w-5" />
-                  Volume Calculations
+                  {t.theory.liftDisplacement.volumeCalculationsTitle}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">Common Shapes:</h4>
+                  <h4 className="font-semibold text-sm">{t.theory.liftDisplacement.commonShapes}</h4>
                   <ul className="text-sm text-muted-foreground space-y-1">
-                    <li>• Rectangular: L × W × H</li>
-                    <li>• Cylindrical: π × r² × h</li>
-                    <li>• Spherical: (4/3) × π × r³</li>
-                    <li>• Irregular: Water displacement method</li>
+                    <li>• {t.theory.liftDisplacement.rectangular}</li>
+                    <li>• {t.theory.liftDisplacement.cylindrical}</li>
+                    <li>• {t.theory.liftDisplacement.spherical}</li>
+                    <li>• {t.theory.liftDisplacement.irregular}</li>
                   </ul>
                 </div>
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">Unit Conversions:</h4>
+                  <h4 className="font-semibold text-sm">{t.theory.liftDisplacement.unitConversions}</h4>
                   <ul className="text-sm text-muted-foreground space-y-1">
-                    <li>• 1 m³ = 1000 liters</li>
-                    <li>• 1 liter = 1 kg (freshwater)</li>
-                    <li>• 1 liter = 1.025 kg (saltwater)</li>
+                    <li>• {t.theory.liftDisplacement.cubicMeterToLiter}</li>
+                    <li>• {t.theory.liftDisplacement.literToKgFresh}</li>
+                    <li>• {t.theory.liftDisplacement.literToKgSalt}</li>
                   </ul>
                 </div>
               </CardContent>

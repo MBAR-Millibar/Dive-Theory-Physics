@@ -9,6 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { Calculator, Info } from "lucide-react"
+import { useI18n } from "@/lib/i18n/context"
 
 interface PressureResults {
   absolutePressure: number
@@ -19,6 +20,7 @@ interface PressureResults {
 }
 
 export function PressureCalculator() {
+  const { t } = useI18n()
   const [activeTab, setActiveTab] = useState<string>("calculator")
   const [depth, setDepth] = useState<string>("30")
   const [oxygenPercentage, setOxygenPercentage] = useState<string>("21")
@@ -55,14 +57,14 @@ export function PressureCalculator() {
   return (
     <div className="max-w-4xl mx-auto p-6 space-y-6">
       <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-foreground mb-2">Water & Pressure Calculator</h1>
-        <p className="text-muted-foreground">Understand water properties and calculate pressures at different depths</p>
+        <h1 className="text-3xl font-bold text-foreground mb-2">{t.calculators.pressure.title}</h1>
+        <p className="text-muted-foreground">{t.calculators.pressure.description}</p>
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
         <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="calculator">Calculator</TabsTrigger>
-          <TabsTrigger value="theory">Theory</TabsTrigger>
+          <TabsTrigger value="calculator">{t.calculatorUI.tabs.calculator}</TabsTrigger>
+          <TabsTrigger value="theory">{t.calculatorUI.tabs.theory}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="calculator" className="space-y-6">
@@ -72,32 +74,29 @@ export function PressureCalculator() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Calculator className="h-5 w-5" />
-                  Input Parameters
+                  {t.calculatorUI.labels.inputParameters}
                 </CardTitle>
-                <CardDescription>Enter your diving parameters to calculate pressures</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="depth">Depth (meters)</Label>
+                  <Label htmlFor="depth">{t.calculatorUI.labels.depth}</Label>
                   <Input
                     id="depth"
                     type="number"
                     value={depth}
                     onChange={(e) => setDepth(e.target.value)}
-                    placeholder="Enter depth in meters"
                     min="0"
                     step="0.1"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="oxygen">Oxygen Percentage (%)</Label>
+                  <Label htmlFor="oxygen">{t.calculatorUI.labels.oxygenPercentage}</Label>
                   <Input
                     id="oxygen"
                     type="number"
                     value={oxygenPercentage}
                     onChange={(e) => setOxygenPercentage(e.target.value)}
-                    placeholder="Enter oxygen percentage"
                     min="1"
                     max="100"
                     step="0.1"
@@ -105,7 +104,7 @@ export function PressureCalculator() {
                 </div>
 
                 <Button onClick={calculatePressure} className="w-full" size="lg">
-                  Calculate Pressures
+                  {t.calculatorUI.buttons.calculatePressures}
                 </Button>
               </CardContent>
             </Card>
@@ -113,21 +112,20 @@ export function PressureCalculator() {
             {/* Results Section */}
             <Card>
               <CardHeader>
-                <CardTitle>Pressure Results</CardTitle>
-                <CardDescription>Calculated pressure values for your dive parameters</CardDescription>
+                <CardTitle>{t.calculatorUI.labels.pressureResults}</CardTitle>
               </CardHeader>
               <CardContent>
                 {results ? (
                   <div className="space-y-4">
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <Label className="text-sm font-medium">Depth</Label>
+                        <Label className="text-sm font-medium">{t.calculatorUI.labels.depth}</Label>
                         <Badge variant="secondary" className="text-base px-3 py-1">
                           {depth}m
                         </Badge>
                       </div>
                       <div className="space-y-2">
-                        <Label className="text-sm font-medium">Atmospheres</Label>
+                        <Label className="text-sm font-medium">{t.calculatorUI.labels.atmospheres}</Label>
                         <Badge variant="secondary" className="text-base px-3 py-1">
                           {results.atmospheres.toFixed(1)} ATM
                         </Badge>
@@ -138,13 +136,13 @@ export function PressureCalculator() {
 
                     <div className="space-y-3">
                       <div className="flex justify-between items-center">
-                        <span className="font-medium">Absolute Pressure:</span>
+                        <span className="font-medium">{t.calculatorUI.labels.absolutePressure}:</span>
                         <span className="text-lg font-bold text-primary">
                           {results.absolutePressure.toFixed(2)} bar
                         </span>
                       </div>
                       <div className="flex justify-between items-center">
-                        <span className="font-medium">Gauge Pressure:</span>
+                        <span className="font-medium">{t.calculatorUI.labels.gaugePressure}:</span>
                         <span className="text-lg font-bold text-primary">{results.gaugePressure.toFixed(2)} bar</span>
                       </div>
                     </div>
@@ -153,16 +151,16 @@ export function PressureCalculator() {
 
                     <div className="space-y-3">
                       <h4 className="font-semibold text-sm uppercase tracking-wide text-muted-foreground">
-                        Partial Pressures
+                        {t.calculatorUI.labels.partialPressures}
                       </h4>
                       <div className="flex justify-between items-center">
-                        <span className="font-medium">Oxygen (O₂):</span>
+                        <span className="font-medium">{t.calculatorUI.labels.oxygen}:</span>
                         <span className="text-lg font-bold text-chart-1">
                           {results.partialPressureO2.toFixed(2)} bar
                         </span>
                       </div>
                       <div className="flex justify-between items-center">
-                        <span className="font-medium">Nitrogen (N₂):</span>
+                        <span className="font-medium">{t.calculatorUI.labels.nitrogen}:</span>
                         <span className="text-lg font-bold text-chart-2">
                           {results.partialPressureN2.toFixed(2)} bar
                         </span>
@@ -173,7 +171,7 @@ export function PressureCalculator() {
                     {results.partialPressureO2 > 1.4 && (
                       <div className="p-3 bg-destructive/10 border border-destructive/20 rounded-lg">
                         <p className="text-sm text-destructive font-medium">
-                          ⚠️ Warning: O₂ partial pressure exceeds 1.4 bar - risk of oxygen toxicity
+                          {t.calculatorUI.warnings.oxygenToxicity}
                         </p>
                       </div>
                     )}
@@ -181,7 +179,7 @@ export function PressureCalculator() {
                 ) : (
                   <div className="text-center py-8 text-muted-foreground">
                     <Calculator className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                    <p>Enter parameters and click calculate to see results</p>
+                    <p>{t.calculatorUI.labels.enterParametersPrompt}</p>
                   </div>
                 )}
               </CardContent>
@@ -194,32 +192,29 @@ export function PressureCalculator() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Info className="h-5 w-5" />
-                Water Properties & Physics
+                {t.theory.pressure.waterPropertiesTitle}
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
               {/* Water Density Section */}
               <div className="space-y-4">
-                <h3 className="text-lg font-semibold">Water Density & Mass</h3>
-                <p className="text-muted-foreground">
-                  Water is approximately <strong>770 times more dense than air</strong>. This fundamental property
-                  affects every aspect of diving physics.
-                </p>
+                <h3 className="text-lg font-semibold">{t.theory.pressure.waterDensityTitle}</h3>
+                <p className="text-muted-foreground" dangerouslySetInnerHTML={{ __html: t.theory.pressure.waterDensityIntro }} />
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="p-4 bg-muted/50 rounded-lg">
-                    <p className="font-semibold mb-2">Fresh Water</p>
+                    <p className="font-semibold mb-2">{t.theory.pressure.freshWater}</p>
                     <ul className="text-sm text-muted-foreground space-y-1">
-                      <li>• Density: 1.0 kg/L</li>
-                      <li>• 1 cubic meter = 1000 kg</li>
-                      <li>• 10.3 meters = 1 bar pressure</li>
+                      {t.theory.pressure.freshWaterDetails.map((item, i) => (
+                        <li key={i}>• {item}</li>
+                      ))}
                     </ul>
                   </div>
                   <div className="p-4 bg-muted/50 rounded-lg">
-                    <p className="font-semibold mb-2">Sea Water</p>
+                    <p className="font-semibold mb-2">{t.theory.pressure.seaWater}</p>
                     <ul className="text-sm text-muted-foreground space-y-1">
-                      <li>• Density: 1.03 kg/L</li>
-                      <li>• 1 cubic meter = 1030 kg</li>
-                      <li>• 10 meters = 1 bar pressure</li>
+                      {t.theory.pressure.seaWaterDetails.map((item, i) => (
+                        <li key={i}>• {item}</li>
+                      ))}
                     </ul>
                   </div>
                 </div>
@@ -229,34 +224,20 @@ export function PressureCalculator() {
 
               {/* Heat Transmission Section */}
               <div className="space-y-4">
-                <h3 className="text-lg font-semibold">Heat Transmission</h3>
-                <p className="text-muted-foreground">
-                  Water conducts heat approximately <strong>20 times faster than air</strong>, making thermal protection
-                  critical for divers.
-                </p>
+                <h3 className="text-lg font-semibold">{t.theory.pressure.heatTitle}</h3>
+                <p className="text-muted-foreground" dangerouslySetInnerHTML={{ __html: t.theory.pressure.heatIntro }} />
                 <div className="space-y-3">
                   <div className="p-4 bg-muted/50 rounded-lg">
-                    <p className="font-semibold mb-2">Three Methods of Heat Transfer:</p>
+                    <p className="font-semibold mb-2">{t.theory.pressure.heatMethods}</p>
                     <ul className="text-sm text-muted-foreground space-y-2">
-                      <li>
-                        <strong>1. Conduction:</strong> Direct heat transfer through contact. Water's high thermal
-                        conductivity means you lose body heat rapidly when immersed.
-                      </li>
-                      <li>
-                        <strong>2. Convection:</strong> Heat transfer through fluid movement. Water currents carry warm
-                        water away from your body, accelerating heat loss.
-                      </li>
-                      <li>
-                        <strong>3. Radiation:</strong> Heat transfer through electromagnetic waves. Less significant
-                        underwater but still contributes to heat loss.
-                      </li>
+                      <li><strong>1. {t.theory.pressure.conduction}</strong> {t.theory.pressure.conductionDesc}</li>
+                      <li><strong>2. {t.theory.pressure.convection}</strong> {t.theory.pressure.convectionDesc}</li>
+                      <li><strong>3. {t.theory.pressure.radiation}</strong> {t.theory.pressure.radiationDesc}</li>
                     </ul>
                   </div>
                   <div className="p-3 bg-amber-500/10 border border-amber-500/20 rounded-lg">
                     <p className="text-sm text-amber-900 dark:text-amber-200">
-                      <strong>Safety Note:</strong> Hypothermia is a serious risk. Always use appropriate thermal
-                      protection for water temperature and dive duration. Even in tropical waters (24°C/75°F), you can
-                      become hypothermic on long dives.
+                      <strong>{t.theory.pressure.heatSafetyNote}</strong> {t.theory.pressure.heatSafetyText}
                     </p>
                   </div>
                 </div>
@@ -266,53 +247,31 @@ export function PressureCalculator() {
 
               {/* Light & Vision Section */}
               <div className="space-y-4">
-                <h3 className="text-lg font-semibold">Light & Vision Underwater</h3>
-                <p className="text-muted-foreground">
-                  Water absorbs and refracts light, dramatically affecting visibility and color perception underwater.
-                </p>
+                <h3 className="text-lg font-semibold">{t.theory.pressure.lightTitle}</h3>
+                <p className="text-muted-foreground">{t.theory.pressure.lightIntro}</p>
                 <div className="space-y-3">
                   <div className="p-4 bg-muted/50 rounded-lg">
-                    <p className="font-semibold mb-2">Light Absorption by Depth:</p>
+                    <p className="font-semibold mb-2">{t.theory.pressure.lightAbsorption}</p>
                     <ul className="text-sm text-muted-foreground space-y-1">
-                      <li>
-                        • <strong>Surface:</strong> Only 20% of sunlight reaches 10 meters depth
-                      </li>
-                      <li>
-                        • <strong>5 meters:</strong> Red colors disappear (absorbed first)
-                      </li>
-                      <li>
-                        • <strong>16 meters:</strong> Orange colors disappear
-                      </li>
-                      <li>
-                        • <strong>30 meters:</strong> Yellow colors disappear
-                      </li>
-                      <li>
-                        • <strong>50+ meters:</strong> Only blue-green light remains
-                      </li>
+                      {t.theory.pressure.lightAbsorptionDetails.map((item, i) => (
+                        <li key={i}>• {item}</li>
+                      ))}
                     </ul>
                   </div>
                   <div className="p-4 bg-muted/50 rounded-lg">
-                    <p className="font-semibold mb-2">Refraction Effects:</p>
+                    <p className="font-semibold mb-2">{t.theory.pressure.refraction}</p>
                     <ul className="text-sm text-muted-foreground space-y-1">
-                      <li>
-                        • Objects appear <strong>25% closer</strong> than they actually are
-                      </li>
-                      <li>
-                        • Objects appear <strong>33% larger</strong> than actual size
-                      </li>
-                      <li>• Refraction ratio: 4:3 (water to air)</li>
-                      <li>• This affects depth perception and distance judgment</li>
+                      {t.theory.pressure.refractionDetails.map((item, i) => (
+                        <li key={i}>• {item}</li>
+                      ))}
                     </ul>
                   </div>
                   <div className="p-4 bg-muted/50 rounded-lg">
-                    <p className="font-semibold mb-2">Turbidity & Visual Effects:</p>
+                    <p className="font-semibold mb-2">{t.theory.pressure.turbidity}</p>
                     <ul className="text-sm text-muted-foreground space-y-1">
-                      <li>• Suspended particles scatter light, reducing visibility</li>
-                      <li>
-                        • <strong>Visual reversal:</strong> In murky water, objects may appear darker when closer
-                      </li>
-                      <li>• Fluorescent colors remain visible longer at depth</li>
-                      <li>• Dive lights restore true colors by providing full-spectrum light</li>
+                      {t.theory.pressure.turbidityDetails.map((item, i) => (
+                        <li key={i}>• {item}</li>
+                      ))}
                     </ul>
                   </div>
                 </div>
@@ -322,113 +281,46 @@ export function PressureCalculator() {
 
               {/* Sound Underwater Section */}
               <div className="space-y-4">
-                <h3 className="text-lg font-semibold">Sound Underwater</h3>
-                <p className="text-muted-foreground">
-                  Sound travels approximately <strong>4 times faster in water</strong> than in air, but this creates
-                  challenges for divers.
-                </p>
+                <h3 className="text-lg font-semibold">{t.theory.pressure.soundTitle}</h3>
+                <p className="text-muted-foreground" dangerouslySetInnerHTML={{ __html: t.theory.pressure.soundIntro }} />
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="p-4 bg-muted/50 rounded-lg">
-                    <p className="font-semibold mb-2">Sound Speed:</p>
+                    <p className="font-semibold mb-2">{t.theory.pressure.soundSpeed}</p>
                     <ul className="text-sm text-muted-foreground space-y-1">
-                      <li>• In air: ~340 m/s (1,115 ft/s)</li>
-                      <li>• In water: ~1,500 m/s (4,920 ft/s)</li>
-                      <li>• 4.4x faster underwater</li>
+                      {t.theory.pressure.soundSpeedDetails.map((item, i) => (
+                        <li key={i}>• {item}</li>
+                      ))}
                     </ul>
                   </div>
                   <div className="p-4 bg-muted/50 rounded-lg">
-                    <p className="font-semibold mb-2">Directional Challenges:</p>
-                    <ul className="text-sm text-muted-foreground space-y-1">
-                      <li>• Difficult to determine sound direction</li>
-                      <li>• Sound reaches both ears almost simultaneously</li>
-                      <li>• Boat engines can be heard from great distances</li>
-                    </ul>
+                    <p className="font-semibold mb-2">{t.theory.pressure.soundDirectionTitle}</p>
+                    <p className="text-sm text-muted-foreground">{t.theory.pressure.soundDirectionText}</p>
                   </div>
                 </div>
-                <div className="p-3 bg-amber-500/10 border border-amber-500/20 rounded-lg">
-                  <p className="text-sm text-amber-900 dark:text-amber-200">
-                    <strong>Safety Note:</strong> Because you cannot easily determine the direction of boat engines,
-                    always use a surface marker buoy (SMB) when ascending and listen carefully for boat traffic.
-                  </p>
-                </div>
-              </div>
-
-              <Separator />
-
-              {/* Pressure Theory Section */}
-              <div className="space-y-4">
-                <h3 className="text-lg font-semibold">Pressure Calculations</h3>
-                <p className="text-muted-foreground">
-                  Understanding pressure is fundamental to safe diving. Pressure increases linearly with depth.
-                </p>
-              </div>
-
-              <div className="space-y-4">
-                <h3 className="text-lg font-semibold">Absolute Pressure</h3>
-                <p className="text-muted-foreground">
-                  The total pressure exerted on a diver, including atmospheric pressure at the surface plus the pressure
-                  from the water column above. Calculated as: <strong>P = 1 + (depth ÷ 10) atmospheres</strong>
-                </p>
-                <div className="p-3 bg-muted/50 rounded-lg">
-                  <p className="text-sm text-muted-foreground">
-                    <strong>Example:</strong> At 30 meters depth: P = 1 + (30 ÷ 10) = 4 bar absolute pressure
-                  </p>
-                </div>
-              </div>
-
-              <Separator />
-
-              <div className="space-y-4">
-                <h3 className="text-lg font-semibold">Gauge Pressure</h3>
-                <p className="text-muted-foreground">
-                  The pressure reading on a gauge, which excludes atmospheric pressure. It represents only the pressure
-                  from the water column: <strong>Gauge Pressure = Absolute Pressure - 1 atmosphere</strong>
-                </p>
-              </div>
-
-              <Separator />
-
-              <div className="space-y-4">
-                <h3 className="text-lg font-semibold">Partial Pressure</h3>
-                <p className="text-muted-foreground">
-                  The pressure exerted by each individual gas in a mixture. For oxygen:{" "}
-                  <strong>PPO₂ = Absolute Pressure × O₂ fraction</strong>. Critical for avoiding oxygen toxicity.
-                </p>
-                <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">Oxygen Toxicity Limits:</h4>
-                  <ul className="space-y-2 text-muted-foreground text-sm">
-                    <li>
-                      • <strong>PPO₂ {"<"} 1.4 bar:</strong> Safe for recreational diving (working limit)
-                    </li>
-                    <li>
-                      • <strong>PPO₂ 1.4-1.6 bar:</strong> Acceptable for decompression stops only
-                    </li>
-                    <li>
-                      • <strong>PPO₂ {">"} 1.6 bar:</strong> High risk of oxygen toxicity (CNS toxicity)
-                    </li>
+                <div className="p-4 bg-muted/50 rounded-lg">
+                  <p className="font-semibold mb-2">{t.theory.pressure.soundPractical}</p>
+                  <ul className="text-sm text-muted-foreground space-y-1">
+                    {t.theory.pressure.soundPracticalDetails.map((item, i) => (
+                      <li key={i}>• {item}</li>
+                    ))}
                   </ul>
                 </div>
               </div>
 
               <Separator />
 
+              {/* Pressure & Depth Section */}
               <div className="space-y-4">
-                <h3 className="text-lg font-semibold">Key Safety Limits</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="p-4 bg-destructive/10 border border-destructive/20 rounded-lg">
-                    <p className="font-semibold mb-2 text-destructive">Oxygen Limits:</p>
-                    <ul className="space-y-1 text-sm text-muted-foreground">
-                      <li>• Working PPO₂: {"<"} 1.4 bar</li>
-                      <li>• Deco PPO₂: {"<"} 1.6 bar</li>
-                      <li>• Minimum PPO₂: {">"} 0.16 bar</li>
-                    </ul>
-                  </div>
-                  <div className="p-4 bg-amber-500/10 border border-amber-500/20 rounded-lg">
-                    <p className="font-semibold mb-2 text-amber-900 dark:text-amber-200">Nitrogen Limits:</p>
-                    <ul className="space-y-1 text-sm text-muted-foreground">
-                      <li>• PPN₂ {">"} 3.2 bar: Narcosis risk</li>
-                      <li>• PPN₂ {">"} 4.0 bar: Significant impairment</li>
-                      <li>• Equivalent to alcohol intoxication</li>
+                <h3 className="text-lg font-semibold">{t.theory.pressure.pressureTitle}</h3>
+                <p className="text-muted-foreground">{t.theory.pressure.pressureIntro}</p>
+                <div className="space-y-3">
+                  <div className="p-4 bg-muted/50 rounded-lg">
+                    <p className="font-semibold mb-2">{t.theory.pressure.pressureKey}</p>
+                    <ul className="text-sm text-muted-foreground space-y-2">
+                      <li><strong>{t.theory.pressure.atmosphericPressure}</strong> {t.theory.pressure.atmosphericPressureDesc}</li>
+                      <li><strong>{t.theory.pressure.hydrostaticPressure}</strong> {t.theory.pressure.hydrostaticPressureDesc}</li>
+                      <li><strong>{t.theory.pressure.absolutePressure}</strong> {t.theory.pressure.absolutePressureDesc}</li>
+                      <li><strong>{t.theory.pressure.gaugePressure}</strong> {t.theory.pressure.gaugePressureDesc}</li>
                     </ul>
                   </div>
                 </div>
@@ -436,28 +328,71 @@ export function PressureCalculator() {
 
               <Separator />
 
-              {/* Safety Reminders */}
-              <div className="p-4 bg-destructive/10 border border-destructive/20 rounded-lg">
-                <p className="font-semibold mb-2 text-destructive">Critical Safety Reminders:</p>
-                <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li>
-                    • <strong>Never hold your breath:</strong> Expanding air during ascent can cause lung overexpansion
-                    injuries (arterial gas embolism)
-                  </li>
-                  <li>
-                    • <strong>Ascend slowly:</strong> Maximum ascent rate of 9-10 meters (30 feet) per minute
-                  </li>
-                  <li>
-                    • <strong>Monitor your depth:</strong> Stay within your training and certification limits
-                  </li>
-                  <li>
-                    • <strong>Plan your dive, dive your plan:</strong> Always use dive tables or computers
-                  </li>
-                  <li>
-                    • <strong>Safety stops:</strong> Perform a 3-5 minute safety stop at 5 meters (15 feet) on every
-                    dive
-                  </li>
-                </ul>
+              {/* Pressure Table */}
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold">{t.theory.pressure.pressureTable}</h3>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="border-b">
+                        {t.theory.pressure.pressureTableHeaders.map((header, i) => (
+                          <th key={i} className="text-left p-2 font-semibold">{header}</th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {t.theory.pressure.pressureTableRows.map((row, i) => (
+                        <tr key={i} className="border-b">
+                          {row.map((cell, j) => (
+                            <td key={j} className="p-2 text-muted-foreground">{cell}</td>
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <Separator />
+
+              {/* Partial Pressures Section */}
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold">{t.theory.pressure.partialPressureTitle}</h3>
+                <p className="text-muted-foreground">{t.theory.pressure.partialPressureIntro}</p>
+                <div className="space-y-3">
+                  <div className="p-4 bg-muted/50 rounded-lg">
+                    <p className="font-semibold mb-2">{t.theory.pressure.partialPressureAir}</p>
+                    <p className="text-sm text-muted-foreground mb-2">{t.theory.pressure.partialPressureAirText}</p>
+                    <p className="font-semibold mb-1">{t.theory.pressure.partialPressureExample}</p>
+                    <ul className="text-sm text-muted-foreground space-y-1">
+                      {t.theory.pressure.partialPressureExampleDetails.map((item, i) => (
+                        <li key={i}>• {item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <Separator />
+
+              {/* Safety Limits */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="p-4 bg-destructive/10 border border-destructive/20 rounded-lg">
+                  <p className="font-semibold mb-2 text-destructive">{t.theory.pressure.oxygenLimits}</p>
+                  <ul className="space-y-1 text-sm text-muted-foreground">
+                    {t.theory.pressure.oxygenLimitsDetails.map((item, i) => (
+                      <li key={i}>• {item}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="p-4 bg-amber-500/10 border border-amber-500/20 rounded-lg">
+                  <p className="font-semibold mb-2 text-amber-900 dark:text-amber-200">{t.theory.pressure.nitrogenNarcosis}</p>
+                  <ul className="space-y-1 text-sm text-muted-foreground">
+                    {t.theory.pressure.nitrogenNarcosisDetails.map((item, i) => (
+                      <li key={i}>• {item}</li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </CardContent>
           </Card>

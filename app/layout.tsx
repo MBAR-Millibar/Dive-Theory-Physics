@@ -5,6 +5,7 @@ import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
 import "./globals.css"
 import { Footer } from "@/components/footer"
+import { I18nProvider } from "@/lib/i18n/context"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -33,9 +34,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${robotoMono.variable}`}>
       <body className="font-sans antialiased">
-        <Suspense fallback={null}>{children}</Suspense>
-        <Analytics />
-        <Footer />
+        <I18nProvider>
+          <Suspense fallback={null}>{children}</Suspense>
+          <Analytics />
+          <Footer />
+        </I18nProvider>
       </body>
     </html>
   )

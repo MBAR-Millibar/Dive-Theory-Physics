@@ -1,16 +1,17 @@
 "use client"
 
 import { useState } from "react"
-import { Navigation } from "@/components/navigation"
+import { CalculatorHeader } from "@/components/calculator-header"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Button } from "@/components/ui/button"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { ArrowUp, Info, ArrowLeft } from "lucide-react"
+import { ArrowUp, Info } from "lucide-react"
+import { useI18n } from "@/lib/i18n/context"
 
 export default function LiftingCalculatorPage() {
+  const { t } = useI18n()
   const [objectWeight, setObjectWeight] = useState<string>("200")
   const [objectVolume, setObjectVolume] = useState<string>("127")
   const [depth, setDepth] = useState<string>("17")
@@ -63,25 +64,19 @@ export default function LiftingCalculatorPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navigation />
+      <CalculatorHeader />
 
-      <main className="pt-24 pb-16 px-4">
+      <main className="py-16 px-4">
         <div className="max-w-6xl mx-auto">
-          <Button variant="ghost" asChild className="mb-6">
-            <a href="/#calculators">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Topics
-            </a>
-          </Button>
 
           <div className="flex items-center gap-3 mb-6">
             <div className="p-3 rounded-lg bg-primary/10">
               <ArrowUp className="h-8 w-8 text-primary" />
             </div>
             <div>
-              <h1 className="text-4xl font-bold text-foreground">Lifting Calculator</h1>
+              <h1 className="text-4xl font-bold text-foreground">{t.calculators.weight.title}</h1>
               <p className="text-lg text-muted-foreground mt-1">
-                Calculate buoyancy required to lift objects underwater
+                {t.calculators.weight.description}
               </p>
             </div>
           </div>

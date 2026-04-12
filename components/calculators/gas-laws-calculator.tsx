@@ -9,6 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Separator } from "@/components/ui/separator"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Thermometer, Gauge, Beaker, Maximize } from "lucide-react"
+import { useI18n } from "@/lib/i18n/context"
 
 interface GasLawResults {
   boylesLaw: {
@@ -30,6 +31,7 @@ interface GasLawResults {
 }
 
 export function GasLawsCalculator() {
+  const { t } = useI18n()
   const [mainTab, setMainTab] = useState<string>("calculator")
   const [activeTab, setActiveTab] = useState("boyles")
 
@@ -153,25 +155,23 @@ export function GasLawsCalculator() {
   return (
     <div className="max-w-6xl mx-auto p-6 space-y-6">
       <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-foreground mb-2">Gas Laws Calculator</h1>
-        <p className="text-muted-foreground">
-          Explore Boyle's Law, Charles's Law, Dalton's Law, and Gay-Lussac's Law with interactive calculations
-        </p>
+        <h1 className="text-3xl font-bold text-foreground mb-2">{t.calculators.gasLaws.title}</h1>
+        <p className="text-muted-foreground">{t.calculators.gasLaws.description}</p>
       </div>
 
       <Tabs value={mainTab} onValueChange={setMainTab} className="w-full">
         <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="calculator">Calculator</TabsTrigger>
-          <TabsTrigger value="theory">Theory</TabsTrigger>
+          <TabsTrigger value="calculator">{t.calculatorUI.tabs.calculator}</TabsTrigger>
+          <TabsTrigger value="theory">{t.calculatorUI.tabs.theory}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="calculator" className="space-y-6">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
             <TabsList className="grid w-full grid-cols-4">
-              <TabsTrigger value="boyles">Boyle's Law</TabsTrigger>
-              <TabsTrigger value="charles">Charles's Law</TabsTrigger>
-              <TabsTrigger value="dalton">Dalton's Law</TabsTrigger>
-              <TabsTrigger value="gay-lussac">Gay-Lussac's Law</TabsTrigger>
+              <TabsTrigger value="boyles">{t.calculatorUI.gasLaws.boylesLaw}</TabsTrigger>
+              <TabsTrigger value="charles">{t.calculatorUI.gasLaws.charlesLaw}</TabsTrigger>
+              <TabsTrigger value="dalton">{t.calculatorUI.gasLaws.daltonsLaw}</TabsTrigger>
+              <TabsTrigger value="gay-lussac">{t.calculatorUI.gasLaws.gayLussacsLaw}</TabsTrigger>
             </TabsList>
 
             {/* Boyle's Law */}
@@ -680,7 +680,7 @@ export function GasLawsCalculator() {
 
           <div className="flex justify-center">
             <Button onClick={calculateGasLaws} size="lg" className="px-8">
-              Calculate All Gas Laws
+              {t.calculatorUI.buttons.calculateGasLaws}
             </Button>
           </div>
         </TabsContent>
@@ -689,29 +689,23 @@ export function GasLawsCalculator() {
           <div className="space-y-8">
             <Card className="border-primary/20 bg-primary/5">
               <CardHeader>
-                <CardTitle>Understanding Gas Laws in Diving</CardTitle>
+                <CardTitle>{t.theory.gasLaws.title}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <p className="text-muted-foreground">
-                  Gas laws describe how gases behave under different conditions of pressure, volume, and temperature.
-                  These laws are fundamental to understanding diving physics and are critical for dive safety.
-                </p>
                 <div className="p-4 bg-muted/50 rounded-lg">
-                  <p className="font-semibold mb-2">Why Gas Laws Matter in Diving:</p>
+                  <p className="font-semibold mb-2">{t.theory.gasLaws.importanceTitle}</p>
                   <ul className="space-y-2 text-sm text-muted-foreground">
                     <li>
-                      • <strong>Boyle's Law:</strong> Explains why you must never hold your breath and why air
-                      consumption increases with depth
+                      • <strong>{t.theory.gasLaws.boylesImportance}</strong> {t.theory.gasLaws.boylesImportanceDesc}
                     </li>
                     <li>
-                      • <strong>Dalton's Law:</strong> Critical for calculating oxygen toxicity and nitrogen narcosis
-                      risks
+                      • <strong>{t.theory.gasLaws.daltonsImportance}</strong> {t.theory.gasLaws.daltonsImportanceDesc}
                     </li>
                     <li>
-                      • <strong>Charles's Law:</strong> Explains tank pressure changes with temperature
+                      • <strong>{t.theory.gasLaws.charlesImportance}</strong> {t.theory.gasLaws.charlesImportanceDesc}
                     </li>
                     <li>
-                      • <strong>Gay-Lussac's Law:</strong> Helps understand regulator performance in cold water
+                      • <strong>{t.theory.gasLaws.gayLussacsImportance}</strong> {t.theory.gasLaws.gayLussacsImportanceDesc}
                     </li>
                   </ul>
                 </div>
@@ -720,49 +714,40 @@ export function GasLawsCalculator() {
 
             {/* Gas Laws Section */}
             <div>
-              <h2 className="text-2xl font-bold mb-6">The Four Essential Gas Laws</h2>
+              <h2 className="text-2xl font-bold mb-6">{t.theory.gasLaws.fourLawsTitle}</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Card>
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <Maximize className="h-5 w-5" />
-                      Boyle's Law
+                      {t.theory.gasLaws.boylesLawTitle}
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="text-center p-4 bg-muted/50 rounded-lg">
-                      <p className="font-mono text-lg mb-2">P₁V₁ = P₂V₂</p>
-                      <p className="text-sm text-muted-foreground">At constant temperature</p>
+                      <p className="font-mono text-lg mb-2">{t.theory.gasLaws.boylesFormula}</p>
+                      <p className="text-sm text-muted-foreground">{t.theory.gasLaws.boylesCondition}</p>
                     </div>
                     <p className="text-sm text-muted-foreground">
-                      At constant temperature, pressure and volume are inversely proportional. If you double the
-                      pressure, you halve the volume. If you halve the pressure, you double the volume.
+                      {t.theory.gasLaws.boylesExplanation}
                     </p>
                     <div className="space-y-2">
-                      <h4 className="font-semibold text-sm">Critical Diving Applications:</h4>
+                      <h4 className="font-semibold text-sm">{t.theory.gasLaws.boylesApplicationsTitle}</h4>
                       <ul className="text-sm text-muted-foreground space-y-1">
                         <li>
-                          • <strong>Never hold your breath:</strong> Air in lungs expands during ascent - can cause
-                          fatal lung overexpansion injury
+                          • <strong>{t.theory.gasLaws.boylesApp1}</strong> {t.theory.gasLaws.boylesApp1Desc}
                         </li>
                         <li>
-                          • <strong>Air consumption:</strong> At 30m (4 bar), you use air 4x faster than at surface
+                          • <strong>{t.theory.gasLaws.boylesApp2}</strong> {t.theory.gasLaws.boylesApp2Desc}
                         </li>
                         <li>
-                          • <strong>BCD control:</strong> Must add air descending, release air ascending
-                        </li>
-                        <li>
-                          • <strong>Mask squeeze:</strong> Must equalize mask pressure during descent
-                        </li>
-                        <li>
-                          • <strong>Ear equalization:</strong> Air spaces compress with depth, causing discomfort
+                          • <strong>{t.theory.gasLaws.boylesApp3}</strong> {t.theory.gasLaws.boylesApp3Desc}
                         </li>
                       </ul>
                     </div>
                     <div className="p-3 bg-destructive/10 border border-destructive/20 rounded-lg">
                       <p className="text-sm text-destructive font-medium">
-                        ⚠️ Most Important Law: Boyle's Law is THE most critical gas law for diver safety. Lung
-                        overexpansion injuries can be fatal.
+                        {t.theory.gasLaws.boylesWarning}
                       </p>
                     </div>
                   </CardContent>
@@ -772,43 +757,16 @@ export function GasLawsCalculator() {
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <Beaker className="h-5 w-5" />
-                      Dalton's Law
+                      {t.theory.gasLaws.daltonsLawTitle}
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="text-center p-4 bg-muted/50 rounded-lg">
-                      <p className="font-mono text-lg mb-2">P_total = P₁ + P₂ + P₃...</p>
-                      <p className="font-mono text-sm mb-1">P_gas = P_total × % volume</p>
+                      <p className="font-mono text-lg mb-2">{t.theory.gasLaws.daltonsFormula}</p>
                     </div>
                     <p className="text-sm text-muted-foreground">
-                      Total pressure of a gas mixture equals the sum of the partial pressures of each gas. Each gas in a
-                      mixture acts independently and exerts its own pressure.
+                      {t.theory.gasLaws.daltonsExplanation}
                     </p>
-                    <div className="space-y-2">
-                      <h4 className="font-semibold text-sm">Critical Diving Applications:</h4>
-                      <ul className="text-sm text-muted-foreground space-y-1">
-                        <li>
-                          • <strong>Oxygen toxicity:</strong> PPO₂ {">"} 1.4 bar causes CNS oxygen toxicity (seizures,
-                          convulsions)
-                        </li>
-                        <li>
-                          • <strong>Nitrogen narcosis:</strong> PPN₂ {">"} 3.2 bar causes impairment (like alcohol
-                          intoxication)
-                        </li>
-                        <li>
-                          • <strong>Nitrox diving:</strong> Calculate maximum operating depth (MOD) for enriched air
-                        </li>
-                        <li>
-                          • <strong>Gas planning:</strong> Determine safe depth limits for different gas mixes
-                        </li>
-                      </ul>
-                    </div>
-                    <div className="p-3 bg-amber-500/10 border border-amber-500/20 rounded-lg">
-                      <p className="text-sm text-amber-900 dark:text-amber-200">
-                        <strong>Safety Note:</strong> Always analyze your gas mix before diving and calculate your
-                        maximum operating depth based on PPO₂ limits.
-                      </p>
-                    </div>
                   </CardContent>
                 </Card>
 
@@ -816,41 +774,17 @@ export function GasLawsCalculator() {
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <Thermometer className="h-5 w-5" />
-                      Charles's Law
+                      {t.theory.gasLaws.charlesLawTitle}
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="text-center p-4 bg-muted/50 rounded-lg">
-                      <p className="font-mono text-lg mb-2">V₁/T₁ = V₂/T₂</p>
-                      <p className="text-sm text-muted-foreground">At constant pressure</p>
+                      <p className="font-mono text-lg mb-2">{t.theory.gasLaws.charlesFormula}</p>
+                      <p className="text-sm text-muted-foreground">{t.theory.gasLaws.charlesCondition}</p>
                     </div>
                     <p className="text-sm text-muted-foreground">
-                      At constant pressure, volume is directly proportional to absolute temperature (Kelvin). As
-                      temperature increases, volume increases proportionally.
+                      {t.theory.gasLaws.charlesExplanation}
                     </p>
-                    <div className="space-y-2">
-                      <h4 className="font-semibold text-sm">Diving Applications:</h4>
-                      <ul className="text-sm text-muted-foreground space-y-1">
-                        <li>
-                          • <strong>Tank filling:</strong> Tanks get hot when filled quickly, pressure drops when cooled
-                        </li>
-                        <li>
-                          • <strong>Cold water diving:</strong> Tank pressure decreases in cold water
-                        </li>
-                        <li>
-                          • <strong>BCD volume:</strong> Changes slightly with water temperature changes
-                        </li>
-                        <li>
-                          • <strong>Wetsuit buoyancy:</strong> Neoprene gas bubbles affected by temperature
-                        </li>
-                      </ul>
-                    </div>
-                    <div className="p-3 bg-muted/50 rounded-lg">
-                      <p className="text-sm text-muted-foreground">
-                        <strong>Practical Tip:</strong> If your tank is filled in warm conditions, expect lower pressure
-                        when diving in cold water. Plan accordingly.
-                      </p>
-                    </div>
                   </CardContent>
                 </Card>
 
@@ -858,66 +792,29 @@ export function GasLawsCalculator() {
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <Gauge className="h-5 w-5" />
-                      Gay-Lussac's Law
+                      {t.theory.gasLaws.gayLussacsLawTitle}
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="text-center p-4 bg-muted/50 rounded-lg">
-                      <p className="font-mono text-lg mb-2">P₁/T₁ = P₂/T₂</p>
-                      <p className="text-sm text-muted-foreground">At constant volume</p>
+                      <p className="font-mono text-lg mb-2">{t.theory.gasLaws.gayLussacsFormula}</p>
+                      <p className="text-sm text-muted-foreground">{t.theory.gasLaws.gayLussacsCondition}</p>
                     </div>
                     <p className="text-sm text-muted-foreground">
-                      At constant volume, pressure is directly proportional to absolute temperature. As temperature
-                      increases, pressure increases proportionally.
+                      {t.theory.gasLaws.gayLussacsExplanation}
                     </p>
-                    <div className="space-y-2">
-                      <h4 className="font-semibold text-sm">Diving Applications:</h4>
-                      <ul className="text-sm text-muted-foreground space-y-1">
-                        <li>
-                          • <strong>Tank pressure changes:</strong> ~0.6 bar per 1°C or ~5 psi per 1°F temperature
-                          change
-                        </li>
-                        <li>
-                          • <strong>Regulator performance:</strong> Cold water can affect first stage performance
-                        </li>
-                        <li>
-                          • <strong>Tank storage:</strong> Store tanks in cool, stable temperature environments
-                        </li>
-                        <li>
-                          • <strong>Fill calculations:</strong> Account for temperature when calculating tank fills
-                        </li>
-                      </ul>
-                    </div>
-                    <div className="p-3 bg-muted/50 rounded-lg">
-                      <p className="text-sm text-muted-foreground">
-                        <strong>Example:</strong> A tank filled to 200 bar at 30°C will drop to ~194 bar when cooled to
-                        20°C.
-                      </p>
-                    </div>
                   </CardContent>
                 </Card>
 
                 <Card className="md:col-span-2">
                   <CardHeader>
-                    <CardTitle>General Gas Law (Combined Gas Law)</CardTitle>
+                    <CardTitle>{t.theory.gasLaws.combinedLawTitle}</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="text-center p-4 bg-muted/50 rounded-lg">
-                      <p className="font-mono text-lg mb-2">P₁V₁/T₁ = P₂V₂/T₂</p>
+                      <p className="font-mono text-lg mb-2">{t.theory.gasLaws.combinedFormula}</p>
                       <p className="text-sm text-muted-foreground">
-                        Combines Boyle's, Charles's, and Gay-Lussac's Laws
-                      </p>
-                    </div>
-                    <p className="text-sm text-muted-foreground">
-                      This formula accounts for all three variables: pressure, volume, and temperature changing
-                      simultaneously. Temperature must be in absolute units (Kelvin = Celsius + 273).
-                    </p>
-                    <div className="p-4 bg-muted/50 rounded-lg">
-                      <p className="font-semibold mb-2">When to Use:</p>
-                      <p className="text-sm text-muted-foreground">
-                        Use the combined gas law when pressure, volume, AND temperature all change. For example,
-                        calculating how much a balloon expands when brought from depth to surface in water of different
-                        temperature.
+                        {t.theory.gasLaws.combinedExplanation}
                       </p>
                     </div>
                   </CardContent>

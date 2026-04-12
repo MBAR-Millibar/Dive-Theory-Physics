@@ -1,66 +1,39 @@
+"use client"
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Gauge, Wind, ArrowUp, Droplets, Atom, Scale } from "lucide-react"
+import { useI18n } from "@/lib/i18n/context"
+import type { LucideIcon } from "lucide-react"
 
-const calculators = [
-  {
-    id: "pressure",
-    title: "Water & Pressure",
-    description: "Understand water properties (heat, light, sound) and calculate pressures at different depths",
-    icon: Gauge,
-    features: ["Water Properties", "Absolute Pressure", "Partial Pressure"],
-  },
-  {
-    id: "air-consumption",
-    title: "Air Consumption",
-    description: "Calculate air consumption rates at various depths and plan your dive accordingly",
-    icon: Wind,
-    features: ["SAC Rate", "RMV Calculation", "Tank Planning"],
-  },
-  {
-    id: "henrys-law",
-    title: "Decompression",
-    description: "Understand gas dissolution, tissue saturation, and decompression theory (Henry's Law)",
-    icon: Droplets,
-    features: ["Gas Dissolution", "Tissue Saturation", "Dive Planning"],
-  },
-  {
-    id: "gas-laws",
-    title: "Gas Laws",
-    description: "Explore Boyle's, Charles's, and Gay-Lussac's laws and their applications in diving",
-    icon: Atom,
-    features: ["Boyle's Law", "Charles's Law", "Combined Gas Law"],
-  },
-  {
-    id: "lift-displacement",
-    title: "Buoyancy & Displacement",
-    description: "Calculate buoyancy, lift requirements, and water displacement for diving operations",
-    icon: ArrowUp,
-    features: ["Buoyancy Force", "Lift Bags", "Water Displacement"],
-  },
-  {
-    id: "weight",
-    title: "Lifting Operations",
-    description: "Calculate buoyancy requirements to lift submerged objects using lift bags or flotation devices",
-    icon: Scale,
-    features: ["Negative Buoyancy", "Lift Requirements", "Safety Margins"],
-  },
+type CalculatorKey = "pressure" | "airConsumption" | "henrysLaw" | "gasLaws" | "liftDisplacement" | "weight"
+
+const calculatorConfig: { id: string; key: CalculatorKey; icon: LucideIcon }[] = [
+  { id: "pressure", key: "pressure", icon: Gauge },
+  { id: "air-consumption", key: "airConsumption", icon: Wind },
+  { id: "henrys-law", key: "henrysLaw", icon: Droplets },
+  { id: "gas-laws", key: "gasLaws", icon: Atom },
+  { id: "lift-displacement", key: "liftDisplacement", icon: ArrowUp },
+  { id: "weight", key: "weight", icon: Scale },
 ]
 
 export function CalculatorGrid() {
+  const { t } = useI18n()
+
   return (
     <section id="calculators" className="py-24 px-4 bg-muted/30">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Diving Physics Topics</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">{t.calculatorGrid.title}</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Interactive tools to help you understand and apply diving physics principles
+            {t.calculatorGrid.subtitle}
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {calculators.map((calc) => {
+          {calculatorConfig.map((calc) => {
             const Icon = calc.icon
+            const calcTranslation = t.calculators[calc.key]
             return (
               <Card
                 key={calc.id}
@@ -71,13 +44,13 @@ export function CalculatorGrid() {
                     <div className="p-2 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
                       <Icon className="h-6 w-6 text-primary" />
                     </div>
-                    <CardTitle className="text-xl">{calc.title}</CardTitle>
+                    <CardTitle className="text-xl">{calcTranslation.title}</CardTitle>
                   </div>
-                  <CardDescription className="text-base">{calc.description}</CardDescription>
+                  <CardDescription className="text-base">{calcTranslation.description}</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-3 mb-6">
-                    {calc.features.map((feature) => (
+                    {calcTranslation.features.map((feature) => (
                       <div key={feature} className="flex items-center gap-2">
                         <div className="w-1.5 h-1.5 rounded-full bg-primary" />
                         <span className="text-sm text-muted-foreground">{feature}</span>
@@ -86,10 +59,10 @@ export function CalculatorGrid() {
                   </div>
                   <div className="flex flex-col gap-3">
                     <Button className="w-full bg-black hover:bg-black/90 text-white" asChild>
-                      <a href={`/calculators/${calc.id}#theory`}>Learn Theory</a>
+                      <a href={`/calculators/${calc.id}#theory`}>{t.calculatorGrid.learnTheory}</a>
                     </Button>
                     <Button className="w-full" variant="default" asChild>
-                      <a href={`/calculators/${calc.id}`}>Open Calculator</a>
+                      <a href={`/calculators/${calc.id}`}>{t.calculatorGrid.openCalculator}</a>
                     </Button>
                   </div>
                 </CardContent>

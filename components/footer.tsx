@@ -10,23 +10,23 @@ export function Footer() {
               Home
             </Link>
             {" | "}
-            <Link href="https://app.millibar.io/terms" className="hover:text-foreground transition-colors">
+            <Link href="https://millibar.io/terms" className="hover:text-foreground transition-colors">
               Terms
             </Link>
             {" | "}
-            <Link href="https://app.millibar.io/privacy" className="hover:text-foreground transition-colors">
+            <Link href="https://millibar.io/privacy" className="hover:text-foreground transition-colors">
               Privacy
             </Link>
             {" | "}
-            <Link href="https://app.millibar.io/security" className="hover:text-foreground transition-colors">
+            <Link href="https://millibar.io/security" className="hover:text-foreground transition-colors">
               Security
             </Link>
             {" | "}
-            <Link href="https://app.millibar.io/imprint" className="hover:text-foreground transition-colors">
+            <Link href="https://millibar.io/imprint" className="hover:text-foreground transition-colors">
               Imprint
             </Link>
           </p>
-          <p className="mt-4 text-muted-foreground">2025 © Millibar - All Rights Reserved</p>
+          <p className="mt-4 text-muted-foreground">{new Date().getFullYear()} © Millibar Technologies UG - All Rights Reserved</p>
         </div>
       </div>
     </footer>
