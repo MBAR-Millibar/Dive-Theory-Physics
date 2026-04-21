@@ -5,6 +5,7 @@ import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
 import "./globals.css"
 import { Footer } from "@/components/footer"
+import { QuestCta } from "@/components/quest-cta"
 import { I18nProvider } from "@/lib/i18n/context"
 
 const inter = Inter({
@@ -37,6 +38,7 @@ export default function RootLayout({
         <I18nProvider>
           <Suspense fallback={null}>{children}</Suspense>
           <Analytics />
+          <QuestCta />
           <Footer />
         </I18nProvider>
       </body>
