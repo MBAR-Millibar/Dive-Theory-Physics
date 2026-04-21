@@ -8,6 +8,7 @@ import "./globals.css"
 import { Footer } from "@/components/footer"
 import { QuestCta } from "@/components/quest-cta"
 import { I18nProvider } from "@/lib/i18n/context"
+import { CookieBanner } from "@/components/cookie-banner"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -44,6 +45,19 @@ export default function RootLayout({
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
+            
+            // Default to denied, will be updated based on user consent
+            gtag('consent', 'default', {
+              'analytics_storage': 'denied'
+            });
+            
+            // Check if user has already consented
+            if (localStorage.getItem('cookie-consent') === 'accepted') {
+              gtag('consent', 'update', {
+                'analytics_storage': 'granted'
+              });
+            }
+            
             gtag('js', new Date());
             gtag('config', 'G-QCSB23PYH8');
           `}
@@ -55,6 +69,7 @@ export default function RootLayout({
           <Analytics />
           <QuestCta />
           <Footer />
+          <CookieBanner />
         </I18nProvider>
       </body>
     </html>
