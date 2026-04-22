@@ -36,7 +36,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${robotoMono.variable}`}>
-      <head>
+      <body className="font-sans antialiased">
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-QCSB23PYH8"
           strategy="afterInteractive"
@@ -45,25 +45,10 @@ export default function RootLayout({
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
-            
-            // Default to denied, will be updated based on user consent
-            gtag('consent', 'default', {
-              'analytics_storage': 'denied'
-            });
-            
-            // Check if user has already consented
-            if (localStorage.getItem('cookie-consent') === 'accepted') {
-              gtag('consent', 'update', {
-                'analytics_storage': 'granted'
-              });
-            }
-            
             gtag('js', new Date());
             gtag('config', 'G-QCSB23PYH8');
           `}
         </Script>
-      </head>
-      <body className="font-sans antialiased">
         <I18nProvider>
           <Suspense fallback={null}>{children}</Suspense>
           <Analytics />
