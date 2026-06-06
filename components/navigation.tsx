@@ -26,6 +26,9 @@ export function Navigation() {
             <a href="/#calculators" className="text-muted-foreground hover:text-foreground transition-colors">
               {t.nav.topics}
             </a>
+            <a href="/export" className="text-muted-foreground hover:text-foreground transition-colors">
+              {t.nav.exportPdf}
+            </a>
             <LanguageSelector />
           </div>
 
@@ -45,6 +48,9 @@ export function Navigation() {
               </a>
               <a href="/about" className="text-muted-foreground hover:text-foreground transition-colors">
                 {t.nav.about}
+              </a>
+              <a href="/export" className="text-muted-foreground hover:text-foreground transition-colors">
+                {t.nav.exportPdf}
               </a>
             </div>
           </div>

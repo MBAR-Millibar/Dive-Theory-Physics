@@ -125,3 +125,70 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Print styles for PDF export */
+@media print {
+  @page {
+    margin: 16mm 14mm;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  /* Hide everything not meant for print */
+  .print\:hidden {
+    display: none !important;
+  }
+
+  /* Ensure the printable area uses full width and dark text */
+  .print-document {
+    color: #000000 !important;
+    max-width: 100% !important;
+  }
+
+  .print-document * {
+    color: #000000 !important;
+  }
+
+  .print-document .print-muted {
+    color: #444444 !important;
+  }
+
+  .print-document .print-card {
+    border: 1px solid #cccccc !important;
+    background: #ffffff !important;
+    box-shadow: none !important;
+    break-inside: avoid;
+  }
+
+  .print-document .print-formula {
+    background: #f2f2f2 !important;
+    border: 1px solid #cccccc !important;
+  }
+
+  .print-document table {
+    border-collapse: collapse !important;
+  }
+
+  .print-document th,
+  .print-document td {
+    border: 1px solid #cccccc !important;
+  }
+
+  .print-break-before {
+    break-before: page;
+  }
+
+  .print-avoid-break {
+    break-inside: avoid;
+  }
+
+  h1,
+  h2,
+  h3 {
+    break-after: avoid;
+  }
+}

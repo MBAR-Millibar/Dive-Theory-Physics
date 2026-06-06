@@ -9,6 +9,7 @@ export const translations = {
       about: "About",
       topics: "Topics",
       calculators: "Calculators",
+      exportPdf: "Export PDF",
     },
     // Hero
     hero: {
@@ -502,6 +503,7 @@ export const translations = {
       about: "Info",
       topics: "Argomenti",
       calculators: "Calcolatori",
+      exportPdf: "Esporta PDF",
     },
     // Hero
     hero: {
@@ -1013,6 +1015,7 @@ export const translations = {
       about: "Über uns",
       topics: "Themen",
       calculators: "Rechner",
+      exportPdf: "PDF exportieren",
     },
     // Hero
     hero: {
@@ -1502,6 +1505,7 @@ export const translations = {
       about: "À propos",
       topics: "Sujets",
       calculators: "Calculateurs",
+      exportPdf: "Exporter en PDF",
     },
     // Hero
     hero: {
@@ -1991,6 +1995,7 @@ export const translations = {
       about: "Acerca de",
       topics: "Temas",
       calculators: "Calculadoras",
+      exportPdf: "Exportar PDF",
     },
     // Hero
     hero: {
