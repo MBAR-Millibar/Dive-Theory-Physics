@@ -38,7 +38,7 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${robotoMono.variable}`}>
       <body className="font-sans antialiased">
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-QCSB23PYH8"
+          src="https://www.googletagmanager.com/gtag/js?id=G-Y0V9Z9XVY2"
           strategy="afterInteractive"
         />
         <Script id="google-analytics" strategy="afterInteractive">
@@ -46,7 +46,7 @@ export default function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-QCSB23PYH8');
+            gtag('config', 'G-Y0V9Z9XVY2');
           `}
         </Script>
         <I18nProvider>
